@@ -14,18 +14,42 @@ import {
   TrendingUp,
   AlertCircle,
   CheckCircle,
-  Plus,
-  Eye,
-  Settings
+  Award,
+  Bookmark,
+  UserCheck,
+  Repeat,
+  GraduationCap
 } from "lucide-react";
-import { useNavigate, useLocation } from 'react-router-dom'; // <-- TAMBAHKAN INI
-
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import "./Beranda.css";
+import CatatanPrestasiModal from "./CatatanPrestasiModal";
+import SampulModal from "./SampulModal";
+import CatatanWaliKelasModal from "./CatatanWaliKelasModal";
+import MutasiModal from "./MutasiModal";
 
 function Beranda() {
-  const navigate = useNavigate(); // <-- TAMBAHKAN INI
-  const location = useLocation(); // <-- TAMBAHKAN INI
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSampulModalOpen, setIsSampulModalOpen] = useState(false);
+  const [isWaliKelasModalOpen, setIsWaliKelasModalOpen] = useState(false);
+  const [isMutasiModalOpen, setIsMutasiModalOpen] = useState(false);
 
+  // Function untuk buka/tutup modal Catatan Prestasi
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  
+  // Function untuk buka/tutup modal Sampul
+  const openSampulModal = () => setIsSampulModalOpen(true);
+  const closeSampulModal = () => setIsSampulModalOpen(false);
+
+  const openWaliKelasModal = () => setIsWaliKelasModalOpen(true);
+  const closeWaliKelasModal = () => setIsWaliKelasModalOpen(false);
+
+  
+  const openMutasiModal = () => setIsMutasiModalOpen(true);
+  const closeMutasiModal = () => setIsMutasiModalOpen(false);
   return (
     <div className="page">
 
@@ -33,7 +57,12 @@ function Beranda() {
       <header className="navbar">
         <div className="container navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img 
+              src="/logo-madinah.png" 
+              alt="Madinah Al-Quds" 
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }} 
+              className="navbar-logo" 
+            /> 
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">
@@ -83,10 +112,10 @@ function Beranda() {
                 <ClipboardList size={18}/> Ekstrakurikuler
               </li>
               <li 
-                className={location.pathname === '/materi-pelajaran' ? 'active' : ''} 
-                onClick={() => navigate('/materi-pelajaran')}
+                className={location.pathname === '/nilai' ? 'active' : ''} 
+                onClick={() => navigate('/nilai')}
               >
-                <BookOpen size={18}/> Materi Pelajaran
+                <GraduationCap size={18}/> Nilai
               </li>
               <li 
                 className={location.pathname === '/raport' ? 'active' : ''} 
@@ -111,7 +140,7 @@ function Beranda() {
               <p>Selamat datang kembali, Ustadz Ahmad! Berikut ringkasan sekolah Anda.</p>
             </section>
 
-            {/* ================= STATS CARDS ================= */}
+            {/* ================= STATS CARDS (3 SEJAJAR) ================= */}
             <section className="stats-grid">
               <div className="stat-card">
                 <h3>Total Siswa</h3>
@@ -122,7 +151,7 @@ function Beranda() {
               </div>
 
               <div className="stat-card">
-                <h3>Kelas Aktif</h3>
+                <h3>Kesiapan Akhlak</h3>
                 <div className="stat-number">12</div>
                 <div className="stat-trend">
                   <span>3 tingkatan</span>
@@ -133,24 +162,15 @@ function Beranda() {
                 <h3>Total Mata Pelajaran</h3>
                 <div className="stat-number">18</div>
                 <div className="stat-trend">
-                  <span>Wajib & Pilihan</span>
-                </div>
-              </div>
-
-              <div className="stat-card">
-                <h3>Prestasi Siswa</h3>
-                <div className="stat-number">15</div>
-                <div className="stat-trend">
-                  <span>Bulan ini</span>
+                  <span>Waktu & Pilihan</span>
                 </div>
               </div>
             </section>
 
-            {/* ================= CONTENT GRID ================= */}
-            <div className="content-grid">
-              {/* LEFT COLUMN */}
-              <div>
-                {/* Aktivitas Terbaru */}
+            {/* ================= ROW DUA KOLOM: Aktivitas Terbaru + Aksi Cepat ================= */}
+            <div className="row-dua-kolom">
+              {/* KOLOM KIRI: Aktivitas Terbaru (Lebih Besar) */}
+              <div className="kolom-aktivitas">
                 <div className="card">
                   <div className="card-header">
                     <h3>Aktivitas Terbaru</h3>
@@ -162,8 +182,8 @@ function Beranda() {
                         <FileText size={20} />
                       </div>
                       <div className="activity-content">
-                        <div className="activity-title">Penilaian Pengetahuan Diperbarui</div>
-                        <div className="activity-desc">Nilai Studi Islam Kelas 10-A ditambahkan</div>
+                        <div className="activity-title">Pendidikan Pengenalan Diperburuk</div>
+                        <div className="activity-desc">Nilai Studi Belum Kelas: 10-A di SMPN 1 Al-Qur'an Hadi</div>
                         <div className="activity-time">2 jam yang lalu</div>
                       </div>
                     </div>
@@ -173,7 +193,7 @@ function Beranda() {
                         <Users size={20} />
                       </div>
                       <div className="activity-content">
-                        <div className="activity-title">Siswa Baru Terdaftar</div>
+                        <div className="activity-title">Sewa Baru Tertibah</div>
                         <div className="activity-desc">Ahmad Fauzan bergabung di Kelas 11-B</div>
                         <div className="activity-time">5 jam yang lalu</div>
                       </div>
@@ -181,29 +201,61 @@ function Beranda() {
 
                     <div className="activity-item">
                       <div className="activity-icon">
-                        <ClipboardList size={20} />
+                        <FileText size={20} />
                       </div>
                       <div className="activity-content">
                         <div className="activity-title">Laporan Dihasilkan</div>
-                        <div className="activity-desc">Raport Semester 1 sudah siap</div>
+                        <div className="activity-desc">Rupoet Semester 1 sudah siap</div>
                         <div className="activity-time">1 hari yang lalu</div>
                       </div>
                     </div>
 
                     <div className="activity-item">
                       <div className="activity-icon">
-                        <AlertCircle size={20} />
+                        <BookOpen size={20} />
                       </div>
                       <div className="activity-content">
-                        <div className="activity-title">Penilaian Tertunda</div>
-                        <div className="activity-desc">5 kelas menunggu penilaian keterampilan</div>
+                        <div className="activity-title">Pendidikan Terbuka</div>
+                        <div className="activity-desc">6 kelas menunggu penilaian keterampilan</div>
                         <div className="activity-time">2 hari yang lalu</div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Siswa Terbaik */}
+              {/* KOLOM KANAN: Aksi Cepat (Lebih Kecil) */}
+              <div className="kolom-aksi-cepat">
+                <div className="card">
+                  <div className="card-header">
+                    <h3>Aksi Cepat</h3>
+                  </div>
+                  <div className="quick-actions">
+                    <div className="quick-action-btn" onClick={openModal}>
+                      <Award size={20} />
+                      Catatan Prestasi Akhlak
+                    </div>
+                    <div className="quick-action-btn" onClick={openSampulModal}>
+                      <Bookmark size={20} />
+                      Sampul
+                    </div>
+                    <div className="quick-action-btn" onClick={openWaliKelasModal}>
+                      <UserCheck size={20} />
+                      Catatan Wali Kelas
+                    </div>
+                    <div className="quick-action-btn" onClick={openMutasiModal}>
+                      <Repeat size={20} />
+                      Mutasi
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ================= ROW TIGA KOLOM: Siswa Terbaik + Jadwal Hari Ini + Tugas Mendesak ================= */}
+            <div className="row-tiga-kolom">
+              {/* KOLOM 1: Siswa Terbaik */}
+              <div className="kolom-siswa-terbaik">
                 <div className="card">
                   <div className="card-header">
                     <h3>Siswa Terbaik</h3>
@@ -213,7 +265,7 @@ function Beranda() {
                     <table className="student-table">
                       <thead>
                         <tr>
-                          <th>No.</th>
+                          <th></th>
                           <th>Nama</th>
                           <th>Kelas</th>
                           <th>Nilai</th>
@@ -222,21 +274,21 @@ function Beranda() {
                       <tbody>
                         <tr>
                           <td><span className="rank-badge">1</span></td>
-                          <td>Fatimah Azzahra</td>
+                          <td>Fadimah Azzahra</td>
                           <td>X IPA 1</td>
                           <td>95.5</td>
                         </tr>
                         <tr>
                           <td><span className="rank-badge">2</span></td>
                           <td>Ahmad Zaki</td>
-                          <td>X IPA 2</td>
+                          <td>XI IPA 2</td>
                           <td>94.2</td>
                         </tr>
                         <tr>
                           <td><span className="rank-badge">3</span></td>
                           <td>Khadijah Nur</td>
-                          <td>X IPA 1</td>
-                          <td>93.8</td>
+                          <td>XI IPA 1</td>
+                          <td>92.8</td>
                         </tr>
                         <tr>
                           <td><span className="rank-badge">4</span></td>
@@ -247,7 +299,7 @@ function Beranda() {
                         <tr>
                           <td><span className="rank-badge">5</span></td>
                           <td>Maryam Khalid</td>
-                          <td>X IPA 1</td>
+                          <td>XI IPA 1</td>
                           <td>91.7</td>
                         </tr>
                       </tbody>
@@ -256,30 +308,8 @@ function Beranda() {
                 </div>
               </div>
 
-              {/* RIGHT COLUMN */}
-              <div>
-                {/* Aksi Cepat */}
-                <div className="card">
-                  <div className="card-header">
-                    <h3>Aksi Cepat</h3>
-                  </div>
-                  <div className="quick-actions">
-                    <div className="quick-action-btn">
-                      <Plus size={20} />
-                      Tambah Penilaian
-                    </div>
-                    <div className="quick-action-btn">
-                      <Eye size={20} />
-                      Lihat Semua Siswa
-                    </div>
-                    <div className="quick-action-btn">
-                      <Settings size={20} />
-                      Kelola Mata Pelajaran
-                    </div>
-                  </div>
-                </div>
-
-                {/* Jadwal Hari Ini */}
+              {/* KOLOM 2: Jadwal Hari Ini */}
+              <div className="kolom-jadwal">
                 <div className="card">
                   <div className="card-header">
                     <h3>Jadwal Hari Ini</h3>
@@ -287,37 +317,39 @@ function Beranda() {
                   </div>
                   <div className="schedule-list">
                     <div className="schedule-item">
-                      <div className="schedule-time">07:30</div>
+                      <div className="schedule-time">07.30 - 08.00</div>
                       <div className="schedule-info">
-                        <h4>Al-Qur'an Hadits</h4>
-                        <p><MapPin size={14} /> X IPA 1 • R-101</p>
+                        <h4>Al-Quran Hadits</h4>
+                        <p><MapPin size={14} /> X IPA 1 • R.101</p>
                       </div>
                     </div>
                     <div className="schedule-item">
-                      <div className="schedule-time">09:15</div>
+                      <div className="schedule-time">09.16 - 10.45</div>
                       <div className="schedule-info">
-                        <h4>Fiqh</h4>
-                        <p><MapPin size={14} /> X IPA 2 • R-102</p>
+                        <h4>Figh</h4>
+                        <p><MapPin size={14} /> X IPA 2 • R.102</p>
                       </div>
                     </div>
                     <div className="schedule-item">
-                      <div className="schedule-time">11:00</div>
+                      <div className="schedule-time">13.00 - 14.00</div>
                       <div className="schedule-info">
                         <h4>Akidah Akhlak</h4>
-                        <p><MapPin size={14} /> XI IPA 1 • R-103</p>
+                        <p><MapPin size={14} /> XI IPA 1 • R.103</p>
                       </div>
                     </div>
                     <div className="schedule-item">
-                      <div className="schedule-time">13:00</div>
+                      <div className="schedule-time">13.00 - 14.00</div>
                       <div className="schedule-info">
                         <h4>SKI</h4>
-                        <p><MapPin size={14} /> XI IPA 1 • R-104</p>
+                        <p><MapPin size={14} /> XII IPA 1 • R.104</p>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Tugas Mendesak */}
+              {/* KOLOM 3: Tugas Mendesak */}
+              <div className="kolom-tugas">
                 <div className="card">
                   <div className="card-header">
                     <h3>Tugas Mendesak</h3>
@@ -341,7 +373,7 @@ function Beranda() {
                         <CheckCircle size={20} />
                       </div>
                       <div className="task-content">
-                        <h4>Verifikasi kehadiran semester/agama</h4>
+                        <h4>Verifikasi kebutuhan semester</h4>
                       </div>
                     </div>
 
@@ -350,7 +382,7 @@ function Beranda() {
                         <Users size={20} />
                       </div>
                       <div className="task-content">
-                        <h4>Rapat koordinasi wali kelas</h4>
+                        <h4>Rupoet koordinasi wali kelas</h4>
                         <div className="task-deadline">
                           <Clock size={14} /> 1 minggu lagi
                         </div>
@@ -362,7 +394,7 @@ function Beranda() {
                         <FileText size={20} />
                       </div>
                       <div className="task-content">
-                        <h4>Cetak raport semester ganjil</h4>
+                        <h4>Citak raport semester gajil</h4>
                         <div className="task-deadline">
                           <Clock size={14} /> 2 minggu lagi
                         </div>
@@ -422,6 +454,13 @@ function Beranda() {
           </div>
         </div>
       </footer>
+
+
+      <CatatanPrestasiModal isOpen={isModalOpen} onClose={closeModal} />
+      <SampulModal isOpen={isSampulModalOpen} onClose={closeSampulModal} />
+      <CatatanWaliKelasModal isOpen={isWaliKelasModalOpen} onClose={closeWaliKelasModal} />
+      <MutasiModal isOpen={isMutasiModalOpen} onClose={closeMutasiModal} />
+
 
     </div>
   );
