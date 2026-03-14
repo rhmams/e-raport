@@ -576,3 +576,44 @@
     padding: 32px 0 16px;
   }
 }
+
+/* Button Lihat Detail */
+  .btn-lihat-detail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  }
+
+.btn-lihat-detail:hover {
+  background-color: #059669;
+  border-color: #059669;
+  color: white;
+}
+
+.btn-lihat-detail svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Update untuk tabel raport */
+.raport-table td:last-child {
+  text-align: center;
+}
+
+.raport-table th:last-child {
+  text-align: center;
+}
+
+/* Hapus styling button edit yang lama */
+.btn-edit-raport {
+  display: none;
+}

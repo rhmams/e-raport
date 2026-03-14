@@ -1,0 +1,396 @@
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+/* Modal Container */
+.modal-container {
+  background: white;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 1100px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid #edf2f7;
+  background: white;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+}
+
+.modal-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.modal-close {
+  background: #f1f5f9;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+/* Modal Content */
+.modal-content {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Form Section */
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #f8fafc;
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #1e293b;
+  transition: all 0.2s;
+  background: white;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #16a085;
+  box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
+}
+
+.form-input::placeholder {
+  color: #a0aec0;
+  font-size: 13px;
+}
+
+/* Date Input */
+.date-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.date-icon {
+  position: absolute;
+  left: 16px;
+  color: #16a085;
+}
+
+.date-input {
+  padding-left: 42px;
+  color: #1e293b;
+}
+
+/* Table Section */
+.table-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0 4px;
+}
+
+.table-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+.btn-semua-hadir {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-semua-hadir:hover {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+}
+
+.btn-semua-hadir.active {
+  background: #16a085;
+  border-color: #16a085;
+  color: white;
+}
+
+.btn-semua-hadir svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Table */
+.table-container {
+  overflow-x: auto;
+  border: 1px solid #edf2f7;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.kehadiran-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.kehadiran-table th {
+  text-align: left;
+  padding: 16px 20px;
+  background: #f8fafc;
+  font-weight: 600;
+  font-size: 13px;
+  color: #4a5568;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.kehadiran-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid #edf2f7;
+  color: #2d3748;
+  font-size: 14px;
+}
+
+.kehadiran-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.kehadiran-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.gender-cell {
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Radio Buttons */
+.radio-label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.radio-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-custom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e0;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.radio-label input:checked ~ .radio-custom {
+  border-color: #16a085;
+  background: #16a085;
+  box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
+}
+
+.radio-label input:checked ~ .radio-custom::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+}
+
+.kehadiran-table th:nth-child(4),
+.kehadiran-table th:nth-child(5),
+.kehadiran-table th:nth-child(6),
+.kehadiran-table th:nth-child(7),
+.kehadiran-table td:nth-child(4),
+.kehadiran-table td:nth-child(5),
+.kehadiran-table td:nth-child(6),
+.kehadiran-table td:nth-child(7) {
+  text-align: center;
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 24px 32px;
+  border-top: 1px solid #edf2f7;
+  background: white;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.btn-batal {
+  padding: 12px 28px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-batal:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e0;
+  color: #1e293b;
+}
+
+.btn-simpan {
+  padding: 12px 28px;
+  background: #16a085;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(22, 160, 133, 0.2);
+}
+
+.btn-simpan:hover {
+  background: #138a72;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(22, 160, 133, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-container {
+    max-width: 95%;
+  }
+
+  .modal-header {
+    padding: 20px 24px;
+  }
+
+  .modal-header h2 {
+    font-size: 20px;
+  }
+
+  .modal-content {
+    padding: 24px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .table-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-semua-hadir {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-footer {
+    padding: 20px 24px;
+  }
+
+  .btn-batal, .btn-simpan {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}

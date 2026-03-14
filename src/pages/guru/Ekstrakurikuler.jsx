@@ -18,7 +18,8 @@ import {
   Eye,
   Calendar,
   User,
-  Award
+  Award,
+  GraduationCap
 } from "lucide-react";
 
 import "./Ekstrakurikuler.css";
@@ -28,6 +29,16 @@ function Ekstrakurikuler() {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState('ekstrakurikuler'); // 'kokurikuler' atau 'ekstrakurikuler'
+
+  // Di komponen Ekstrakurikuler, update fungsi handleLihatDetail
+const handleLihatDetail = (itemId) => {
+  if (activeTab === 'kokurikuler') {
+    navigate(`/kokurikuler/${itemId}`);
+  } else {
+    navigate(`/ekstrakurikuler/${itemId}`);
+  }
+};
 
   const dataEkstra = [
     {
@@ -86,19 +97,57 @@ function Ekstrakurikuler() {
     }
   ];
 
-  const filteredData = dataEkstra.filter(ekstra =>
-    ekstra.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    ekstra.jenis.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    ekstra.pembimbing.toLowerCase().includes(searchTerm.toLowerCase())
+  const dataKokurikuler = [
+    {
+      id: 101,
+      nama: "Tahfidz Al-Quran",
+      jenis: "Keagamaan",
+      peserta: 248,
+      jadwal: "Setiap Hari",
+      pembimbing: "Ustadz Ahmad",
+      status: "Aktif"
+    },
+    {
+      id: 102,
+      nama: "Bahasa Arab Terapan",
+      jenis: "Akademik",
+      peserta: 248,
+      jadwal: "Senin & Rabu",
+      pembimbing: "Ustad Zali Fatimah",
+      status: "Aktif"
+    },
+    {
+      id: 103,
+      nama: "Studi Islam Kontemporer",
+      jenis: "Keagamaan",
+      peserta: 180,
+      jadwal: "Selasa & Kamis",
+      pembimbing: "Ustadz Muhammad",
+      status: "Aktif"
+    },
+    {
+      id: 104,
+      nama: "Praktik Ibadah",
+      jenis: "Keagamaan",
+      peserta: 248,
+      jadwal: "Setiap Hari",
+      pembimbing: "Ustadz Abdullah",
+      status: "Aktif"
+    }
+  ];
+
+  // Tentukan data yang ditampilkan berdasarkan tab aktif
+  const currentData = activeTab === 'ekstrakurikuler' ? dataEkstra : dataKokurikuler;
+
+  const filteredData = currentData.filter(item =>
+    item.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.jenis.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.pembimbing.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const totalKegiatan = dataEkstra.length;
-  const totalPeserta = dataEkstra.reduce((acc, curr) => acc + curr.peserta, 0);
-  const programAktif = dataEkstra.filter(ekstra => ekstra.status === "Aktif").length;
-
-  const handleLihatDetail = (ekstraId) => {
-    navigate(`/ekstrakurikuler/${ekstraId}`);
-  };
+  const totalKegiatan = currentData.length;
+  const totalPeserta = currentData.reduce((acc, curr) => acc + curr.peserta, 0);
+  const programAktif = currentData.filter(item => item.status === "Aktif").length;
 
   return (
     <div className="page">
@@ -107,11 +156,16 @@ function Ekstrakurikuler() {
       <header className="navbar">
         <div className="navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img 
+              src="/logo-madinah.png" 
+              alt="Madinah Al-Quds" 
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }} 
+              className="navbar-logo" 
+            />
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">
-                Guru &gt; Ekstrakurikuler
+                Guru &gt; {activeTab === 'ekstrakurikuler' ? 'Ekstrakurikuler' : 'Kokurikuler'}
               </div>
             </div>
           </div>
@@ -157,10 +211,10 @@ function Ekstrakurikuler() {
                 <ClipboardList size={18}/> Ekstrakurikuler
               </li>
               <li 
-                className={location.pathname === '/materi-pelajaran' ? 'active' : ''} 
-                onClick={() => navigate('/materi-pelajaran')}
+                className={location.pathname === '/nilai' ? 'active' : ''} 
+                onClick={() => navigate('/nilai')}
               >
-                <BookOpen size={18}/> Materi Pelajaran
+                <GraduationCap size={18}/> Nilai
               </li>
               <li 
                 className={location.pathname === '/raport' ? 'active' : ''} 
@@ -181,13 +235,40 @@ function Ekstrakurikuler() {
           {/* ================= HEADER ================= */}
           <div className="page-header">
             <div>
-              <h1>Kegiatan Ekstrakurikuler</h1>
-              <p className="subtitle">Kelola program ko-kurikuler dan partisipasi</p>
+              <h1>Kegiatan {activeTab === 'ekstrakurikuler' ? 'Ekstrakurikuler' : 'Kokurikuler'}</h1>
+              <p className="subtitle">Kelola program ko-kurikuler dan partisipasi siswa</p>
             </div>
             <button className="btn-tambah">
               <Plus size={18} /> Tambah Kegiatan
             </button>
           </div>
+
+          {/* ================= TAB NAVIGATION ================= */}
+          <div className="tab-navigation">
+            <div 
+              className={`tab-item ${activeTab === 'kokurikuler' ? 'active' : ''}`}
+              onClick={() => setActiveTab('kokurikuler')}
+            >
+              Kokurikuler
+            </div>
+            <div 
+              className={`tab-item ${activeTab === 'ekstrakurikuler' ? 'active' : ''}`}
+              onClick={() => setActiveTab('ekstrakurikuler')}
+            >
+              Ekstrakurikuler
+            </div>
+          </div>
+
+          {/* ================= INPUT NILAI SECTION ================= */}
+          {activeTab === 'kokurikuler' && (
+            <div className="input-nilai-section">
+              <div className="input-nilai-header">
+                <GraduationCap size={20} />
+                <h3>Input Nilai Kokurikuler</h3>
+              </div>
+              <p className="input-nilai-desc">Kelola nilai dimensi profil lulusan untuk kegiatan kokurikuler</p>
+            </div>
+          )}
 
           {/* ================= STATS CARDS ================= */}
           <div className="stats-grid">
@@ -246,7 +327,7 @@ function Ekstrakurikuler() {
             </div>
           </div>
 
-          {/* ================= TABLE EKSTRAKURIKULER ================= */}
+          {/* ================= TABLE ================= */}
           <div className="table-container">
             <table className="ekstra-table">
               <thead>
@@ -261,31 +342,31 @@ function Ekstrakurikuler() {
                 </tr>
               </thead>
               <tbody>
-                {filteredData.map((ekstra) => (
-                  <tr key={ekstra.id}>
+                {filteredData.map((item) => (
+                  <tr key={item.id}>
                     <td>
                       <div className="nama-kegiatan">
-                        <span>{ekstra.nama}</span>
+                        <span>{item.nama}</span>
                       </div>
                     </td>
                     <td>
-                      <span className="badge-jenis">{ekstra.jenis}</span>
+                      <span className="badge-jenis">{item.jenis}</span>
                     </td>
-                    <td>{ekstra.peserta}</td>
-                    <td>{ekstra.jadwal}</td>
+                    <td>{item.peserta}</td>
+                    <td>{item.jadwal}</td>
                     <td>
                       <div className="pembimbing-info">
                         <User size={14} />
-                        <span>{ekstra.pembimbing}</span>
+                        <span>{item.pembimbing}</span>
                       </div>
                     </td>
                     <td>
-                      <span className="badge-status aktif">{ekstra.status}</span>
+                      <span className="badge-status aktif">{item.status}</span>
                     </td>
                     <td>
                       <button 
                         className="btn-lihat-detail" 
-                        onClick={() => handleLihatDetail(ekstra.id)}
+                        onClick={() => handleLihatDetail(item.id)}
                       >
                         <Eye size={16} />
                         <span>Lihat Detail</span>
@@ -299,7 +380,7 @@ function Ekstrakurikuler() {
 
           {/* ================= PAGINATION INFO ================= */}
           <div className="pagination-info">
-            Menampilkan 1 - {filteredData.length} dari {dataEkstra.length} kegiatan
+            Menampilkan 1 - {filteredData.length} dari {currentData.length} kegiatan
           </div>
 
         </main>

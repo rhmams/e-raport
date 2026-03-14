@@ -15,10 +15,10 @@ import {
   Download,
   Upload,
   Eye,
-  Edit,
   Printer,
   Award,
-  Calendar
+  Calendar,
+  GraduationCap  // Ditambahkan untuk icon di sidebar nanti
 } from "lucide-react";
 
 import "./Raport.css";
@@ -97,6 +97,10 @@ function Raport() {
   const selesai = dataRaport.filter(r => r.status === "Selesai").length;
   const draft = dataRaport.filter(r => r.status === "Draft").length;
 
+  const handleLihatDetail = (raportId) => {
+    navigate(`/raport/${raportId}`);
+  };
+
   return (
     <div className="page">
 
@@ -104,7 +108,12 @@ function Raport() {
       <header className="navbar">
         <div className="navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img 
+              src="/logo-madinah.png" 
+              alt="Madinah Al-Quds" 
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }} 
+              className="navbar-logo" 
+            />
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">
@@ -154,10 +163,10 @@ function Raport() {
                 <ClipboardList size={18}/> Ekstrakurikuler
               </li>
               <li 
-                className={location.pathname === '/materi-pelajaran' ? 'active' : ''} 
-                onClick={() => navigate('/materi-pelajaran')}
+                className={location.pathname === '/nilai' ? 'active' : ''} 
+                onClick={() => navigate('/nilai')}
               >
-                <BookOpen size={18}/> Materi Pelajaran
+                <GraduationCap size={18}/> Nilai
               </li>
               <li 
                 className={location.pathname === '/raport' ? 'active' : ''} 
@@ -280,8 +289,13 @@ function Raport() {
                     </td>
                     <td>{raport.tanggalTerbit}</td>
                     <td>
-                      <button className="btn-edit-raport">
-                        <Edit size={16} />
+                      <button 
+                        className="btn-lihat-detail" 
+                        onClick={() => handleLihatDetail(raport.id)}
+                        title="Lihat Detail Raport"
+                      >
+                        <Eye size={16} />
+                        <span>Lihat Detail</span>
                       </button>
                     </td>
                   </tr>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Search, Award, BookOpen, FileText } from "lucide-react";
+import { Search } from "lucide-react"; // Hapus X dari import
 import "./CatatanPrestasiModal.css";
 
 function CatatanPrestasiModal({ isOpen, onClose }) {
@@ -12,7 +12,7 @@ function CatatanPrestasiModal({ isOpen, onClose }) {
         <div className="modal-header">
           <h2>Catatan Prestasi Akhir</h2>
           <button className="close-button" onClick={onClose}>
-            <X size={20} />
+            X {/* Ganti dari <X size={20} /> menjadi huruf X */}
           </button>
         </div>
 

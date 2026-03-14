@@ -20,7 +20,8 @@ import {
   Plus,
   Eye,
   Calendar,
-  FileEdit
+  FileEdit,
+  BarChart // Tambahkan icon untuk Nilai
 } from "lucide-react";
 
 import "./WaliKelas.css";
@@ -152,9 +153,30 @@ function WaliKelas() {
   const totalHadir = dataSiswa.reduce((acc, curr) => acc + curr.hadir, 0) / totalSiswa;
   const rataKelas = (dataSiswa.reduce((acc, curr) => acc + curr.rataRata, 0) / totalSiswa).toFixed(1);
 
-  const handleLihatDetail = (siswaId) => {
-    navigate(`/wali-kelas/siswa/${siswaId}`);
+  // PERBAIKAN: Ubah navigasi ke DetailMuridWakel
+  const handleLihatDetail = (muridId) => {
+    navigate(`/wali-kelas/murid/${muridId}/detail`);
   };
+
+  // Navigasi ke halaman Nilai
+  const goToNilai = () => {
+    navigate('/nilai');
+  };
+
+  // Navigasi ke halaman Beranda
+  const goToBeranda = () => navigate('/');
+  
+  // Navigasi ke halaman Kelas
+  const goToKelas = () => navigate('/kelas');
+  
+  // Navigasi ke halaman Wali Kelas
+  const goToWaliKelas = () => navigate('/wali-kelas');
+  
+  // Navigasi ke halaman Ekstrakurikuler
+  const goToEkstrakurikuler = () => navigate('/ekstrakurikuler');
+  
+  // Navigasi ke halaman Raport
+  const goToRaport = () => navigate('/raport');
 
   return (
     <div className="page">
@@ -163,7 +185,12 @@ function WaliKelas() {
       <header className="navbar">
         <div className="navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img 
+              src="/logo-madinah.png" 
+              alt="Madinah Al-Quds" 
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }} 
+              className="navbar-logo" 
+            />
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">
@@ -190,43 +217,43 @@ function WaliKelas() {
             <ul className="menu">
               <li 
                 className={location.pathname === '/' || location.pathname === '/beranda' ? 'active' : ''} 
-                onClick={() => navigate('/beranda')}
+                onClick={goToBeranda}
               >
                 <LayoutDashboard size={18}/> Beranda
               </li>
               <li 
                 className={location.pathname.startsWith('/kelas') && !location.pathname.includes('/kelas/') ? 'active' : ''} 
-                onClick={() => navigate('/kelas')}
+                onClick={goToKelas}
               >
                 <BookOpen size={18}/> Kelas
               </li>
               <li 
                 className={location.pathname === '/wali-kelas' ? 'active' : ''} 
-                onClick={() => navigate('/wali-kelas')}
+                onClick={goToWaliKelas}
               >
                 <Users size={18}/> Wali Kelas
               </li>
               <li 
                 className={location.pathname === '/ekstrakurikuler' ? 'active' : ''} 
-                onClick={() => navigate('/ekstrakurikuler')}
+                onClick={goToEkstrakurikuler}
               >
                 <ClipboardList size={18}/> Ekstrakurikuler
               </li>
               <li 
-                className={location.pathname === '/materi-pelajaran' ? 'active' : ''} 
-                onClick={() => navigate('/materi-pelajaran')}
+                className={location.pathname === '/nilai' ? 'active' : ''} 
+                onClick={goToNilai}
               >
-                <BookOpen size={18}/> Materi Pelajaran
+                <GraduationCap size={18}/> Nilai
               </li>
               <li 
                 className={location.pathname === '/raport' ? 'active' : ''} 
-                onClick={() => navigate('/raport')}
+                onClick={goToRaport}
               >
                 <FileText size={18}/> Raport 
               </li>
             </ul>
           </div>
-          <div className="logout" onClick={() => navigate('/logout')}>
+          <div className="logout" onClick={() => navigate('/login')}>
             <LogOut size={18}/> Keluar
           </div>
         </aside>

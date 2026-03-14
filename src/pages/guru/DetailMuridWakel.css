@@ -1,0 +1,445 @@
+/* ================= DETAIL MURID WAKEL ================= */
+.detail-murid-main {
+  background: #f8fafc;
+}
+
+.detail-murid-main .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 0;
+  margin-bottom: 24px;
+  transition: color 0.2s;
+}
+
+.back-button:hover {
+  color: #16a085;
+}
+
+/* Header */
+.detail-header {
+  margin-bottom: 16px;
+}
+
+.detail-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.header-subtitle {
+  font-size: 15px;
+  color: #64748b;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 2px solid #e2e8f0;
+  margin: 16px 0 24px 0;
+}
+
+/* Profile Section */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+  background: white;
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #16a085, #0b3b5c);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: white;
+  box-shadow: 0 4px 10px rgba(22, 160, 133, 0.2);
+}
+
+.profile-info h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.profile-meta {
+  font-size: 15px;
+  color: #64748b;
+}
+
+/* Detail Grid */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+/* Info Card */
+.info-card {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  margin-bottom: 24px;
+}
+
+.info-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.info-label {
+  min-width: 130px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.info-value {
+  color: #1e293b;
+  flex: 1;
+}
+
+/* Kehadiran Card */
+.kehadiran-card {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  margin-bottom: 24px;
+}
+
+.kehadiran-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.kehadiran-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kehadiran-item {
+  text-align: center;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 16px;
+  border: 1px solid #edf2f7;
+}
+
+.kehadiran-label {
+  display: block;
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.kehadiran-value {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.kehadiran-value.hadir {
+  color: #16a085;
+}
+
+.kehadiran-value.sakit {
+  color: #f39c12;
+}
+
+.kehadiran-value.izin {
+  color: #3498db;
+}
+
+.kehadiran-value.alpha {
+  color: #ef4444;
+}
+
+.kehadiran-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #edf2f7;
+}
+
+.persentase, .total {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.persentase strong, .total strong {
+  font-size: 18px;
+  color: #1e293b;
+}
+
+/* Prestasi List */
+.prestasi-list {
+  list-style: none;
+  padding: 0;
+}
+
+.prestasi-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #edf2f7;
+  color: #1e293b;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prestasi-list li:last-child {
+  border-bottom: none;
+}
+
+/* Akademik Grid */
+.akademik-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.semester-card {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #edf2f7;
+}
+
+.semester-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.semester-detail p {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.semester-detail p:last-child {
+  margin-bottom: 0;
+}
+
+.semester-detail strong {
+  color: #16a085;
+  font-size: 16px;
+}
+
+/* Nilai Section */
+.nilai-section {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  margin-bottom: 32px;
+}
+
+.nilai-section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+/* Table */
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.nilai-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.nilai-table th {
+  text-align: left;
+  padding: 16px 12px;
+  background: #f8fafc;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  border-bottom: 2px solid #edf2f7;
+}
+
+.nilai-table td {
+  padding: 14px 12px;
+  font-size: 14px;
+  color: #1e293b;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.nilai-table tr:last-child td {
+  border-bottom: none;
+}
+
+.nilai-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.nilai-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #e6f0f7;
+  color: #3498db;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.predikat-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.predikat-badge.a {
+  background: #e6f7f0;
+  color: #16a085;
+}
+
+.predikat-badge.aplus {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Rata-rata */
+.rata-rata {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 2px solid #edf2f7;
+  font-size: 16px;
+  color: #64748b;
+}
+
+.rata-rata strong {
+  font-size: 24px;
+  color: #16a085;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .akademik-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .detail-murid-main .container {
+    padding: 0 16px;
+  }
+  
+  .detail-header h1 {
+    font-size: 24px;
+  }
+  
+  .profile-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .profile-info {
+    text-align: center;
+  }
+  
+  .kehadiran-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .kehadiran-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .info-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .info-label {
+    min-width: auto;
+  }
+  
+  .rata-rata {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+}

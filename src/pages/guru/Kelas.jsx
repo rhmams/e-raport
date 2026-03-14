@@ -3,7 +3,7 @@ import {
   BookOpen,
   Users,
   ClipboardList,
-  FileText,
+  GraduationCap,
   LogOut,
   Clock,
   MapPin,
@@ -24,6 +24,10 @@ function Kelas() {
     navigate(`/kelas/${kelasId}`);
   };
 
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="page">
 
@@ -31,7 +35,12 @@ function Kelas() {
       <header className="navbar">
         <div className="container navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img 
+              src="/logo-madinah.png" 
+              alt="Madinah Al-Quds" 
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }} 
+              className="navbar-logo" 
+            />
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">
@@ -56,15 +65,31 @@ function Kelas() {
         <aside className="sidebar">
           <div>
             <ul className="menu">
-              <li><LayoutDashboard size={18}/> Beranda</li>
-              <li className="active"><BookOpen size={18}/> Kelas</li>
-              <li><Users size={18}/> Wali Kelas</li>
-              <li><ClipboardList size={18}/> Ekstrakurikuler</li>
-              <li><BookOpen size={18}/> Materi Pelajaran</li>
-              <li><FileText size={18}/> Raport</li>
+              <li onClick={() => handleNavigation('/beranda')}>
+                <LayoutDashboard size={18}/> Beranda
+              </li>
+              <li className="active">
+                <BookOpen size={18}/> Kelas
+              </li>
+              <li onClick={() => handleNavigation('/wali-kelas')}>
+                <Users size={18}/> Wali Kelas
+              </li>
+              <li onClick={() => handleNavigation('/ekstrakurikuler')}>
+                <ClipboardList size={18}/> Ekstrakurikuler
+              </li>
+              <li onClick={() => handleNavigation('/nilai')}>
+                <GraduationCap size={18}/> Nilai
+              </li>
+              <li onClick={() => handleNavigation('/raport')}>
+                <BookOpen size={18}/> Raport
+              </li>
             </ul>
           </div>
-          <div className="logout">
+          <div className="logout" onClick={() => {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            navigate('/login');
+          }}>
             <LogOut size={18}/> Keluar
           </div>
         </aside>
@@ -73,7 +98,7 @@ function Kelas() {
         <main className="main">
           <div className="container">
 
-            {/* ================= JADWAL HARI INI (BACKGROUND HIJAU) ================= */}
+            {/* ================= JADWAL HARI INI ================= */}
             <div className="jadwal-wrapper">
               <div className="jadwal-header">
                 <h3>Jadwal Hari Ini</h3>

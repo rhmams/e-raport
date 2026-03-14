@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChevronDown, Download } from "lucide-react";
+import { ChevronDown, Download } from "lucide-react"; // Hapus X dari import
 import "./SampulModal.css";
 
 function SampulModal({ isOpen, onClose }) {
@@ -19,13 +19,13 @@ function SampulModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-container sampul-modal">
+    <div className="modal-overlay sampul-modal">
+      <div className="modal-container">
         {/* Header */}
         <div className="modal-header">
           <h2>Sampul Raport</h2>
           <button className="close-button" onClick={onClose}>
-            <X size={20} />
+            X {/* Ganti icon X dengan huruf X */}
           </button>
         </div>
 

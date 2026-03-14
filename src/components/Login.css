@@ -1,0 +1,364 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #2d5a27 0%, #4a7c3a 100%);
+}
+
+.login-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1300px;
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  /* HAPUS height: 750px; biar menyesuaikan konten */
+}
+
+/* Left side - Image */
+.login-left {
+  flex: 1.5;
+  overflow: hidden;
+  position: relative;
+  background: #f5f5f5;
+  /* Tambahkan tinggi minimum */
+  min-height: 700px;
+}
+
+.login-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Right side - Form */
+.login-right {
+  flex: 1;
+  display: flex;
+  align-items: flex-start; /* Ubah dari center ke flex-start */
+  justify-content: center;
+  padding: 40px 50px;
+  background: white;
+  overflow-y: auto; /* Pastikan bisa scroll */
+  max-height: 800px; /* Batasi maksimal tinggi */
+}
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+  /* Hapus properti yang membatasi */
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 25px; /* Kurangi sedikit margin */
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px; /* Kurangi margin */
+}
+
+.logo-ponpes {
+  width: 90px; /* Perkecil sedikit */
+  height: 90px;
+  object-fit: contain;
+}
+
+.raport-title {
+  color: #2d5a27;
+  font-size: 22px; /* Perkecil sedikit */
+  font-weight: 600;
+  margin-bottom: 5px;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+.pesantren-title {
+  color: #4a7c3a;
+  font-size: 26px; /* Perkecil sedikit */
+  font-weight: 700;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+.pesantren-subtitle {
+  color: #666;
+  font-size: 16px; /* Perkecil sedikit */
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.login-welcome {
+  color: #4a7c3a;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 0;
+  border-bottom: 2px solid #4a7c3a;
+  display: inline-block;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Kurangi gap */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Kurangi gap */
+}
+
+.form-group label {
+  color: #333;
+  font-size: 13px; /* Perkecil font */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-input {
+  padding: 12px 16px; /* Kurangi padding */
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px; /* Perkecil font */
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4a7c3a;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(74, 124, 58, 0.1);
+}
+
+.form-input::placeholder {
+  color: #aaa;
+  font-size: 13px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px; /* Kurangi gap */
+}
+
+.select-group {
+  flex: 1;
+}
+
+.form-select {
+  width: 100%;
+  padding: 12px 16px; /* Kurangi padding */
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #f8fafc;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: #4a7c3a;
+  background-color: white;
+}
+
+.login-button {
+  background: #2d5a27;
+  color: white;
+  padding: 14px; /* Kurangi padding */
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 5px; /* Kurangi margin */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+}
+
+.login-button:hover {
+  background: #1e3e1a;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(45, 90, 39, 0.3);
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: 0; /* Hapus margin */
+}
+
+.forgot-password a {
+  color: #4a7c3a;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  display: inline-block;
+  padding: 3px 0;
+}
+
+.forgot-password a:hover {
+  color: #2d5a27;
+  text-decoration: underline;
+}
+
+.create-account-section {
+  text-align: center;
+  margin-top: 15px; /* Kurangi margin */
+  padding-top: 15px; /* Kurangi padding */
+  border-top: 2px solid #f0f0f0;
+}
+
+.create-account-section p {
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.create-account-button {
+  display: inline-block;
+  background: transparent;
+  color: #4a7c3a;
+  padding: 10px 30px; /* Kurangi padding */
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid #4a7c3a;
+  width: auto;
+  min-width: 160px;
+}
+
+.create-account-button:hover {
+  background: #4a7c3a;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(74, 124, 58, 0.2);
+}
+
+.login-footer {
+  margin-top: 15px; /* Kurangi margin */
+  text-align: center;
+}
+
+.version-text {
+  color: #999;
+  font-size: 11px;
+}
+
+/* Warning message like in RDM */
+.warning-message {
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-top: 10px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.warning-message a {
+  color: #533f03;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.warning-message a:hover {
+  color: #000;
+}
+
+.version-info {
+  background: #e9ecef;
+  padding: 8px;
+  border-radius: 6px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #495057;
+  text-align: center;
+  font-family: monospace;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .login-wrapper {
+    max-width: 95%;
+  }
+  
+  .login-left {
+    min-height: 600px;
+  }
+  
+  .raport-title {
+    font-size: 20px;
+  }
+  
+  .pesantren-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column;
+  }
+  
+  .login-left {
+    min-height: 300px;
+  }
+  
+  .login-right {
+    padding: 30px 20px;
+    max-height: none; /* Hapus max-height di mobile */
+  }
+  
+  .logo-ponpes {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .raport-title {
+    font-size: 18px;
+  }
+  
+  .pesantren-title {
+    font-size: 22px;
+  }
+}
+
+/* Tambahkan di bagian akhir file Login.css */
+.error-message {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
