@@ -1,0 +1,681 @@
+/* src/pages/admin/ProfilMadrasah.css */
+.dashboard-container .profil-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Profil Header */
+.dashboard-container .profil-header {
+  background: linear-gradient(135deg, #0b3b5c 0%, #1c5a85 100%);
+  border-radius: 20px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.dashboard-container .profil-header-overlay {
+  padding: 40px 35px;
+}
+
+.dashboard-container .profil-title-section {
+  color: white;
+}
+
+.dashboard-container .profil-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: 'Inter', sans-serif;
+}
+
+.dashboard-container .profil-tagline {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.dashboard-container .badge-container {
+  display: flex;
+  gap: 15px;
+}
+
+.dashboard-container .badge-akreditasi,
+.dashboard-container .badge-tahun {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Contact Cards */
+.dashboard-container .contact-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.dashboard-container .contact-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e9ecef;
+  transition: transform 0.2s;
+}
+
+.dashboard-container .contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container .contact-icon {
+  width: 45px;
+  height: 45px;
+  background: #e8f0fe;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0b3b5c;
+  font-size: 20px;
+}
+
+.dashboard-container .contact-detail h4 {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.dashboard-container .contact-detail p {
+  font-size: 14px;
+  color: #1e293b;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Visi Misi Section */
+.dashboard-container .visi-misi-section {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.dashboard-container .visi-card,
+.dashboard-container .misi-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e9ecef;
+}
+
+.dashboard-container .visi-icon,
+.dashboard-container .misi-icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.dashboard-container .visi-card h3,
+.dashboard-container .misi-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 15px;
+}
+
+.dashboard-container .visi-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.dashboard-container .misi-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.dashboard-container .misi-card li {
+  padding: 8px 0;
+  padding-left: 24px;
+  position: relative;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.dashboard-container .misi-card li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #0b3b5c;
+  font-weight: bold;
+}
+
+/* Program Unggulan */
+.dashboard-container .unggulan-section {
+  margin-bottom: 50px;
+}
+
+.dashboard-container .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.dashboard-container .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #0b3b5c, #1c5a85);
+  border-radius: 2px;
+}
+
+.dashboard-container .unggulan-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.dashboard-container .unggulan-item {
+  background: white;
+  border-radius: 16px;
+  padding: 25px 20px;
+  text-align: center;
+  transition: all 0.3s;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-container .unggulan-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container .unggulan-icon {
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(135deg, #0b3b5c, #1c5a85);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: white;
+  font-size: 28px;
+}
+
+.dashboard-container .unggulan-item h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.dashboard-container .unggulan-item p {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Fasilitas */
+.dashboard-container .fasilitas-section {
+  margin-bottom: 50px;
+}
+
+.dashboard-container .fasilitas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.dashboard-container .fasilitas-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #1e293b;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.dashboard-container .fasilitas-item:hover {
+  background: white;
+  border-color: #0b3b5c;
+  transform: translateX(5px);
+}
+
+.dashboard-container .fasilitas-item svg {
+  color: #0b3b5c;
+  font-size: 18px;
+}
+
+/* Profil Footer Info */
+.dashboard-container .profil-footer-info {
+  background: #0b3b5c;
+  border-radius: 20px;
+  padding: 35px;
+  color: white;
+  margin-top: 20px;
+}
+
+.dashboard-container .footer-brand-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.dashboard-container .footer-logo-small {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dashboard-container .footer-logo-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dashboard-container .footer-brand-section h3 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.dashboard-container .footer-contact-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.dashboard-container .footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #cbd5e0;
+}
+
+.dashboard-container .footer-hours {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dashboard-container .hours-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #cbd5e0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .dashboard-container .contact-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-container .unggulan-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-container .fasilitas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboard-container .visi-misi-section {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-container .profil-title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container .contact-cards {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-container .unggulan-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-container .fasilitas-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-container .badge-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .dashboard-container .footer-contact-row,
+  .dashboard-container .footer-hours {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .dashboard-container .profil-footer-info {
+    padding: 25px 20px;
+  }
+}
+
+/* src/pages/admin/ProfilMadrasah.css - Tambahan */
+
+/* Tombol Edit Actions */
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.btn-edit {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-save {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+.btn-cancel {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background: #d32f2f;
+  transform: translateY(-2px);
+}
+
+/* Edit Input Styles */
+.edit-input-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #4CAF50;
+  border-radius: 12px;
+  padding: 10px 20px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  color: #333;
+}
+
+.edit-input-tagline {
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.edit-input:focus,
+.edit-textarea:focus,
+.edit-input-title:focus,
+.edit-input-tagline:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.edit-textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.edit-select {
+  padding: 4px 8px;
+  border: 2px solid #4CAF50;
+  border-radius: 6px;
+  font-size: 13px;
+  background: white;
+  cursor: pointer;
+}
+
+.edit-input-small {
+  padding: 4px 8px;
+  border: 2px solid #4CAF50;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Edit Misi List */
+.edit-misi-list {
+  width: 100%;
+}
+
+.edit-misi-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.edit-input-misi {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.btn-remove-misi {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-remove-misi:hover {
+  background: #ee5a5a;
+  transform: scale(1.05);
+}
+
+.btn-add-misi {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-add-misi:hover {
+  background: #45a049;
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .edit-input-title {
+    font-size: 1.5rem;
+    padding: 8px 16px;
+  }
+  
+  .edit-input-tagline {
+    font-size: 0.9rem;
+  }
+  
+  .edit-misi-item {
+    flex-direction: column;
+  }
+  
+  .btn-remove-misi {
+    width: 100%;
+  }
+  
+  .edit-buttons {
+    flex-direction: column;
+  }
+}
+
+/* Info Card Vertical Styles */
+.info-card {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.info-item-vertical {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 8px 0;
+}
+
+.info-item-vertical:last-child {
+  margin-bottom: 0;
+}
+
+.info-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  background: #e0e7ff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-icon {
+  font-size: 18px;
+  color: #3b82f6;
+}
+
+.info-item-vertical div {
+  flex: 1;
+  min-width: 0;
+}
+
+.info-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.info-value {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e293b;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}

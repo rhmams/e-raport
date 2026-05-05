@@ -64,7 +64,12 @@ function Absensi() {
       <header className="navbar">
         <div className="navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img 
+              src="/logo-madinah.png" 
+              alt="Madinah Al-Quds" 
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }} 
+              className="navbar-logo" 
+            /> 
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">

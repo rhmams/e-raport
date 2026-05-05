@@ -10,7 +10,7 @@
   background: #f8fafc;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  /* ← pastikan ini ada */
   position: relative;
 }
 
@@ -18,7 +18,7 @@
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
 }
 
 /* ================= NAVBAR ================= */
@@ -105,25 +105,27 @@
 }
 
 /* ================= LAYOUT ================= */
+
 .layout {
   display: flex;
-  max-width: 1400px;
-  margin: 0 auto;
-  background: #f8fafc;
+  margin: 0;
   flex: 1;
+  padding-left: 24px;
+  min-height: 0;
+  padding: 0;
   width: 100%;
 }
 
-/* ================= SIDEBAR ================= */
 .sidebar {
   width: 220px;
+  min-width: 220px;
+  flex-shrink: 0;
+  margin: 0; 
   background: #0b3b5c;
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-shrink: 0;
-  border-top-right-radius: 24px;
 }
 
 .menu {
@@ -175,13 +177,10 @@
 .main {
   flex: 1;
   padding: 24px;
-  max-width: calc(100% - 220px);
+  min-width: 0;
+  overflow-y: auto;
 }
 
-.main .container {
-  max-width: 100%;
-  padding: 0;
-}
 
 /* ================= WELCOME SECTION ================= */
 .welcome-section {
@@ -566,9 +565,42 @@
 
 .footer-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
   gap: 40px;
   margin-bottom: 24px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.footer-section.footer-logo {
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-logo-img {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  margin-bottom: 0;
+}
+
+.footer-brand {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.3;
+}
+
+.footer-desc {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.5;
 }
 
 .footer-section h4 {
@@ -649,4 +681,20 @@
   .welcome-section h1 {
     font-size: 20px;
   }
+}
+
+/* Override footer khusus Beranda */
+.page .footer-content {
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 40px !important;
+}
+
+.page .footer-section.footer-logo {
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+.page .layout {
+  max-width: 100% !important;
+  margin: 0 !important;
 }

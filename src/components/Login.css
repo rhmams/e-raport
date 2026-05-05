@@ -1,3 +1,4 @@
+/* src/pages/Login.css - FULL CODE */
 * {
   margin: 0;
   padding: 0;
@@ -11,88 +12,79 @@ body {
 
 .login-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-  background: linear-gradient(135deg, #2d5a27 0%, #4a7c3a 100%);
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  background: white;
 }
 
 .login-wrapper {
   display: flex;
   width: 100%;
-  max-width: 1300px;
-  background: white;
-  border-radius: 30px;
-  overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  /* HAPUS height: 750px; biar menyesuaikan konten */
+  height: 100vh;
 }
 
-/* Left side - Image */
+/* Left side - Background Image FULL */
 .login-left {
-  flex: 1.5;
-  overflow: hidden;
-  position: relative;
-  background: #f5f5f5;
-  /* Tambahkan tinggi minimum */
-  min-height: 700px;
+  flex: 1.2;
+  background-image: url('https://images.unsplash.com/photo-1542816417-0983c9c9ad53?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 .login-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  display: none;
 }
 
 /* Right side - Form */
 .login-right {
   flex: 1;
   display: flex;
-  align-items: flex-start; /* Ubah dari center ke flex-start */
+  align-items: center;
   justify-content: center;
-  padding: 40px 50px;
+  padding: 40px;
   background: white;
-  overflow-y: auto; /* Pastikan bisa scroll */
-  max-height: 800px; /* Batasi maksimal tinggi */
+  overflow-y: auto;
+  height: 100vh;
 }
 
 .login-card {
   width: 100%;
   max-width: 450px;
-  /* Hapus properti yang membatasi */
 }
 
 .login-header {
   text-align: center;
-  margin-bottom: 25px; /* Kurangi sedikit margin */
+  margin-bottom: 35px;
 }
 
 .logo-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 15px; /* Kurangi margin */
+  margin-bottom: 20px;
 }
 
 .logo-ponpes {
-  width: 90px; /* Perkecil sedikit */
+  width: 90px;
   height: 90px;
   object-fit: contain;
 }
 
 .raport-title {
   color: #2d5a27;
-  font-size: 22px; /* Perkecil sedikit */
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   letter-spacing: -0.5px;
   text-transform: uppercase;
 }
 
 .pesantren-title {
   color: #4a7c3a;
-  font-size: 26px; /* Perkecil sedikit */
+  font-size: 28px;
   font-weight: 700;
   margin-bottom: 5px;
   line-height: 1.2;
@@ -100,14 +92,14 @@ body {
 
 .pesantren-subtitle {
   color: #666;
-  font-size: 16px; /* Perkecil sedikit */
+  font-size: 18px;
   font-weight: 500;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .login-welcome {
   color: #4a7c3a;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   padding: 8px 0;
   border-bottom: 2px solid #4a7c3a;
@@ -117,30 +109,31 @@ body {
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Kurangi gap */
+  gap: 18px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 5px; /* Kurangi gap */
+  gap: 6px;
 }
 
 .form-group label {
   color: #333;
-  font-size: 13px; /* Perkecil font */
+  font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .form-input {
-  padding: 12px 16px; /* Kurangi padding */
+  padding: 14px 16px;
   border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  font-size: 14px; /* Perkecil font */
+  border-radius: 12px;
+  font-size: 14px;
   transition: all 0.3s ease;
   background-color: #f8fafc;
+  width: 100%;
 }
 
 .form-input:focus {
@@ -157,7 +150,7 @@ body {
 
 .form-row {
   display: flex;
-  gap: 12px; /* Kurangi gap */
+  gap: 15px;
 }
 
 .select-group {
@@ -166,9 +159,9 @@ body {
 
 .form-select {
   width: 100%;
-  padding: 12px 16px; /* Kurangi padding */
+  padding: 14px 16px;
   border: 2px solid #e0e0e0;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 14px;
   background-color: #f8fafc;
   cursor: pointer;
@@ -186,14 +179,14 @@ body {
 .login-button {
   background: #2d5a27;
   color: white;
-  padding: 14px; /* Kurangi padding */
+  padding: 14px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 5px; /* Kurangi margin */
+  margin-top: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
   width: 100%;
@@ -207,7 +200,7 @@ body {
 
 .forgot-password {
   text-align: center;
-  margin-top: 0; /* Hapus margin */
+  margin-top: 5px;
 }
 
 .forgot-password a {
@@ -216,8 +209,6 @@ body {
   font-size: 13px;
   font-weight: 500;
   transition: color 0.3s ease;
-  display: inline-block;
-  padding: 3px 0;
 }
 
 .forgot-password a:hover {
@@ -227,30 +218,28 @@ body {
 
 .create-account-section {
   text-align: center;
-  margin-top: 15px; /* Kurangi margin */
-  padding-top: 15px; /* Kurangi padding */
+  margin-top: 20px;
+  padding-top: 20px;
   border-top: 2px solid #f0f0f0;
 }
 
 .create-account-section p {
   color: #666;
   font-size: 13px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .create-account-button {
   display: inline-block;
   background: transparent;
   color: #4a7c3a;
-  padding: 10px 30px; /* Kurangi padding */
+  padding: 10px 30px;
   border-radius: 30px;
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
   transition: all 0.3s ease;
   border: 2px solid #4a7c3a;
-  width: auto;
-  min-width: 160px;
 }
 
 .create-account-button:hover {
@@ -261,7 +250,7 @@ body {
 }
 
 .login-footer {
-  margin-top: 15px; /* Kurangi margin */
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -270,71 +259,50 @@ body {
   font-size: 11px;
 }
 
-/* Warning message like in RDM */
-.warning-message {
-  background: #fff3cd;
-  border: 1px solid #ffeeba;
-  color: #856404;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  margin-top: 10px;
+.error-message {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-size: 14px;
   text-align: center;
-  line-height: 1.4;
-}
-
-.warning-message a {
-  color: #533f03;
-  font-weight: 600;
-  text-decoration: underline;
-}
-
-.warning-message a:hover {
-  color: #000;
-}
-
-.version-info {
-  background: #e9ecef;
-  padding: 8px;
-  border-radius: 6px;
-  margin-top: 8px;
-  font-size: 11px;
-  color: #495057;
-  text-align: center;
-  font-family: monospace;
+  margin-bottom: 5px;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
   .login-wrapper {
-    max-width: 95%;
-  }
-  
-  .login-left {
-    min-height: 600px;
-  }
-  
-  .raport-title {
-    font-size: 20px;
-  }
-  
-  .pesantren-title {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 768px) {
-  .login-wrapper {
     flex-direction: column;
+    height: auto;
+    min-height: 100vh;
   }
   
   .login-left {
+    height: 40vh;
     min-height: 300px;
   }
   
   .login-right {
+    height: auto;
+    min-height: auto;
+    padding: 40px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-left {
+    height: 35vh;
+    min-height: 250px;
+  }
+  
+  .login-right {
     padding: 30px 20px;
-    max-height: none; /* Hapus max-height di mobile */
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
   }
   
   .logo-ponpes {
@@ -351,14 +319,22 @@ body {
   }
 }
 
-/* Tambahkan di bagian akhir file Login.css */
-.error-message {
-  background: #f8d7da;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
-  padding: 12px 15px;
-  border-radius: 8px;
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 10px;
+@media (max-width: 480px) {
+  .login-right {
+    padding: 25px 15px;
+  }
+  
+  .form-input, .form-select {
+    padding: 12px 14px;
+  }
+  
+  .login-button {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .logo-ponpes {
+    width: 60px;
+    height: 60px;
+  }
 }

@@ -1,3 +1,4 @@
+// src/pages/DetailEkskul.jsx
 import {
   LayoutDashboard,
   BookOpen,
@@ -9,12 +10,12 @@ import {
   Mail,
   MapPinned,
   Clock as ClockIcon,
-  ChevronLeft,
   Calendar,
   MapPin,
   Clock,
   Award,
-  Info
+  Info,
+  GraduationCap
 } from "lucide-react";
 
 import "./DetailEkskul.css";
@@ -55,7 +56,12 @@ function DetailEkskul() {
       <header className="navbar">
         <div className="navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img 
+              src="/logo-madinah.png" 
+              alt="Madinah Al-Quds" 
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }} 
+              className="navbar-logo" 
+            /> 
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">
@@ -84,7 +90,7 @@ function DetailEkskul() {
               <li onClick={() => navigate('/kelas')}><BookOpen size={18}/> Kelas</li>
               <li onClick={() => navigate('/wali-kelas')}><Users size={18}/> Wali Kelas</li>
               <li className="active" onClick={() => navigate('/ekstrakurikuler')}><ClipboardList size={18}/> Ekstrakurikuler</li>
-              <li onClick={() => navigate('/materi-pelajaran')}><BookOpen size={18}/> Materi Pelajaran</li>
+              <li onClick={() => navigate('/nilai')}><GraduationCap size={18}/> Nilai</li>
               <li onClick={() => navigate('/raport')}><FileText size={18}/> Raport</li>
             </ul>
           </div>
@@ -96,11 +102,10 @@ function DetailEkskul() {
         {/* ================= MAIN ================= */}
         <main className="main">
           
-          {/* ================= BACK BUTTON ================= */}
-          <div className="back-button" onClick={() => navigate('/ekstrakurikuler')}>
-            <ChevronLeft size={20} />
-            <span>Kembali ke Daftar Ekstrakurikuler</span>
-          </div>
+          {/* ================= BACK BUTTON (PANAH SAJA) ================= */}
+          <button className="back-button" onClick={() => navigate('/ekstrakurikuler')} title="Kembali">
+            ←
+          </button>
 
           {/* ================= HEADER ================= */}
           <div className="detail-header">
@@ -224,35 +229,30 @@ function DetailEkskul() {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-content">
+            {/* KOLOM 1: LOGO */}
+            <div className="footer-section footer-logo">
+              <img 
+                src="/logo-madinah.png" 
+                alt="Logo Madinah" 
+                className="footer-logo-img"
+              />
+              <h3 className="footer-brand">Madinah El - Quds</h3>
+            </div>
+
+            {/* KOLOM 2: Hubungi Kami */}
             <div className="footer-section">
               <h4>Hubungi Kami</h4>
-              <p>
-                <MapPinned size={18} />
-                Jl. Pendidikan No. 123, Kota Santri, Indonesia
-              </p>
-              <p>
-                <Phone size={18} />
-                <a href="tel:+622112345678">+62 21 1234-5678</a>
-              </p>
-              <p>
-                <Mail size={18} />
-                <a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a>
-              </p>
+              <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
+              <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
+              <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
             </div>
+
+            {/* KOLOM 3: Jam Layanan */}
             <div className="footer-section">
               <h4>Jam Layanan</h4>
-              <p>
-                <ClockIcon size={18} />
-                Senin - Jumat: 07:00 - 16:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Sabtu: 07:00 - 14:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Minggu: Tutup
-              </p>
+              <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
+              <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
+              <p><ClockIcon size={18}/> Minggu: Tutup</p>
             </div>
           </div>
           <div className="footer-bottom">

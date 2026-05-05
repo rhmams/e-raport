@@ -402,7 +402,7 @@
   font-weight: 600;
 }
 
-/* ================= FOOTER ================= */
+/* ================= FOOTER ================= */  
 .footer {
   background: #0b3b5c;
   color: white;
@@ -420,7 +420,7 @@
 
 .footer-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 48px;
   margin-bottom: 40px;
 }

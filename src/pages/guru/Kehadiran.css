@@ -3,14 +3,10 @@
   background: #f8fafc;
   width: 100%;
   flex: 1;
+  min-width: 0;      /* ← tambah ini */
+  padding: 24px;
 }
 
-.kehadiran-main .container {
-  width: 100%;
-  max-width: 100%;
-  padding: 0 32px;
-  margin: 0;
-}
 
 .back-button {
   display: flex;

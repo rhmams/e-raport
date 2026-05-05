@@ -1,3 +1,4 @@
+// src/pages/DetailRaport.jsx
 import { useState } from 'react';
 import {
   LayoutDashboard,
@@ -31,22 +32,22 @@ function DetailRaport() {
 
   // Data pencapaian kompetensi
   const kompetensiData = [
-    { no: 1, nama: 'Perdidikan Agama dan Budi Pekerti', nilai: 87 },
-    { no: 2, nama: 'Perdidikan Perancasa', nilai: 85 },
+    { no: 1, nama: 'Pendidikan Agama dan Budi Pekerti', nilai: 87 },
+    { no: 2, nama: 'Pendidikan Pancasila', nilai: 85 },
     { no: 3, nama: 'Bahasa Indonesia', nilai: 82 },
     { no: 4, nama: 'Matematika', nilai: 78 },
-    { no: 5, nama: 'Ilmu Pengolahan Alam', nilai: 80 },
-    { no: 6, nama: 'Ilmu Pengolahan Sosial', nilai: 83 },
+    { no: 5, nama: 'Ilmu Pengetahuan Alam', nilai: 80 },
+    { no: 6, nama: 'Ilmu Pengetahuan Sosial', nilai: 83 },
   ];
 
   // Data ekstrakurikuler
   const ekstraData = [
-    { no: 1, kategori: 'Kompresis Tasarım', predikat: 'Blok', kontenjan: 'Aktif nefropati koşulları dan memnuniyetli performans yaygın bir şekilde sağlanabilir.' },
-    { no: 2, kategori: 'Pnömatik', predikat: 'Sergel Türk', kontenjan: 'Sergel edilmiş önemli kompozisyonlar için başlangıçta oluşturulan bir şekilde sağlanabilir.' },
-    { no: 3, kategori: '', predikat: '', kontenjan: '' },
-    { no: 4, kategori: '', predikat: '', kontenjan: '' },
-    { no: 5, kategori: '', predikat: '', kontenjan: '' },
-    { no: 6, kategori: '', predikat: '', kontenjan: '' },
+    { no: 1, kategori: 'Pramuka', predikat: 'Sangat Baik', keterangan: 'Aktif mengikuti kegiatan dan menunjukkan performa yang memuaskan.' },
+    { no: 2, kategori: 'Seni Musik', predikat: 'Baik', keterangan: 'Menunjukkan kemampuan yang baik dalam berkomposisi musik.' },
+    { no: 3, kategori: '', predikat: '', keterangan: '' },
+    { no: 4, kategori: '', predikat: '', keterangan: '' },
+    { no: 5, kategori: '', predikat: '', keterangan: '' },
+    { no: 6, kategori: '', predikat: '', keterangan: '' },
   ];
 
   return (
@@ -56,7 +57,11 @@ function DetailRaport() {
       <header className="navbar">
         <div className="navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img
+              src="/logo-madinah.png"
+              alt="Madinah Al-Quds"
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }}
+            />
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">
@@ -97,7 +102,7 @@ function DetailRaport() {
                 <GraduationCap size={18}/> Nilai
               </li>
               <li className="active" onClick={() => navigate('/raport')}>
-                <FileText size={18}/> Raport 
+                <FileText size={18}/> Raport
               </li>
             </ul>
           </div>
@@ -108,12 +113,12 @@ function DetailRaport() {
 
         {/* ================= MAIN CONTENT ================= */}
         <main className="main-content">
-          
-          {/* ================= HEADER WITH BACK BUTTON ================= */}
+
+          {/* ================= HEADER WITH BACK BUTTON (PANAH SAJA) ================= */}
           <div className="page-header">
             <div className="header-left">
-              <button className="btn-back" onClick={() => navigate('/raport')}>
-                <ChevronLeft size={20} />
+              <button className="btn-back" onClick={() => navigate('/raport')} title="Kembali">
+                ←
               </button>
               <div>
                 <h1>Detail Raport Siswa</h1>
@@ -122,7 +127,7 @@ function DetailRaport() {
             </div>
             <div className="header-actions">
               <button className="btn-download">
-                <Download size={16} /> Download PDF
+                <Download size={16} /> Unduh PDF
               </button>
               <button className="btn-print">
                 <Printer size={16} /> Cetak
@@ -154,13 +159,13 @@ function DetailRaport() {
               <Award size={20} />
               <h2>PENCAPAIAN KOMPETENSI MURID</h2>
             </div>
-            
+
             <div className="kompetensi-table-container">
               <table className="kompetensi-table">
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Nama Murid</th>
+                    <th>Mata Pelajaran</th>
                     <th>Nilai Akhir</th>
                   </tr>
                 </thead>
@@ -185,14 +190,14 @@ function DetailRaport() {
               <BookOpen size={20} />
               <h2>Kurikulum</h2>
             </div>
-            
+
             <div className="sub-section">
-              <h3>Perdana Satu</h3>
+              <h3>Kelompok A</h3>
               <table className="kompetensi-table">
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Nama Murid</th>
+                    <th>Mata Pelajaran</th>
                     <th>Nilai Akhir</th>
                     <th>Capaian Kompetensi</th>
                   </tr>
@@ -200,51 +205,43 @@ function DetailRaport() {
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td>Perdidikan Agama</td>
+                    <td>Pendidikan Agama dan Budi Pekerti</td>
                     <td>87</td>
-                    <td>
-                      <span className="capaian-baik">Baik</span>
-                    </td>
+                    <td><span className="capaian-baik">Baik</span></td>
                   </tr>
                   <tr>
                     <td>2</td>
-                    <td>Perdidikan Perancasa</td>
+                    <td>Pendidikan Pancasila</td>
                     <td>85</td>
-                    <td>
-                      <span className="capaian-baik">Baik</span>
-                    </td>
+                    <td><span className="capaian-baik">Baik</span></td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
             <div className="sub-section">
-              <h3>Perdana Dua</h3>
+              <h3>Kelompok B</h3>
               <table className="kompetensi-table">
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Nama Murid</th>
+                    <th>Mata Pelajaran</th>
                     <th>Nilai Akhir</th>
                     <th>Capaian Kompetensi</th>
-                  </tr>
+                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>1</td>
                     <td>Bahasa Indonesia</td>
                     <td>82</td>
-                    <td>
-                      <span className="capaian-baik">Baik</span>
-                    </td>
+                    <td><span className="capaian-baik">Baik</span></td>
                   </tr>
                   <tr>
                     <td>2</td>
                     <td>Matematika</td>
                     <td>78</td>
-                    <td>
-                      <span className="capaian-cukup">Cukup</span>
-                    </td>
+                    <td><span className="capaian-cukup">Cukup</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -257,11 +254,11 @@ function DetailRaport() {
               <ClipboardList size={20} />
               <h2>Kokurikuler</h2>
             </div>
-            
+
             <div className="kokurikuler-info">
-              <p><span className="label">Hazırlayan:</span> İdris</p>
-              <p><span className="label">Name:</span> Murad</p>
-              <p><span className="label">Adı:</span> Ali</p>
+              <p><span className="label">Dibuat oleh:</span> Ustadz Idris</p>
+              <p><span className="label">Nama:</span> Murad</p>
+              <p><span className="label">Nama Lengkap:</span> Murad Ali</p>
               <p><span className="label">NIS:</span> 202400100123456789</p>
             </div>
           </div>
@@ -270,17 +267,17 @@ function DetailRaport() {
           <div className="section-card">
             <div className="section-header">
               <Award size={20} />
-              <h2>Ekstrakuriküler</h2>
+              <h2>Ekstrakurikuler</h2>
             </div>
-            
+
             <div className="ekstra-table-container">
               <table className="ekstra-table">
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Kategorinin Ekstrakuriküler</th>
+                    <th>Kegiatan Ekstrakurikuler</th>
                     <th>Predikat</th>
-                    <th>Kontenjan</th>
+                    <th>Keterangan</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -290,12 +287,12 @@ function DetailRaport() {
                       <td>{item.kategori || '-'}</td>
                       <td>
                         {item.predikat && (
-                          <span className={`predikat-badge ${item.predikat === 'Blok' ? 'blok' : 'sergel'}`}>
+                          <span className={`predikat-badge ${item.predikat === 'Sangat Baik' ? 'blok' : 'sergel'}`}>
                             {item.predikat}
                           </span>
                         )}
                       </td>
-                      <td className="kontenjan-text">{item.kontenjan || '-'}</td>
+                      <td className="kontenjan-text">{item.keterangan || '-'}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -309,18 +306,18 @@ function DetailRaport() {
               <XCircle size={20} />
               <h2>Ketidakhadiran</h2>
             </div>
-            
+
             <div className="absensi-grid">
               <div className="absensi-item">
-                <span className="absensi-label">Sektör:</span>
+                <span className="absensi-label">Sakit:</span>
                 <span className="absensi-value">2 Hari</span>
               </div>
               <div className="absensi-item">
-                <span className="absensi-label">İçin:</span>
+                <span className="absensi-label">Izin:</span>
                 <span className="absensi-value">1 Hari</span>
               </div>
               <div className="absensi-item">
-                <span className="absensi-label">Tartışma Kontenjanı:</span>
+                <span className="absensi-label">Tanpa Keterangan:</span>
                 <span className="absensi-value">0 Hari</span>
               </div>
             </div>
@@ -332,11 +329,11 @@ function DetailRaport() {
               <FileText size={20} />
               <h2>Catatan Wali Kelas</h2>
             </div>
-            
+
             <div className="catatan-content">
-              <p><strong>Aktif nedir?</strong> Aktif nefropati koşulları dan memnuniyetli performans yaygın bir şekilde sağlanabilir.</p>
-              <p><strong>Aktif nedir?</strong> Performans ve kompozisyon kontenjanı paylaşımında %1'den az ise, rezidüel diktapkar?</p>
-              <p><strong>Sergel edilmiş önemli kompozisyonlar için başlangıçta oluşturulan bir şekilde sağlanabilir.</strong></p>
+              <p><strong>Catatan Perkembangan:</strong> Siswa menunjukkan kondisi belajar yang aktif dan performa yang memuaskan secara keseluruhan.</p>
+              <p><strong>Rekomendasi:</strong> Diharapkan dapat terus meningkatkan semangat belajar, khususnya pada mata pelajaran Matematika.</p>
+              <p><strong>Kesimpulan:</strong> Siswa menunjukkan kemajuan yang baik dan komposisi nilai yang memuaskan.</p>
             </div>
           </div>
 
@@ -344,9 +341,9 @@ function DetailRaport() {
           <div className="section-card">
             <div className="section-header">
               <Users size={20} />
-              <h2>Tanggapan Orangtua/Wali Murid</h2>
+              <h2>Tanggapan Orangtua / Wali Murid</h2>
             </div>
-            
+
             <div className="tanggapan-placeholder">
               <p>_________________________________________</p>
               <p>_________________________________________</p>
@@ -354,20 +351,20 @@ function DetailRaport() {
             </div>
           </div>
 
-          {/* ================= KEŞFLÜSİN SECTION ================= */}
+          {/* ================= KENAIKAN KELAS SECTION ================= */}
           <div className="section-card">
             <div className="section-header">
               <AlertCircle size={20} />
-              <h2>Keşflüsün</h2>
+              <h2>Keterangan Kenaikan Kelas</h2>
             </div>
-            
+
             <div className="kesflusin-content">
-              <p><strong>Performans ve kompozisyon kontenjanı paylaşımında % 1'den az ise, rezidüel diktapkar?</strong></p>
-              
+              <p><strong>Berdasarkan hasil penilaian selama satu semester, siswa dinyatakan:</strong></p>
+
               <div className="kesflusin-list">
-                <p><span className="label">Yeni ile kelip:</span> (sembol)</p>
-                <p><span className="label">Engelli ilk kez:</span></p>
-                <p><span className="label">Çevreye yönelik:</span></p>
+                <p><span className="label">Status:</span> Naik Kelas</p>
+                <p><span className="label">Catatan Khusus:</span> -</p>
+                <p><span className="label">Rekomendasi:</span> Pertahankan prestasi dan tingkatkan kedisiplinan</p>
               </div>
             </div>
           </div>
@@ -375,19 +372,22 @@ function DetailRaport() {
           {/* ================= SIGNATURE SECTION ================= */}
           <div className="signature-section">
             <div className="signature-left">
-              <p>Altındaki adı:</p>
-              <p>Wales, 20 Dönember 2025</p>
-              <p><strong>Veli Kelimeler:</strong></p>
+              <p>Mengetahui,</p>
+              <p>Bandung, 20 Desember 2025</p>
+              <br />
+              <br />
+              <br />
+              <p><strong>Wali Kelas</strong></p>
             </div>
-            
+
             <div className="signature-right">
-              <p>Testler sergilenir:</p>
-              <p><strong>KAPILAL S.P.M.</strong></p>
-              <p>MIP 20000400001400300</p>
-              <p>Her güncel bilgi:</p>
-              <p><strong>Koparkası Şekil:</strong></p>
-              <p>PURPOSE: 5 PF, M PF</p>
-              <p>MIP 19700101000100002</p>
+              <p>Menyetujui,</p>
+              <p>Bandung, 20 Desember 2025</p>
+              <br />
+              <br />
+              <br />
+              <p><strong>Kepala Sekolah</strong></p>
+              <p>NIP. 197001010001000001</p>
             </div>
           </div>
 
@@ -404,36 +404,33 @@ function DetailRaport() {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-content">
+
+            {/* KOLOM 1: LOGO */}
+            <div className="footer-section footer-logo">
+              <img
+                src="/logo-madinah.png"
+                alt="Logo Madinah"
+                className="footer-logo-img"
+              />
+              <h3 className="footer-brand">Madinah El - Quds</h3>
+            </div>
+
+            {/* KOLOM 2: Hubungi Kami */}
             <div className="footer-section">
               <h4>Hubungi Kami</h4>
-              <p>
-                <MapPinned size={18} />
-                Jl. Pendidikan No. 123, Kota Santri, Indonesia
-              </p>
-              <p>
-                <Phone size={18} />
-                <a href="tel:+622112345678">+62 21 1234-5678</a>
-              </p>
-              <p>
-                <Mail size={18} />
-                <a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a>
-              </p>
+              <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
+              <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
+              <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
             </div>
+
+            {/* KOLOM 3: Jam Layanan */}
             <div className="footer-section">
               <h4>Jam Layanan</h4>
-              <p>
-                <ClockIcon size={18} />
-                Senin - Jumat: 07:00 - 16:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Sabtu: 07:00 - 14:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Minggu: Tutup
-              </p>
+              <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
+              <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
+              <p><ClockIcon size={18}/> Minggu: Tutup</p>
             </div>
+
           </div>
           <div className="footer-bottom">
             <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>

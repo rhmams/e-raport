@@ -1,0 +1,472 @@
+/* InputNilai.css - Simple & Clean */
+
+/* Header Sederhana */
+.header-simple {
+  margin-bottom: 32px;
+}
+
+.header-simple h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+
+.info-banner-simple {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  border: 1px solid #edf2f7;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.info-row svg {
+  color: #16a085;
+}
+
+.info-row strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Empty State Sederhana */
+.empty-state-simple {
+  text-align: center;
+  padding: 60px 40px;
+  background: #f8fafc;
+  border-radius: 16px;
+  border: 2px dashed #cbd5e1;
+}
+
+.empty-icon-simple {
+  width: 100px;
+  height: 100px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: #94a3b8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.empty-state-simple h3 {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.empty-state-simple p {
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.btn-tambah-simple {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #16a085;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-tambah-simple:hover {
+  background: #0f6b58;
+  transform: translateY(-1px);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.modal-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #ef4444;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #edf2f7;
+  background: #f8fafc;
+}
+
+/* Form */
+.form-modul {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.form-control {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #16a085;
+  box-shadow: 0 0 0 2px rgba(22, 160, 133, 0.1);
+}
+
+/* Search */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+}
+
+.search-wrapper input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-wrapper svg {
+  color: #94a3b8;
+}
+
+/* Table */
+.table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.siswa-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.siswa-table th {
+  text-align: left;
+  padding: 12px;
+  background: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.siswa-table td {
+  padding: 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.siswa-table tr:hover td {
+  background: #fafbff;
+}
+
+.gender-icon {
+  margin-right: 8px;
+}
+
+.nilai-input {
+  width: 70px;
+  padding: 6px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.nilai-input:focus {
+  outline: none;
+  border-color: #16a085;
+}
+
+.catatan-input {
+  width: 120px;
+  padding: 6px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.catatan-input:focus {
+  outline: none;
+  border-color: #16a085;
+}
+
+.grade-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: center;
+}
+
+.btn-save-single {
+  background: #16a085;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s;
+}
+
+.btn-save-single:hover {
+  background: #0f6b58;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e2e8f0;
+  border-top-color: #16a085;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.success-icon {
+  color: #16a085;
+}
+
+/* Ringkasan */
+.ringkasan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 16px;
+  background: #f0fdf4;
+  border-radius: 10px;
+}
+
+.ringkasan-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.ringkasan-item span {
+  color: #64748b;
+}
+
+.ringkasan-item strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.text-success {
+  color: #16a085;
+}
+
+.text-warning {
+  color: #f59e0b;
+}
+
+.text-primary {
+  color: #3b82f6;
+}
+
+/* Buttons */
+.btn-batal {
+  padding: 8px 20px;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn-batal:hover {
+  background: #f1f5f9;
+}
+
+.btn-simpan {
+  padding: 8px 24px;
+  background: #16a085;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-simpan:hover:not(:disabled) {
+  background: #0f6b58;
+}
+
+.btn-simpan:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Back Button */
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 24px;
+  width: fit-content;
+  transition: color 0.2s;
+}
+
+.back-button:hover {
+  color: #16a085;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .info-banner-simple {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .siswa-table {
+    font-size: 12px;
+  }
+  
+  .nilai-input {
+    width: 55px;
+  }
+  
+  .catatan-input {
+    width: 90px;
+  }
+  
+  .ringkasan {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* Back Button - Panah Biasa */
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 24px;
+  font-weight: 400;
+  color: #64748b;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: all 0.2s;
+  border-radius: 8px;
+}
+
+.back-button:hover {
+  color: #16a085;
+  background: #f1f5f9;
+}

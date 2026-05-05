@@ -1,3 +1,4 @@
+// src/pages/CreateAcc.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './CreateAcc.css';
@@ -24,8 +25,18 @@ const CreateAcc = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (formData.password !== formData.confirmPassword) {
+      alert('Password dan konfirmasi password tidak cocok!');
+      return;
+    }
+    
+    if (formData.password.length < 8) {
+      alert('Password minimal 8 karakter!');
+      return;
+    }
+    
     console.log('Account creation attempted:', formData);
-    // Here you would typically send data to backend
     alert('Akun berhasil dibuat! Silakan login.');
     navigate('/login');
   };
@@ -202,14 +213,13 @@ const CreateAcc = () => {
                 </Link>
               </div>
 
-              {/* Info panel */}
               <div className="info-panel">
                 <i>INFO</i> Data guru akan diverifikasi oleh admin sebelum dapat mengakses sistem
               </div>
             </form>
 
             <div className="create-acc-footer">
-              <p className="version-text">Pondok Pesantren Madinah El-Quds © 2024 | v1.0.0</p>
+              <p className="version-text">Pondok Pesantren Madinah El-Quds © 2026</p>
             </div>
           </div>
         </div>

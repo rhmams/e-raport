@@ -96,7 +96,12 @@ function DetailMuridWakel() {
       <header className="navbar">
         <div className="navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img 
+              src="/logo-madinah.png" 
+              alt="Madinah Al-Quds" 
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }} 
+              className="navbar-logo" 
+            /> 
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">
@@ -173,7 +178,6 @@ function DetailMuridWakel() {
             {/* Back Button */}
             <button className="back-button" onClick={goToWaliKelasPage}>
               <ArrowLeft size={18} />
-              Kembali ke Daftar Murid
             </button>
 
             {/* Header */}
@@ -367,45 +371,43 @@ function DetailMuridWakel() {
       </div>
 
       {/* ================= FOOTER ================= */}
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-content">
-            <div className="footer-section">
-              <h4>Hubungi Kami</h4>
-              <p>
-                <MapPinned size={18} />
-                Jl. Pendidikan No. 123, Kota Santri, Indonesia
-              </p>
-              <p>
-                <Phone size={18} />
-                <a href="tel:+622112345678">+62 21 1234-5678</a>
-              </p>
-              <p>
-                <Mail size={18} />
-                <a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a>
-              </p>
-            </div>
-            <div className="footer-section">
-              <h4>Jam Layanan</h4>
-              <p>
-                <ClockIcon size={18} />
-                Senin - Jumat: 07:00 - 16:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Sabtu: 07:00 - 14:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Minggu: Tutup
-              </p>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
-          </div>
-        </div>
-      </footer>
+<footer className="footer">
+  <div className="footer-container">
+    <div className="footer-content">
+
+      {/* KOLOM 1: LOGO */}
+      <div className="footer-section footer-logo">
+        <img 
+          src="/logo-madinah.png" 
+          alt="Logo Madinah" 
+          className="footer-logo-img"
+        />
+        <h3 className="footer-brand">Madinah El - Quds</h3>
+      </div>
+
+      {/* KOLOM 2: Hubungi Kami */}
+      <div className="footer-section">
+        <h4>Hubungi Kami</h4>
+        <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
+        <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
+        <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
+      </div>
+
+      {/* KOLOM 3: Jam Layanan */}
+      <div className="footer-section">
+        <h4>Jam Layanan</h4>
+        <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
+        <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
+        <p><ClockIcon size={18}/> Minggu: Tutup</p>
+      </div>
+
+    </div>
+    <div className="footer-bottom">
+      <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
+    </div>
+  </div>
+</footer>
+
     </div>
   );
 }

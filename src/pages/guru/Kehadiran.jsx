@@ -1,3 +1,4 @@
+// src/pages/Kehadiran.jsx
 import { useState } from "react";
 import {
   LayoutDashboard,
@@ -14,7 +15,8 @@ import {
   Clock as ClockIcon,
   Plus,
   Download,
-  Upload
+  Upload,
+  GraduationCap
 } from "lucide-react";
 import { useNavigate, useParams } from 'react-router-dom';
 import "./Kehadiran.css";
@@ -80,7 +82,7 @@ function Kehadiran() {
 
   // Navigasi ke halaman Beranda
   const goToBeranda = () => {
-    navigate('/');
+    navigate('/beranda');
   };
 
   // Navigasi ke halaman Kelas
@@ -95,16 +97,15 @@ function Kehadiran() {
 
   // Handler untuk modal
   const handleTambahKehadiran = () => {
-    setShowModal(true); // Buka modal
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    setShowModal(false); // Tutup modal
+    setShowModal(false);
   };
 
   const handleSubmitKehadiran = (data) => {
     console.log("Data kehadiran:", data);
-    // Di sini nanti logic untuk menyimpan data ke database
     alert("Data kehadiran berhasil disimpan!");
   };
 
@@ -117,8 +118,8 @@ function Kehadiran() {
     navigate('/ekstrakurikuler');
   };
 
-  const goToMateriPelajaran = () => {
-    navigate('/materi');
+  const goToNilai = () => {
+    navigate('/nilai');
   };
 
   const goToRaport = () => {
@@ -143,7 +144,12 @@ function Kehadiran() {
       <header className="navbar">
         <div className="container navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img 
+              src="/logo-madinah.png" 
+              alt="Madinah Al-Quds" 
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }} 
+              className="navbar-logo" 
+            /> 
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">
@@ -176,8 +182,8 @@ function Kehadiran() {
               <li className="active" onClick={goToKelas}><BookOpen size={18}/> Kelas</li>
               <li onClick={goToWaliKelas}><Users size={18}/> Wali Kelas</li>
               <li onClick={goToEkstrakurikuler}><ClipboardList size={18}/> Ekstrakurikuler</li>
-              <li onClick={goToMateriPelajaran}><FileText size={18}/> Materi Pelajaran</li>
-              <li onClick={goToRaport}><BookOpen size={18}/> Raport</li>
+              <li onClick={goToNilai}><GraduationCap size={18}/> Nilai</li>
+              <li onClick={goToRaport}><FileText size={18}/> Raport</li>
             </ul>
           </div>
           <div className="logout" onClick={handleLogout}>
@@ -187,12 +193,9 @@ function Kehadiran() {
 
         {/* ================= MAIN ================= */}
         <main className="main kehadiran-main">
-          <div className="container">
-
             {/* Back Button */}
             <button className="back-button" onClick={goToDetailKelas}>
               <ArrowLeft size={18} />
-              Kembali ke Detail Kelas
             </button>
 
             {/* Header Kehadiran */}
@@ -229,8 +232,6 @@ function Kehadiran() {
                 Tambah Kehadiran Baru
               </button>
             </div>
-
-          </div>
         </main>
       </div>
 
@@ -246,42 +247,40 @@ function Kehadiran() {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-content">
+
+            {/* KOLOM 1: LOGO */}
+            <div className="footer-section footer-logo">
+              <img 
+                src="/logo-madinah.png" 
+                alt="Logo Madinah" 
+                className="footer-logo-img"
+              />
+              <h3 className="footer-brand">Madinah El - Quds</h3>
+            </div>
+
+            {/* KOLOM 2: Hubungi Kami */}
             <div className="footer-section">
               <h4>Hubungi Kami</h4>
-              <p>
-                <MapPinned size={18} />
-                Jl. Pendidikan No. 123, Kota Santri, Indonesia
-              </p>
-              <p>
-                <Phone size={18} />
-                <a href="tel:+622112345678">(021) 1234-5678</a>
-              </p>
-              <p>
-                <Mail size={18} />
-                <a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a>
-              </p>
+              <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
+              <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
+              <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
             </div>
+
+            {/* KOLOM 3: Jam Layanan */}
             <div className="footer-section">
               <h4>Jam Layanan</h4>
-              <p>
-                <ClockIcon size={18} />
-                Senin - Jumat: 07:00 - 16:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Sabtu: 07:00 - 14:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Minggu: Tutup
-              </p>
+              <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
+              <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
+              <p><ClockIcon size={18}/> Minggu: Tutup</p>
             </div>
+
           </div>
           <div className="footer-bottom">
             <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
           </div>
         </div>
       </footer>
+
     </div>
   );
 }

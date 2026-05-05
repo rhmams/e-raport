@@ -1,3 +1,4 @@
+// src/pages/DetailKelas.jsx
 import { useState } from "react";
 import {
   LayoutDashboard,
@@ -16,7 +17,8 @@ import {
   Filter,
   ChevronLeft,
   ChevronsLeft,
-  ChevronsRight
+  ChevronsRight,
+  GraduationCap
 } from "lucide-react";
 import { useNavigate, useParams } from 'react-router-dom';
 import "./DetailKelas.css";
@@ -134,7 +136,7 @@ function DetailKelas() {
 
   // Navigasi ke halaman Beranda
   const goToBeranda = () => {
-    navigate('/');
+    navigate('/beranda');
   };
 
   // Navigasi ke halaman Kelas
@@ -151,8 +153,8 @@ function DetailKelas() {
     navigate('/ekstrakurikuler');
   };
 
-  const goToMateriPelajaran = () => {
-    navigate('/materi');
+  const goToNilai = () => {
+    navigate('/nilai');
   };
 
   const goToRaport = () => {
@@ -169,7 +171,12 @@ function DetailKelas() {
       <header className="navbar">
         <div className="container navbar-inner">
           <div className="nav-left">
-            <div className="logo-circle">MQ</div>
+            <img 
+              src="/logo-madinah.png" 
+              alt="Madinah Al-Quds" 
+              style={{ width: '40px', height: '40px', borderRadius: '8px' }} 
+              className="navbar-logo" 
+            /> 
             <div className="nav-text">
               <div className="brand-nav">Madinah Al-Quds</div>
               <div className="breadcrumb">
@@ -200,8 +207,8 @@ function DetailKelas() {
               <li className="active" onClick={goToKelas}><BookOpen size={18}/> Kelas</li>
               <li onClick={goToWaliKelas}><Users size={18}/> Wali Kelas</li>
               <li onClick={goToEkstrakurikuler}><ClipboardList size={18}/> Ekstrakurikuler</li>
-              <li onClick={goToMateriPelajaran}><FileText size={18}/> Materi Pelajaran</li>
-              <li onClick={goToRaport}><BookOpen size={18}/> Raport</li>
+              <li onClick={goToNilai}><GraduationCap size={18}/> Nilai</li>
+              <li onClick={goToRaport}><FileText size={18}/> Raport</li>
             </ul>
           </div>
           <div className="logout" onClick={handleLogout}>
@@ -216,7 +223,6 @@ function DetailKelas() {
             {/* Back Button */}
             <button className="back-button" onClick={goToKelas}>
               <ArrowLeft size={18} />
-              Kembali
             </button>
 
             {/* Header Kelas - Posisi di atas */}
@@ -236,7 +242,7 @@ function DetailKelas() {
                 </div>
                 <button className="btn-kelola" onClick={() => navigate(`/kehadiran/${kelasId}`)}>
                   Isi Kehadiran
-                  </button>
+                </button>
               </div>
             </div>
 
@@ -345,42 +351,40 @@ function DetailKelas() {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-content">
+
+            {/* KOLOM 1: LOGO */}
+            <div className="footer-section footer-logo">
+              <img 
+                src="/logo-madinah.png" 
+                alt="Logo Madinah" 
+                className="footer-logo-img"
+              />
+              <h3 className="footer-brand">Madinah El - Quds</h3>
+            </div>
+
+            {/* KOLOM 2: Hubungi Kami */}
             <div className="footer-section">
               <h4>Hubungi Kami</h4>
-              <p>
-                <MapPinned size={18} />
-                Jl. Pendidikan No. 122, Kota Santri, Indonesia
-              </p>
-              <p>
-                <Phone size={18} />
-                <a href="tel:+622112345678">(021) 1234-5678</a>
-              </p>
-              <p>
-                <Mail size={18} />
-                <a href="mailto:info@idhuan.com.id">info@idhuan.com.id</a>
-              </p>
+              <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
+              <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
+              <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
             </div>
+
+            {/* KOLOM 3: Jam Layanan */}
             <div className="footer-section">
               <h4>Jam Layanan</h4>
-              <p>
-                <ClockIcon size={18} />
-                Senin - Jumat: 07:00 - 16:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Sabtu: 07:00 - 14:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Minggu: Tutup
-              </p>
+              <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
+              <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
+              <p><ClockIcon size={18}/> Minggu: Tutup</p>
             </div>
+
           </div>
           <div className="footer-bottom">
-            <p>© 2025 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
+            <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
           </div>
         </div>
       </footer>
+
     </div>
   );
 }

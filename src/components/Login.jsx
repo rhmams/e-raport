@@ -1,3 +1,4 @@
+// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
@@ -12,15 +13,9 @@ const Login = () => {
     e.preventDefault();
     setError('');
     
-    // Validasi credentials
-    if (username === 'admin' && password === 'password123') {
-      console.log('Login berhasil!');
-      
-      // Simpan status login di localStorage (opsional)
+    if (username === 'racha' && password === 'rachanun') {
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('username', username);
-      
-      // Redirect ke halaman Beranda (dashboard)
       navigate('/beranda');
     } else {
       setError('Username atau password salah!');
@@ -30,14 +25,8 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-wrapper">
-        {/* Left side - Image */}
-        <div className="login-left">
-          <img 
-            src="https://images.unsplash.com/photo-1542816417-0983c9c9ad53?q=80&w=2070&auto=format&fit=crop" 
-            alt="Pondok Pesantren" 
-            className="login-image"
-          />
-        </div>
+        {/* Left side - Background Image */}
+        <div className="login-left"></div>
 
         {/* Right side - Login Form */}
         <div className="login-right">
@@ -57,11 +46,7 @@ const Login = () => {
             </div>
 
             <form onSubmit={handleLogin} className="login-form">
-              {error && (
-                <div className="error-message">
-                  {error}
-                </div>
-              )}
+              {error && <div className="error-message">{error}</div>}
               
               <div className="form-group">
                 <label htmlFor="username">USERNAME</label>
@@ -91,23 +76,23 @@ const Login = () => {
 
               <div className="form-row">
                 <div className="select-group">
-                  <select className="form-select" defaultValue="2021/2022">
+                  <select className="form-select" defaultValue="2024/2025">
                     <option>2021/2022</option>
                     <option>2022/2023</option>
                     <option>2023/2024</option>
+                    <option>2024/2025</option>
+                    <option>2025/2026</option>
                   </select>
                 </div>
                 <div className="select-group">
                   <select className="form-select" defaultValue="Genap">
-                    <option>Genap</option>
                     <option>Ganjil</option>
+                    <option>Genap</option>
                   </select>
                 </div>
               </div>
 
-              <button type="submit" className="login-button">
-                LOGIN
-              </button>
+              <button type="submit" className="login-button">LOGIN</button>
 
               <div className="forgot-password">
                 <Link to="/forgot-password">Lupa Password?</Link>

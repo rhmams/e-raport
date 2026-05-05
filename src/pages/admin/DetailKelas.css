@@ -1,0 +1,851 @@
+/* src/pages/admin/DetailKelas.css - FULL KOREKSI */
+
+.detail-kelas-container {
+  padding: 20px;
+  background: #f8fafc;
+  min-height: calc(100vh - 200px);
+}
+
+/* Header - PERBAIKAN tombol kembali jadi icon panah */
+.detail-kelas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  color: #475569;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-back:hover {
+  background: #f1f5f9;
+  border-color: #1a7a4a;
+  color: #1a7a4a;
+  transform: translateX(-2px);
+}
+
+.btn-back svg {
+  font-size: 18px;
+}
+
+.header-title {
+  flex: 1;
+}
+
+.header-title h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.header-title p {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.btn-edit-header {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #1a7a4a;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-edit-header:hover {
+  background: #15643d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 122, 74, 0.3);
+}
+
+/* Info Cards */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.info-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e9ecef;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.2s;
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.info-icon {
+  width: 48px;
+  height: 48px;
+  background: #e8f5e9;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a7a4a;
+  font-size: 22px;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #64748b;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Detail Card */
+.detail-kelas-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e9ecef;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafcff;
+}
+
+.card-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.editing-badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  background: #fef3c7;
+  color: #d97706;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* Form */
+.detail-form {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.detail-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.detail-form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 2px;
+}
+
+.required {
+  color: #e11d48;
+  margin-left: 2px;
+}
+
+.form-hint {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.form-control {
+  padding: 10px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+  background: white;
+  font-family: inherit;
+}
+
+.form-control:focus {
+  border-color: #1a7a4a;
+  box-shadow: 0 0 0 3px rgba(26, 122, 74, 0.1);
+}
+
+select.form-control {
+  cursor: pointer;
+  background: white;
+}
+
+/* View Mode */
+.view-mode {
+  padding: 10px 14px;
+  background: #f8fafc;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #1e293b;
+  border: 1px solid #e9ecef;
+}
+
+.nama-kelas {
+  font-weight: 700;
+  color: #1a7a4a;
+  font-size: 15px;
+}
+
+.jumlah-siswa {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+/* Badge Tingkat - PERBAIKAN */
+.badge-tingkat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.badge-x {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.badge-xi {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.badge-xii {
+  background: #fefce8;
+  color: #ca8a04;
+  border: 1px solid #fde68a;
+}
+
+/* Semester & Tahun Ajaran */
+.semester-value, .tahun-value {
+  display: inline-flex;
+  align-items: center;
+}
+
+.kurikulum-value, .jurusan-value {
+  font-weight: 500;
+}
+
+/* Form Actions */
+.detail-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.btn-batal {
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-batal:hover {
+  background: #f8fafc;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.btn-simpan-kelas {
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: none;
+  background: #1a7a4a;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-simpan-kelas:hover {
+  background: #15643d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 122, 74, 0.3);
+}
+
+/* Additional Info - 4 kolom */
+.additional-info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.info-box {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e9ecef;
+  padding: 20px;
+  transition: all 0.2s;
+}
+
+.info-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.info-box h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.info-box p {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #1a7a4a;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+.btn-link:hover {
+  color: #15643d;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .info-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .additional-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .detail-kelas-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .btn-back {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .detail-form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .info-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .additional-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .detail-form {
+    padding: 20px;
+  }
+  
+  .card-header {
+    padding: 16px 20px;
+  }
+  
+  .detail-form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-batal, .btn-simpan-kelas {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .badge-tingkat {
+    min-width: 35px;
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-kelas-container {
+    padding: 12px;
+  }
+  
+  .btn-back {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .btn-back svg {
+    font-size: 14px;
+  }
+  
+  .header-title h2 {
+    font-size: 18px;
+  }
+  
+  .info-card {
+    padding: 12px 16px;
+  }
+  
+  .info-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .info-value {
+    font-size: 14px;
+  }
+}
+
+/* DetailKelas.css - Pastikan ini ada */
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-back svg {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+.btn-back:hover {
+  background: #f1f5f9;
+  border-color: #1a7a4a;
+  color: #1a7a4a;
+  transform: translateX(-2px);
+}
+
+/* Tambahan CSS untuk DetailKelas.css */
+
+/* Detail Section */
+.detail-section {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e9ecef;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafcff;
+}
+
+.section-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-count {
+  font-size: 12px;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* Table Wrapper */
+.table-wrapper {
+  overflow-x: auto;
+  padding: 0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead {
+  background: #f8fafc;
+}
+
+.data-table th {
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.data-table td {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.data-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.status-active {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #dcfce7;
+  color: #16a34a;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+
+/* Tambahan CSS untuk DetailKelas.css */
+
+/* Section Actions */
+.section-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #1a7a4a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-add:hover {
+  background: #15643d;
+  transform: translateY(-1px);
+}
+
+/* Edit Form Panel */
+.edit-form-panel {
+  background: #f8fafc;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.edit-form-panel h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.edit-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.edit-form-row input,
+.edit-form-row select {
+  padding: 8px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.edit-form-row input:focus,
+.edit-form-row select:focus {
+  outline: none;
+  border-color: #1a7a4a;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-edit-small,
+.btn-delete-small,
+.btn-save-small,
+.btn-cancel-small {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.btn-edit-small {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.btn-edit-small:hover {
+  background: #fde68a;
+  transform: scale(1.05);
+}
+
+.btn-delete-small {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.btn-delete-small:hover {
+  background: #fecaca;
+  transform: scale(1.05);
+}
+
+.btn-save-small {
+  background: #1a7a4a;
+  color: white;
+  width: auto;
+  padding: 0 12px;
+  gap: 4px;
+}
+
+.btn-save-small:hover {
+  background: #15643d;
+}
+
+.btn-cancel-small {
+  background: #e2e8f0;
+  color: #475569;
+  width: auto;
+  padding: 0 12px;
+  gap: 4px;
+}
+
+.btn-cancel-small:hover {
+  background: #cbd5e1;
+}
+
+/* Status Badge */
+.status-aktif {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #dcfce7;
+  color: #16a34a;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.status-pindah, .status-lulus {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #fef3c7;
+  color: #d97706;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .edit-form-row {
+    flex-direction: column;
+  }
+  
+  .edit-form-row input,
+  .edit-form-row select {
+    width: 100%;
+  }
+  
+  .section-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .action-buttons {
+    justify-content: center;
+  }
+}
+
+/* DetailKelas.css - Ukuran Sedang (Tidak terlalu besar) */
+
+/* Action Buttons - Ukuran Sedang */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-edit-small,
+.btn-delete-small {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 34px;
+}
+
+.btn-edit-small {
+  color: #3b82f6;
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+.btn-edit-small:hover {
+  background-color: #dbeafe;
+  transform: scale(1.05);
+}
+
+.btn-delete-small {
+  color: #ef4444;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.btn-delete-small:hover {
+  background-color: #fee2e2;
+  transform: scale(1.05);
+}
+
+/* Icon di dalam tombol */
+.btn-edit-small svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-delete-small svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Pastikan tidak ada CSS lain yang menimpa */
+.table-wrapper .action-buttons .btn-edit-small,
+.table-wrapper .action-buttons .btn-delete-small {
+  padding: 6px 10px !important;
+}

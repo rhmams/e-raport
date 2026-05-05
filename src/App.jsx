@@ -11,10 +11,12 @@ import DetailRaport from './pages/guru/DetailRaport';
 import Kehadiran from './pages/guru/Kehadiran';
 import DetailMuridWakel from './pages/guru/DetailMuridWakel';
 import Nilai from './pages/guru/Nilai';
+import InputNilai from './pages/guru/InputNilai'; // Import InputNilai
 import DetailKokurikuler from './pages/guru/DetailKokurikuler';
 import Login from './components/Login';
 import CreateAcc from './components/CreateAcc';
 import ProtectedRoute from './components/ProtectedRoute';
+import Dashboard from './pages/admin/Dashboard';
 
 function App() {
   // Daftar halaman yang perlu dilindungi
@@ -31,7 +33,10 @@ function App() {
     { path: "/raport/:id", element: <DetailRaport /> },
     { path: "/wali-kelas/murid/:id/detail", element: <DetailMuridWakel /> },
     { path: "/nilai", element: <Nilai /> },
-    { path: "/kokurikuler/:id", element: <DetailKokurikuler /> }
+    { path: "/nilai/input/:kelasId/:jenis", element: <InputNilai /> }, // Route untuk InputNilai
+    { path: "/kokurikuler/:id", element: <DetailKokurikuler /> },
+    { path: "/admin", element: <Dashboard /> },
+    { path: "/admin/dashboard", element: <Dashboard /> }
   ];
 
   return (

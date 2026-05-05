@@ -1,3 +1,4 @@
+/* src/pages/CreateAcc.css */
 * {
   margin: 0;
   padding: 0;
@@ -14,27 +15,26 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
-  background: linear-gradient(135deg, #2d5a27 0%, #4a7c3a 100%);
+  background: #f0f2f5;
 }
 
 .create-acc-wrapper {
   display: flex;
   width: 100%;
-  max-width: 1300px;
+  max-width: 100%;
   background: white;
-  border-radius: 30px;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  min-height: 800px;
+  box-shadow: none;
 }
 
 /* Left side - Image */
 .create-acc-left {
-  flex: 1.5;
+  flex: 1.2;
   overflow: hidden;
   position: relative;
   background: #f5f5f5;
+  min-height: 100vh;
 }
 
 .create-acc-image {
@@ -50,14 +50,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 50px;
+  padding: 40px;
   background: white;
+  min-height: 100vh;
   overflow-y: auto;
 }
 
 .create-acc-card {
   width: 100%;
-  max-width: 480px;
+  max-width: 500px;
 }
 
 .create-acc-header {
@@ -72,8 +73,8 @@ body {
 }
 
 .logo-ponpes {
-  width: 80px;
-  height: 80px;
+  width: 85px;
+  height: 85px;
   object-fit: contain;
 }
 
@@ -88,7 +89,7 @@ body {
 
 .pesantren-title {
   color: #4a7c3a;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   margin-bottom: 5px;
   line-height: 1.2;
@@ -96,14 +97,14 @@ body {
 
 .pesantren-subtitle {
   color: #666;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   margin-bottom: 10px;
 }
 
 .create-acc-welcome {
   color: #4a7c3a;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   padding: 8px 20px;
   background: #f0f7ee;
@@ -134,7 +135,7 @@ body {
 
 .form-group label {
   color: #333;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -147,6 +148,7 @@ body {
   font-size: 14px;
   transition: all 0.3s ease;
   background-color: #f8fafc;
+  width: 100%;
 }
 
 .form-input:focus {
@@ -183,7 +185,7 @@ body {
 .create-acc-button {
   background: #2d5a27;
   color: white;
-  padding: 15px;
+  padding: 14px;
   border: none;
   border-radius: 10px;
   font-size: 16px;
@@ -211,7 +213,7 @@ body {
 
 .login-link-section p {
   color: #666;
-  font-size: 14px;
+  font-size: 13px;
   margin-bottom: 10px;
 }
 
@@ -226,8 +228,6 @@ body {
   font-weight: 600;
   transition: all 0.3s ease;
   border: 2px solid #4a7c3a;
-  width: auto;
-  min-width: 160px;
 }
 
 .login-link-button:hover {
@@ -244,7 +244,7 @@ body {
 
 .version-text {
   color: #999;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 /* Info panel */
@@ -290,8 +290,16 @@ body {
 /* Responsive */
 @media (max-width: 1024px) {
   .create-acc-wrapper {
-    max-width: 95%;
+    flex-direction: column;
+  }
+  
+  .create-acc-left {
+    min-height: 300px;
+  }
+  
+  .create-acc-right {
     min-height: auto;
+    padding: 40px 30px;
   }
   
   .raport-title {
@@ -299,27 +307,31 @@ body {
   }
   
   .pesantren-title {
-    font-size: 22px;
+    font-size: 24px;
   }
 }
 
 @media (max-width: 768px) {
-  .create-acc-wrapper {
-    flex-direction: column;
-    height: auto;
-  }
-  
   .create-acc-left {
-    height: 250px;
+    min-height: 250px;
   }
   
   .create-acc-right {
     padding: 30px 20px;
   }
   
+  .create-acc-card {
+    max-width: 100%;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
   .logo-ponpes {
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
   }
   
   .raport-title {
@@ -327,11 +339,30 @@ body {
   }
   
   .pesantren-title {
-    font-size: 20px;
+    font-size: 22px;
   }
   
-  .form-row {
-    flex-direction: column;
-    gap: 15px;
+  .pesantren-subtitle {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-acc-right {
+    padding: 25px 15px;
+  }
+  
+  .form-input, .form-select {
+    padding: 10px 14px;
+  }
+  
+  .create-acc-button {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .logo-ponpes {
+    width: 55px;
+    height: 55px;
   }
 }

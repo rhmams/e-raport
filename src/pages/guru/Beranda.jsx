@@ -132,7 +132,6 @@ function Beranda() {
 
         {/* ================= MAIN ================= */}
         <main className="main">
-          <div className="container">
 
             {/* ================= WELCOME SECTION ================= */}
             <section className="welcome-section">
@@ -151,10 +150,10 @@ function Beranda() {
               </div>
 
               <div className="stat-card">
-                <h3>Kesiapan Akhlak</h3>
-                <div className="stat-number">12</div>
+                <h3>Total Guru</h3>
+                <div className="stat-number">182</div>
                 <div className="stat-trend">
-                  <span>3 tingkatan</span>
+                  <span>+ 2%</span>
                 </div>
               </div>
 
@@ -404,56 +403,47 @@ function Beranda() {
                 </div>
               </div>
             </div>
-
-          </div>
         </main>
 
       </div>
 
-      {/* ================= FOOTER ================= */}
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-content">
-            {/* Hubungi Kami */}
-            <div className="footer-section">
-              <h4>Hubungi Kami</h4>
-              <p>
-                <MapPinned size={18} />
-                Jl. Pendidikan No. 123, Kota Santri, Indonesia
-              </p>
-              <p>
-                <Phone size={18} />
-                <a href="tel:+622112345678">+62 21 1234-5678</a>
-              </p>
-              <p>
-                <Mail size={18} />
-                <a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a>
-              </p>
-            </div>
+     {/* ================= FOOTER ================= */}
+<footer className="footer">
+  <div className="footer-container">
+    <div className="footer-content">
 
-            {/* Jam Layanan */}
-            <div className="footer-section">
-              <h4>Jam Layanan</h4>
-              <p>
-                <ClockIcon size={18} />
-                Senin - Jumat: 07:00 - 16:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Sabtu: 07:00 - 14:00
-              </p>
-              <p>
-                <ClockIcon size={18} />
-                Minggu: Tutup
-              </p>
-            </div>
-          </div>
+      {/* KOLOM 1: LOGO */}
+      <div className="footer-section footer-logo">
+        <img 
+          src="/logo-madinah.png" 
+          alt="Logo Madinah" 
+          className="footer-logo-img"
+        />
+        <h3 className="footer-brand">Madinah El - Quds</h3>
+      </div>
 
-          <div className="footer-bottom">
-            <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
-          </div>
-        </div>
-      </footer>
+      {/* KOLOM 2: Hubungi Kami */}
+      <div className="footer-section">
+        <h4>Hubungi Kami</h4>
+        <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
+        <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
+        <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
+      </div>
+
+      {/* KOLOM 3: Jam Layanan */}
+      <div className="footer-section">
+        <h4>Jam Layanan</h4>
+        <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
+        <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
+        <p><ClockIcon size={18}/> Minggu: Tutup</p>
+      </div>
+
+    </div>
+    <div className="footer-bottom">
+      <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
+    </div>
+  </div>
+</footer>
 
 
       <CatatanPrestasiModal isOpen={isModalOpen} onClose={closeModal} />
