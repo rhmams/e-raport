@@ -1,90 +1,59 @@
 import React, { useState } from 'react';
-import { ChevronDown, Download } from "lucide-react"; // Hapus X dari import
-import "./SampulModal.css";
+import { X, ChevronDown } from 'lucide-react';
+import './SampulModal.css';
 
-function SampulModal({ isOpen, onClose }) {
-  const [selectedTemplate, setSelectedTemplate] = useState('1');
+const SampulModal = ({ isOpen, onClose }) => {
+  const [selectedTemplate, setSelectedTemplate] = useState('sampul1');
+  const templates = [
+    { id: 'sampul1', name: 'Sampul 1', image: '/sampul1.png' },
+    { id: 'sampul2', name: 'Sampul 2', image: '/sampul2.png' },
+  ];
 
   if (!isOpen) return null;
 
-  // Function untuk download template
-  const downloadTemplate = () => {
-    const templateName = selectedTemplate === '1' ? 'sampul1.png' : 'sampul2.png';
-    const link = document.createElement('a');
-    link.href = `/${templateName}`;
-    link.download = templateName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = () => {
+    alert(`Download template ${selectedTemplate} (simulasi)`);
+    onClose();
   };
 
+  const currentTemplate = templates.find(t => t.id === selectedTemplate);
+
   return (
-    <div className="modal-overlay sampul-modal">
-      <div className="modal-container">
-        {/* Header */}
-        <div className="modal-header">
-          <h2>Sampul Raport</h2>
-          <button className="close-button" onClick={onClose}>
-            X {/* Ganti icon X dengan huruf X */}
+    <div className="sampul-modal-overlay" onClick={onClose}>
+      <div className="sampul-modal-container" onClick={(e) => e.stopPropagation()}>
+        <div className="sampul-modal-header">
+          <h2>📄 Pilih Template Sampul Raport</h2>
+          <button className="sampul-modal-close" onClick={onClose}>
+            <X size={20} />
           </button>
         </div>
-
-        <div className="modal-subtitle">
-          Pilih dan download template sampul untuk raport
-        </div>
-
-        {/* Content */}
-        <div className="modal-content">
-          {/* Dropdown Pilihan Sampul */}
-          <div className="form-section">
-            <label className="section-label">Pilih Template Sampul</label>
-            <div className="dropdown-wrapper">
-              <select 
-                className="template-select"
+        <div className="sampul-modal-body">
+          <div className="sampul-preview">
+            <img src={currentTemplate?.image || '/placeholder.png'} alt="Preview Sampul" />
+          </div>
+          <div className="sampul-dropdown-wrapper">
+            <label className="sampul-dropdown-label">Pilih Template</label>
+            <div className="sampul-select-wrapper">
+              <select
+                className="sampul-select"
                 value={selectedTemplate}
                 onChange={(e) => setSelectedTemplate(e.target.value)}
               >
-                <option value="1">Sampul 1</option>
-                <option value="2">Sampul 2</option>
+                {templates.map(tpl => (
+                  <option key={tpl.id} value={tpl.id}>{tpl.name}</option>
+                ))}
               </select>
-              <ChevronDown className="dropdown-icon" size={18} />
+              <ChevronDown className="sampul-select-icon" size={18} />
             </div>
           </div>
-
-          {/* Preview Gambar */}
-          <div className="preview-section">
-            <div className="preview-header">
-              <span className="preview-title">Preview Sampul</span>
-            </div>
-            
-            <div className="template-preview">
-              <img 
-                src={selectedTemplate === '1' ? "/sampul1.png" : "/sampul2.png"} 
-                alt={`Template Sampul ${selectedTemplate}`} 
-                className="template-image"
-              />
-            </div>
-          </div>
-
-          {/* Info */}
-          <div className="info-note">
-            <p>Template tersedia dalam format PNG siap cetak.</p>
-          </div>
-
-          {/* Actions */}
-          <div className="modal-actions">
-            <button className="btn-secondary" onClick={onClose}>
-              Batal
-            </button>
-            <button className="btn-primary" onClick={downloadTemplate}>
-              <Download size={18} style={{ marginRight: '8px' }} />
-              Download Template
-            </button>
-          </div>
+        </div>
+        <div className="sampul-modal-footer">
+          <button className="sampul-btn-secondary" onClick={onClose}>Batal</button>
+          <button className="sampul-btn-primary" onClick={handleDownload}>Download</button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default SampulModal;

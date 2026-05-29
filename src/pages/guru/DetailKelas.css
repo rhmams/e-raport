@@ -102,3 +102,19 @@
   background: #fce4e9;
   color: #d53f8c;
 }
+
+.btn-tujuan {
+  background: #16a085;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-tujuan:hover {
+  background: #1abc9c;
+}

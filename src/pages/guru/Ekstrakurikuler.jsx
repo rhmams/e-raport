@@ -22,7 +22,11 @@ import {
   Award,
   GraduationCap,
   X,
-  Save
+  Save,
+  FileCheck,
+  Target,
+  TrendingUp,
+  FileSpreadsheet
 } from "lucide-react";
 
 import "./Ekstrakurikuler.css";
@@ -32,111 +36,93 @@ function Ekstrakurikuler() {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeTab, setActiveTab] = useState('ekstrakurikuler');
+  const [activeTab, setActiveTab] = useState('kokurikuler'); // default ke kokurikuler
   const [showModal, setShowModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentEditId, setCurrentEditId] = useState(null);
 
-  // Data Ekstrakurikuler
+  // ==================== DATA EKSTRAKURIKULER ====================
   const [dataEkstra, setDataEkstra] = useState([
-    {
-      id: 1,
-      nama: "Kompetisi Tilawah",
-      jenis: "Keagamaan",
-      peserta: 45,
-      jadwal: "Setiap Jumat",
-      pembimbing: "Ustadz Ahmad",
-      status: "Aktif"
-    },
-    {
-      id: 2,
-      nama: "Klub Debat Bahasa Arab",
-      jenis: "Akademik",
-      peserta: 28,
-      jadwal: "Selasa & Kamis",
-      pembimbing: "Ustadz Muhammad",
-      status: "Aktif"
-    },
-    {
-      id: 3,
-      nama: "Kaligrafi Islam",
-      jenis: "Seni",
-      peserta: 32,
-      jadwal: "Rabu",
-      pembimbing: "Ustadzah Fatimah",
-      status: "Aktif"
-    },
-    {
-      id: 4,
-      nama: "Panitia Amal",
-      jenis: "Sosial",
-      peserta: 52,
-      jadwal: "Bulanan",
-      pembimbing: "Ustadzah Khadijah",
-      status: "Aktif"
-    },
-    {
-      id: 5,
-      nama: "Paduan Suara Nasheed",
-      jenis: "Seni",
-      peserta: 38,
-      jadwal: "Senin & Jumat",
-      pembimbing: "Ustadz Umar",
-      status: "Aktif"
-    },
-    {
-      id: 6,
-      nama: "Olahraga & Kebugaran",
-      jenis: "Fisik",
-      peserta: 65,
-      jadwal: "Harian",
-      pembimbing: "Ustadz Abdulrahman",
-      status: "Aktif"
-    }
+    { id: 1, nama: "Kompetisi Tilawah", jenis: "Keagamaan", peserta: 45, jadwal: "Setiap Jumat", pembimbing: "Ustadz Ahmad", status: "Aktif" },
+    { id: 2, nama: "Klub Debat Bahasa Arab", jenis: "Akademik", peserta: 28, jadwal: "Selasa & Kamis", pembimbing: "Ustadz Muhammad", status: "Aktif" },
+    { id: 3, nama: "Kaligrafi Islam", jenis: "Seni", peserta: 32, jadwal: "Rabu", pembimbing: "Ustadzah Fatimah", status: "Aktif" },
+    { id: 4, nama: "Panitia Amal", jenis: "Sosial", peserta: 52, jadwal: "Bulanan", pembimbing: "Ustadzah Khadijah", status: "Aktif" },
+    { id: 5, nama: "Paduan Suara Nasheed", jenis: "Seni", peserta: 38, jadwal: "Senin & Jumat", pembimbing: "Ustadz Umar", status: "Aktif" },
+    { id: 6, nama: "Olahraga & Kebugaran", jenis: "Fisik", peserta: 65, jadwal: "Harian", pembimbing: "Ustadz Abdulrahman", status: "Aktif" }
   ]);
 
-  // Data Kokurikuler
+  // ==================== DATA KOKURIKULER (PROJEK/KEGIATAN) ====================
   const [dataKokurikuler, setDataKokurikuler] = useState([
     {
       id: 101,
-      nama: "Tahfidz Al-Quran",
-      jenis: "Keagamaan",
-      peserta: 248,
-      jadwal: "Setiap Hari",
-      pembimbing: "Ustadz Ahmad",
-      status: "Aktif"
+      namaKegiatan: "Projek Gaya Hidup Berkelanjutan",
+      bentuk: "Projek P5",
+      tema: "Gaya Hidup Berkelanjutan",
+      kelas: "7A, 7B, 7C",
+      semester: "Ganjil 2025/2026",
+      tanggalMulai: "2025-08-01",
+      tanggalSelesai: "2025-09-15",
+      status: "Berlangsung",
+      dimensi: ["Bernalar Kritis", "Kreatif", "Gotong Royong"],
+      deskripsiUmum: "Siswa membuat produk daur ulang dari sampah plastik"
     },
     {
       id: 102,
-      nama: "Bahasa Arab Terapan",
-      jenis: "Akademik",
-      peserta: 248,
-      jadwal: "Senin & Rabu",
-      pembimbing: "Ustadz Zali Fatimah",
-      status: "Aktif"
+      namaKegiatan: "Pameran Kearifan Lokal",
+      bentuk: "Projek P5",
+      tema: "Kearifan Lokal",
+      kelas: "8A, 8B",
+      semester: "Ganjil 2025/2026",
+      tanggalMulai: "2025-09-01",
+      tanggalSelesai: "2025-10-20",
+      status: "Berlangsung",
+      dimensi: ["Kreatif", "Berkebinekaan Global", "Mandiri"],
+      deskripsiUmum: "Eksplorasi dan pameran budaya Betawi"
     },
     {
       id: 103,
-      nama: "Studi Islam Kontemporer",
-      jenis: "Keagamaan",
-      peserta: 180,
-      jadwal: "Selasa & Kamis",
-      pembimbing: "Ustadz Muhammad",
-      status: "Aktif"
+      namaKegiatan: "Gerakan 7 Kebiasaan",
+      bentuk: "Gerakan 7 Kebiasaan",
+      tema: "Bangunlah Jiwa dan Raganya",
+      kelas: "Semua Kelas",
+      semester: "Ganjil 2025/2026",
+      tanggalMulai: "2025-07-15",
+      tanggalSelesai: "2025-12-15",
+      status: "Berlangsung",
+      dimensi: ["Mandiri", "Beriman & Bertakwa", "Bernalar Kritis"],
+      deskripsiUmum: "Pembiasaan bangun pagi, shalat tepat waktu, dan pola hidup sehat"
     },
     {
       id: 104,
-      nama: "Praktik Ibadah",
-      jenis: "Keagamaan",
-      peserta: 248,
-      jadwal: "Setiap Hari",
-      pembimbing: "Ustadz Abdullah",
-      status: "Aktif"
+      namaKegiatan: "Bazar Kewirausahaan",
+      bentuk: "Projek P5",
+      tema: "Kewirausahaan",
+      kelas: "9A, 9B, 9C",
+      semester: "Genap 2025/2026",
+      tanggalMulai: "2026-01-10",
+      tanggalSelesai: "2026-02-28",
+      status: "Rencana",
+      dimensi: ["Kreatif", "Mandiri", "Gotong Royong"],
+      deskripsiUmum: "Siswa membuat dan menjual produk hasil kreativitas"
     }
   ]);
 
-  // Form state untuk modal
+  // Form state untuk modal kegiatan Kokurikuler
   const [formData, setFormData] = useState({
+    namaKegiatan: '',
+    bentuk: 'Projek P5',
+    tema: '',
+    kelas: '',
+    semester: '',
+    tanggalMulai: '',
+    tanggalSelesai: '',
+    status: 'Rencana',
+    dimensi: [],
+    deskripsiUmum: ''
+  });
+
+  // Form state untuk ekstrakurikuler (edit/tambah)
+  const [formEkstra, setFormEkstra] = useState({
     nama: '',
     jenis: '',
     peserta: '',
@@ -145,32 +131,122 @@ function Ekstrakurikuler() {
     status: 'Aktif'
   });
 
-  const jenisOptions = ['Keagamaan', 'Akademik', 'Seni', 'Sosial', 'Fisik', 'Olahraga'];
-  const statusOptions = ['Aktif', 'Nonaktif', 'Selesai'];
+  const bentukOptions = ['Projek P5', 'Gerakan 7 Kebiasaan', 'Studi Lapangan', 'Praktik Kewirausahaan', 'Bakti Sosial', 'Lainnya'];
+  const temaP5Options = [
+    'Gaya Hidup Berkelanjutan',
+    'Kearifan Lokal',
+    'Bhinneka Tunggal Ika',
+    'Bangunlah Jiwa dan Raganya',
+    'Suara Demokrasi',
+    'Rekayasa dan Teknologi',
+    'Kewirausahaan',
+    'Kebekerjaan'
+  ];
+  const statusKegiatanOptions = ['Rencana', 'Berlangsung', 'Selesai', 'Ditiadakan'];
 
-  // Tentukan data yang ditampilkan berdasarkan tab aktif
-  const currentData = activeTab === 'ekstrakurikuler' ? dataEkstra : dataKokurikuler;
-  const setCurrentData = activeTab === 'ekstrakurikuler' ? setDataEkstra : setDataKokurikuler;
-
-  const filteredData = currentData.filter(item =>
-    item.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.jenis.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.pembimbing.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter data
+  const filteredKokurikuler = dataKokurikuler.filter(item =>
+    item.namaKegiatan.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.tema.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.bentuk.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const totalKegiatan = currentData.length;
-  const totalPeserta = currentData.reduce((acc, curr) => acc + curr.peserta, 0);
-  const programAktif = currentData.filter(item => item.status === "Aktif").length;
+  const filteredEkstra = dataEkstra.filter(item =>
+    item.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.jenis.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  // Handle form input change
+  // Statistik
+  const totalKegiatanKokurikuler = dataKokurikuler.length;
+  const kegiatanBerlangsung = dataKokurikuler.filter(k => k.status === 'Berlangsung').length;
+  const kegiatanSelesai = dataKokurikuler.filter(k => k.status === 'Selesai').length;
+  const totalPesertaEkstra = dataEkstra.reduce((acc, curr) => acc + curr.peserta, 0);
+  const programAktifEkstra = dataEkstra.filter(item => item.status === "Aktif").length;
+
+  // Handle form kegiatan kokurikuler
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Reset modal
-  const resetModal = () => {
+  const resetModalKokurikuler = () => {
     setFormData({
+      namaKegiatan: '',
+      bentuk: 'Projek P5',
+      tema: '',
+      kelas: '',
+      semester: '',
+      tanggalMulai: '',
+      tanggalSelesai: '',
+      status: 'Rencana',
+      dimensi: [],
+      deskripsiUmum: ''
+    });
+    setEditMode(false);
+    setCurrentEditId(null);
+    setShowModal(false);
+  };
+
+  const handleTambahKegiatanKokurikuler = () => {
+    if (!formData.namaKegiatan || !formData.bentuk || !formData.semester) {
+      alert('Mohon lengkapi field yang diperlukan!');
+      return;
+    }
+    const newId = Math.max(...dataKokurikuler.map(item => item.id), 0) + 1;
+    const newKegiatan = {
+      id: newId,
+      ...formData,
+      kelas: formData.kelas || 'Semua Kelas'
+    };
+    setDataKokurikuler([...dataKokurikuler, newKegiatan]);
+    resetModalKokurikuler();
+    alert('Kegiatan Kokurikuler berhasil ditambahkan!');
+  };
+
+  const handleEditKegiatanKokurikuler = (item) => {
+    setEditMode(true);
+    setCurrentEditId(item.id);
+    setFormData({
+      namaKegiatan: item.namaKegiatan,
+      bentuk: item.bentuk,
+      tema: item.tema || '',
+      kelas: item.kelas,
+      semester: item.semester,
+      tanggalMulai: item.tanggalMulai || '',
+      tanggalSelesai: item.tanggalSelesai || '',
+      status: item.status,
+      dimensi: item.dimensi || [],
+      deskripsiUmum: item.deskripsiUmum || ''
+    });
+    setShowModal(true);
+  };
+
+  const handleUpdateKegiatanKokurikuler = () => {
+    const updatedData = dataKokurikuler.map(item =>
+      item.id === currentEditId
+        ? { ...item, ...formData, kelas: formData.kelas || 'Semua Kelas' }
+        : item
+    );
+    setDataKokurikuler(updatedData);
+    resetModalKokurikuler();
+    alert('Kegiatan Kokurikuler berhasil diupdate!');
+  };
+
+  const handleHapusKegiatan = (id, nama) => {
+    if (window.confirm(`Yakin ingin menghapus kegiatan "${nama}"?`)) {
+      const newData = dataKokurikuler.filter(item => item.id !== id);
+      setDataKokurikuler(newData);
+      alert(`Kegiatan "${nama}" berhasil dihapus!`);
+    }
+  };
+
+  const handleLihatDetail = (itemId) => {
+    navigate(`/kokurikuler/${itemId}`);
+  };
+
+  // Handler untuk ekstrakurikuler
+  const resetModalEkstra = () => {
+    setFormEkstra({
       nama: '',
       jenis: '',
       peserta: '',
@@ -183,37 +259,30 @@ function Ekstrakurikuler() {
     setShowModal(false);
   };
 
-  // Handle tambah kegiatan
-  const handleTambahKegiatan = () => {
-    if (!formData.nama || !formData.jenis || !formData.peserta || !formData.jadwal || !formData.pembimbing) {
-      alert('Mohon lengkapi semua field yang diperlukan!');
-      return;
-    }
-
-    const newId = Math.max(...currentData.map(item => item.id), 0) + 1;
-    const newKegiatan = {
-      id: newId,
-      nama: formData.nama,
-      jenis: formData.jenis,
-      peserta: parseInt(formData.peserta),
-      jadwal: formData.jadwal,
-      pembimbing: formData.pembimbing,
-      status: formData.status
-    };
-
-    setCurrentData([...currentData, newKegiatan]);
-    resetModal();
-    alert(`Kegiatan ${activeTab === 'ekstrakurikuler' ? 'Ekstrakurikuler' : 'Kokurikuler'} berhasil ditambahkan!`);
+  const handleInputEkstraChange = (e) => {
+    const { name, value } = e.target;
+    setFormEkstra(prev => ({ ...prev, [name]: value }));
   };
 
-  // Handle edit kegiatan
-  const handleEditKegiatan = (item) => {
+  const handleTambahEkstra = () => {
+    if (!formEkstra.nama || !formEkstra.jenis || !formEkstra.peserta || !formEkstra.jadwal || !formEkstra.pembimbing) {
+      alert('Mohon lengkapi semua field!');
+      return;
+    }
+    const newId = Math.max(...dataEkstra.map(item => item.id), 0) + 1;
+    const newEkstra = { id: newId, ...formEkstra, peserta: parseInt(formEkstra.peserta) };
+    setDataEkstra([...dataEkstra, newEkstra]);
+    resetModalEkstra();
+    alert('Ekstrakurikuler berhasil ditambahkan!');
+  };
+
+  const handleEditEkstra = (item) => {
     setEditMode(true);
     setCurrentEditId(item.id);
-    setFormData({
+    setFormEkstra({
       nama: item.nama,
       jenis: item.jenis,
-      peserta: item.peserta.toString(),
+      peserta: item.peserta,
       jadwal: item.jadwal,
       pembimbing: item.pembimbing,
       status: item.status
@@ -221,47 +290,22 @@ function Ekstrakurikuler() {
     setShowModal(true);
   };
 
-  // Handle update kegiatan
-  const handleUpdateKegiatan = () => {
-    if (!formData.nama || !formData.jenis || !formData.peserta || !formData.jadwal || !formData.pembimbing) {
-      alert('Mohon lengkapi semua field yang diperlukan!');
-      return;
-    }
-
-    const updatedData = currentData.map(item =>
+  const handleUpdateEkstra = () => {
+    const updatedData = dataEkstra.map(item =>
       item.id === currentEditId
-        ? {
-            ...item,
-            nama: formData.nama,
-            jenis: formData.jenis,
-            peserta: parseInt(formData.peserta),
-            jadwal: formData.jadwal,
-            pembimbing: formData.pembimbing,
-            status: formData.status
-          }
+        ? { ...item, ...formEkstra, peserta: parseInt(formEkstra.peserta) }
         : item
     );
-
-    setCurrentData(updatedData);
-    resetModal();
-    alert(`Kegiatan ${activeTab === 'ekstrakurikuler' ? 'Ekstrakurikuler' : 'Kokurikuler'} berhasil diupdate!`);
+    setDataEkstra(updatedData);
+    resetModalEkstra();
+    alert('Ekstrakurikuler berhasil diupdate!');
   };
 
-  // Handle hapus kegiatan
-  const handleHapusKegiatan = (id, nama) => {
-    if (window.confirm(`Yakin ingin menghapus kegiatan "${nama}"?`)) {
-      const newData = currentData.filter(item => item.id !== id);
-      setCurrentData(newData);
-      alert(`Kegiatan "${nama}" berhasil dihapus!`);
-    }
-  };
-
-  // Handle lihat detail
-  const handleLihatDetail = (itemId) => {
-    if (activeTab === 'kokurikuler') {
-      navigate(`/kokurikuler/${itemId}`);
-    } else {
-      navigate(`/ekstrakurikuler/${itemId}`);
+  const handleHapusEkstra = (id, nama) => {
+    if (window.confirm(`Yakin ingin menghapus ekstrakurikuler "${nama}"?`)) {
+      const newData = dataEkstra.filter(item => item.id !== id);
+      setDataEkstra(newData);
+      alert(`Ekstrakurikuler "${nama}" berhasil dihapus!`);
     }
   };
 
@@ -305,7 +349,7 @@ function Ekstrakurikuler() {
               <li className={location.pathname === '/' || location.pathname === '/beranda' ? 'active' : ''} onClick={() => navigate('/beranda')}>
                 <LayoutDashboard size={18}/> Beranda
               </li>
-              <li className={location.pathname.startsWith('/kelas') && !location.pathname.includes('/kelas/') ? 'active' : ''} onClick={() => navigate('/kelas')}>
+              <li className={location.pathname.startsWith('/kelas') ? 'active' : ''} onClick={() => navigate('/kelas')}>
                 <BookOpen size={18}/> Kelas
               </li>
               <li className={location.pathname === '/wali-kelas' ? 'active' : ''} onClick={() => navigate('/wali-kelas')}>
@@ -334,14 +378,19 @@ function Ekstrakurikuler() {
           <div className="page-header">
             <div>
               <h1>Kegiatan {activeTab === 'ekstrakurikuler' ? 'Ekstrakurikuler' : 'Kokurikuler'}</h1>
-              <p className="subtitle">Kelola program ko-kurikuler dan partisipasi siswa</p>
+              <p className="subtitle">
+                {activeTab === 'kokurikuler' 
+                  ? 'Kelola Projek P5 dan kegiatan penguatan Profil Pelajar Pancasila (sesuai Permendikbudristek No. 12 Tahun 2024)'
+                  : 'Kelola ekstrakurikuler dan pengembangan minat bakat siswa'}
+              </p>
             </div>
             <button className="btn-tambah" onClick={() => {
               setEditMode(false);
-              setFormData({ nama: '', jenis: '', peserta: '', jadwal: '', pembimbing: '', status: 'Aktif' });
+              if (activeTab === 'kokurikuler') resetModalKokurikuler();
+              else resetModalEkstra();
               setShowModal(true);
             }}>
-              <Plus size={18} /> Tambah Kegiatan
+              <Plus size={18} /> {activeTab === 'kokurikuler' ? 'Tambah Projek/Kegiatan' : 'Tambah Ekstrakurikuler'}
             </button>
           </div>
 
@@ -349,65 +398,96 @@ function Ekstrakurikuler() {
           <div className="tab-navigation">
             <div 
               className={`tab-item ${activeTab === 'kokurikuler' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveTab('kokurikuler');
-                setSearchTerm('');
-              }}
+              onClick={() => { setActiveTab('kokurikuler'); setSearchTerm(''); }}
             >
-              Kokurikuler
+              <FileCheck size={16} /> Kokurikuler (P5 & Projek)
             </div>
             <div 
               className={`tab-item ${activeTab === 'ekstrakurikuler' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveTab('ekstrakurikuler');
-                setSearchTerm('');
-              }}
+              onClick={() => { setActiveTab('ekstrakurikuler'); setSearchTerm(''); }}
             >
-              Ekstrakurikuler
+              <Target size={16} /> Ekstrakurikuler
             </div>
           </div>
 
-          {/* ================= INPUT NILAI SECTION ================= */}
+          {/* ================= INFO PENTING KOKURIKULER ================= */}
           {activeTab === 'kokurikuler' && (
-            <div className="input-nilai-section">
-              <div className="input-nilai-header">
+            <div className="info-panel">
+              <div className="info-panel-header">
                 <GraduationCap size={20} />
-                <h3>Input Nilai Kokurikuler</h3>
+                <h3>📖 Tentang Kokurikuler (Permendikbudristek No. 12/2024)</h3>
               </div>
-              <p className="input-nilai-desc">Kelola nilai dimensi profil lulusan untuk kegiatan kokurikuler</p>
+              <div className="info-panel-body">
+                <p><strong>Kokurikuler</strong> adalah kegiatan penguatan, pendalaman, dan pengayaan kompetensi intrakurikuler.</p>
+                <p><strong>Bentuk kegiatan:</strong> Projek Penguatan Profil Pelajar Pancasila (P5), Gerakan 7 Kebiasaan Anak Indonesia Hebat, atau bentuk relevan lainnya.</p>
+              </div>
             </div>
           )}
 
           {/* ================= STATS CARDS ================= */}
-          <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-icon" style={{ background: '#e6f7f0', color: '#16a085' }}>
-                <Award size={24} />
+          {activeTab === 'kokurikuler' && (
+            <div className="stats-grid">
+              <div className="stat-card">
+                <div className="stat-icon" style={{ background: '#e6f7f0', color: '#16a085' }}>
+                  <FileSpreadsheet size={24} />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-value">{totalKegiatanKokurikuler}</div>
+                  <div className="stat-label">Total Projek/Kegiatan</div>
+                </div>
               </div>
-              <div className="stat-content">
-                <div className="stat-value">{totalKegiatan}</div>
-                <div className="stat-label">Total Kegiatan</div>
+              <div className="stat-card">
+                <div className="stat-icon" style={{ background: '#e6f0f7', color: '#3498db' }}>
+                  <TrendingUp size={24} />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-value">{kegiatanBerlangsung}</div>
+                  <div className="stat-label">Kegiatan Berlangsung</div>
+                </div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-icon" style={{ background: '#fef3c7', color: '#f39c12' }}>
+                  <Award size={24} />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-value">{kegiatanSelesai}</div>
+                  <div className="stat-label">Kegiatan Selesai</div>
+                </div>
               </div>
             </div>
-            <div className="stat-card">
-              <div className="stat-icon" style={{ background: '#e6f0f7', color: '#3498db' }}>
-                <Users size={24} />
+          )}
+
+          {activeTab === 'ekstrakurikuler' && (
+            <div className="stats-grid">
+              <div className="stat-card">
+                <div className="stat-icon" style={{ background: '#e6f7f0', color: '#16a085' }}>
+                  <Award size={24} />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-value">{dataEkstra.length}</div>
+                  <div className="stat-label">Total Ekstrakurikuler</div>
+                </div>
               </div>
-              <div className="stat-content">
-                <div className="stat-value">{totalPeserta}</div>
-                <div className="stat-label">Total Peserta</div>
+              <div className="stat-card">
+                <div className="stat-icon" style={{ background: '#e6f0f7', color: '#3498db' }}>
+                  <Users size={24} />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-value">{totalPesertaEkstra}</div>
+                  <div className="stat-label">Total Peserta</div>
+                </div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-icon" style={{ background: '#fef3c7', color: '#f39c12' }}>
+                  <Calendar size={24} />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-value">{programAktifEkstra}</div>
+                  <div className="stat-label">Program Aktif</div>
+                </div>
               </div>
             </div>
-            <div className="stat-card">
-              <div className="stat-icon" style={{ background: '#fef3c7', color: '#f39c12' }}>
-                <Calendar size={24} />
-              </div>
-              <div className="stat-content">
-                <div className="stat-value">{programAktif}</div>
-                <div className="stat-label">Program Aktif</div>
-              </div>
-            </div>
-          </div>
+          )}
 
           {/* ================= ACTION BAR ================= */}
           <div className="action-bar">
@@ -424,7 +504,7 @@ function Ekstrakurikuler() {
                 <Search size={16} />
                 <input 
                   type="text" 
-                  placeholder="Cari kegiatan..." 
+                  placeholder={activeTab === 'kokurikuler' ? "Cari projek/kegiatan..." : "Cari ekstrakurikuler..."}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -435,76 +515,267 @@ function Ekstrakurikuler() {
             </div>
           </div>
 
-          {/* ================= TABLE ================= */}
-          <div className="table-container">
-            <table className="ekstra-table">
-              <thead>
-                <tr>
-                  <th>Nama Kegiatan</th>
-                  <th>Jenis</th>
-                  <th>Peserta</th>
-                  <th>Jadwal</th>
-                  <th>Pembimbing</th>
-                  <th>Status</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredData.map((item) => (
-                  <tr key={item.id}>
-                    <td className="nama-kegiatan">{item.nama}</td>
-                    <td><span className="badge-jenis">{item.jenis}</span></td>
-                    <td>{item.peserta}</td>
-                    <td>{item.jadwal}</td>
-                    <td>
-                      <div className="pembimbing-info">
-                        <User size={14} />
-                        <span>{item.pembimbing}</span>
-                      </div>
-                    </td>
-                    <td><span className="badge-status aktif">{item.status}</span></td>
-                    <td className="action-cell">
-                      <button className="btn-edit-small" onClick={() => handleEditKegiatan(item)} title="Edit">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M17 3l4 4-7 7H10v-4l7-7z" />
-                          <path d="M4 20h16" />
-                        </svg>
-                      </button>
-                      <button className="btn-delete-small" onClick={() => handleHapusKegiatan(item.id, item.nama)} title="Hapus">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M18 6L6 18" />
-                          <path d="M6 6l12 12" />
-                        </svg>
-                      </button>
-                      <button className="btn-lihat-detail" onClick={() => handleLihatDetail(item.id)} title="Lihat Detail">
-                        <Eye size={16} />
-                      </button>
-                    </td>
+          {/* ================= TABEL KOKURIKULER ================= */}
+          {activeTab === 'kokurikuler' && (
+            <div className="table-container">
+              <table className="ekstra-table">
+                <thead>
+                  <tr>
+                    <th>Nama Project</th>
+                    <th>Kelas</th>
+                    <th>Tema</th>
+                    <th>Semester</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {filteredKokurikuler.map((item) => (
+                    <tr key={item.id}>
+                      <td className="nama-kegiatan"><strong>{item.namaKegiatan}</strong></td>
+                      <td>{item.kelas}</td>
+                      <td>{item.tema || '-'}</td>
+                      <td>{item.semester}</td>
+                      <td>
+                        <span className={`badge-status ${item.status === 'Berlangsung' ? 'aktif' : item.status === 'Selesai' ? 'selesai' : 'rencana'}`}>
+                          {item.status}
+                        </span>
+                      </td>
+                      <td className="action-cell">
+                        <button className="btn-edit-small" onClick={() => handleEditKegiatanKokurikuler(item)} title="Edit">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M17 3l4 4-7 7H10v-4l7-7z" />
+                            <path d="M4 20h16" />
+                          </svg>
+                        </button>
+                        <button className="btn-delete-small" onClick={() => handleHapusKegiatan(item.id, item.namaKegiatan)} title="Hapus">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M18 6L6 18" />
+                            <path d="M6 6l12 12" />
+                          </svg>
+                        </button>
+                        <button className="btn-lihat-detail" onClick={() => handleLihatDetail(item.id)} title="Lihat Detail">
+                          <Eye size={16} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
 
-          {/* ================= PAGINATION INFO ================= */}
+          {/* ================= TABEL EKSTRAKURIKULER ================= */}
+          {activeTab === 'ekstrakurikuler' && (
+            <div className="table-container">
+              <table className="ekstra-table">
+                <thead>
+                  <tr>
+                    <th>Nama Kegiatan</th>
+                    <th>Jenis</th>
+                    <th>Peserta</th>
+                    <th>Jadwal</th>
+                    <th>Pembimbing</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredEkstra.map((item) => (
+                    <tr key={item.id}>
+                      <td className="nama-kegiatan">{item.nama}</td>
+                      <td><span className="badge-jenis">{item.jenis}</span></td>
+                      <td>{item.peserta}</td>
+                      <td>{item.jadwal}</td>
+                      <td>
+                        <div className="pembimbing-info">
+                          <User size={14} />
+                          <span>{item.pembimbing}</span>
+                        </div>
+                      </td>
+                      <td><span className="badge-status aktif">{item.status}</span></td>
+                      <td className="action-cell">
+                        <button className="btn-edit-small" onClick={() => handleEditEkstra(item)} title="Edit">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M17 3l4 4-7 7H10v-4l7-7z" />
+                            <path d="M4 20h16" />
+                          </svg>
+                        </button>
+                        <button className="btn-delete-small" onClick={() => handleHapusEkstra(item.id, item.nama)} title="Hapus">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M18 6L6 18" />
+                            <path d="M6 6l12 12" />
+                          </svg>
+                        </button>
+                        <button className="btn-lihat-detail" onClick={() => handleLihatDetail(item.id)} title="Lihat Detail">
+                          <Eye size={16} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
           <div className="pagination-info">
-            Menampilkan 1 - {filteredData.length} dari {currentData.length} kegiatan
+            Menampilkan {activeTab === 'kokurikuler' ? filteredKokurikuler.length : filteredEkstra.length} dari {activeTab === 'kokurikuler' ? dataKokurikuler.length : dataEkstra.length} kegiatan
           </div>
 
         </main>
-
       </div>
 
-      {/* ================= MODAL TAMBAH/EDIT KEGIATAN ================= */}
-      {showModal && (
-        <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && resetModal()}>
+      {/* ================= MODAL TAMBAH/EDIT KOKURIKULER ================= */}
+      {showModal && activeTab === 'kokurikuler' && (
+        <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && resetModalKokurikuler()}>
+          <div className="modal-box modal-large">
+            <div className="modal-header">
+              <div>
+                <h3>{editMode ? 'Edit Kegiatan Kokurikuler' : 'Tambah Kegiatan Kokurikuler'}</h3>
+                <p>{editMode ? 'Edit data kegiatan yang dipilih' : 'Lengkapi form untuk menambahkan kegiatan P5/Kokurikuler baru'}</p>
+              </div>
+              <button className="modal-close" onClick={resetModalKokurikuler}>
+                <X size={18} />
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="modal-form-group">
+                <label>Nama Project <span className="required">*</span></label>
+                <input
+                  type="text"
+                  name="namaKegiatan"
+                  value={formData.namaKegiatan}
+                  onChange={handleInputChange}
+                  className="form-control"
+                  placeholder="Contoh: Projek Gaya Hidup Berkelanjutan"
+                />
+              </div>
+
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Bentuk Kegiatan <span className="required">*</span></label>
+                  <select
+                    name="bentuk"
+                    value={formData.bentuk}
+                    onChange={handleInputChange}
+                    className="form-control"
+                  >
+                    {bentukOptions.map(opt => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="modal-form-group">
+                  <label>Tema</label>
+                  <select
+                    name="tema"
+                    value={formData.tema}
+                    onChange={handleInputChange}
+                    className="form-control"
+                  >
+                    <option value="">Pilih Tema</option>
+                    {temaP5Options.map(opt => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Kelas Target</label>
+                  <input
+                    type="text"
+                    name="kelas"
+                    value={formData.kelas}
+                    onChange={handleInputChange}
+                    className="form-control"
+                    placeholder="Contoh: 7A, 7B, 7C atau Semua Kelas"
+                  />
+                </div>
+                <div className="modal-form-group">
+                  <label>Semester <span className="required">*</span></label>
+                  <input
+                    type="text"
+                    name="semester"
+                    value={formData.semester}
+                    onChange={handleInputChange}
+                    className="form-control"
+                    placeholder="Contoh: Ganjil 2025/2026"
+                  />
+                </div>
+              </div>
+
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Tanggal Mulai</label>
+                  <input
+                    type="date"
+                    name="tanggalMulai"
+                    value={formData.tanggalMulai}
+                    onChange={handleInputChange}
+                    className="form-control"
+                  />
+                </div>
+                <div className="modal-form-group">
+                  <label>Tanggal Selesai</label>
+                  <input
+                    type="date"
+                    name="tanggalSelesai"
+                    value={formData.tanggalSelesai}
+                    onChange={handleInputChange}
+                    className="form-control"
+                  />
+                </div>
+                <div className="modal-form-group">
+                  <label>Status</label>
+                  <select
+                    name="status"
+                    value={formData.status}
+                    onChange={handleInputChange}
+                    className="form-control"
+                  >
+                    {statusKegiatanOptions.map(opt => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="modal-form-group">
+                <label>Deskripsi Umum Kegiatan</label>
+                <textarea
+                  name="deskripsiUmum"
+                  value={formData.deskripsiUmum}
+                  onChange={handleInputChange}
+                  className="form-control"
+                  rows="3"
+                  placeholder="Jelaskan secara singkat tentang kegiatan ini..."
+                />
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="btn-batal" onClick={resetModalKokurikuler}>
+                Batal
+              </button>
+              <button className="btn-simpan" onClick={editMode ? handleUpdateKegiatanKokurikuler : handleTambahKegiatanKokurikuler}>
+                <Save size={16} /> {editMode ? 'Update' : 'Simpan'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL TAMBAH/EDIT EKSTRAKURIKULER ================= */}
+      {showModal && activeTab === 'ekstrakurikuler' && (
+        <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && resetModalEkstra()}>
           <div className="modal-box">
             <div className="modal-header">
               <div>
-                <h3>{editMode ? 'Edit Kegiatan' : 'Tambah Kegiatan Baru'}</h3>
-                <p>{editMode ? 'Edit data kegiatan yang dipilih' : `Lengkapi form untuk menambahkan kegiatan ${activeTab === 'ekstrakurikuler' ? 'Ekstrakurikuler' : 'Kokurikuler'} baru`}</p>
+                <h3>{editMode ? 'Edit Ekstrakurikuler' : 'Tambah Ekstrakurikuler'}</h3>
+                <p>{editMode ? 'Edit data ekstrakurikuler yang dipilih' : 'Lengkapi form untuk menambahkan ekstrakurikuler baru'}</p>
               </div>
-              <button className="modal-close" onClick={resetModal}>
+              <button className="modal-close" onClick={resetModalEkstra}>
                 <X size={18} />
               </button>
             </div>
@@ -514,10 +785,10 @@ function Ekstrakurikuler() {
                 <input
                   type="text"
                   name="nama"
-                  value={formData.nama}
-                  onChange={handleInputChange}
+                  value={formEkstra.nama}
+                  onChange={handleInputEkstraChange}
                   className="form-control"
-                  placeholder="Masukkan nama kegiatan"
+                  placeholder="Masukkan nama ekstrakurikuler"
                 />
               </div>
               <div className="modal-form-row">
@@ -525,12 +796,12 @@ function Ekstrakurikuler() {
                   <label>Jenis Kegiatan <span className="required">*</span></label>
                   <select
                     name="jenis"
-                    value={formData.jenis}
-                    onChange={handleInputChange}
+                    value={formEkstra.jenis}
+                    onChange={handleInputEkstraChange}
                     className="form-control"
                   >
                     <option value="">Pilih Jenis</option>
-                    {jenisOptions.map(opt => (
+                    {['Keagamaan', 'Akademik', 'Seni', 'Sosial', 'Fisik', 'Olahraga'].map(opt => (
                       <option key={opt} value={opt}>{opt}</option>
                     ))}
                   </select>
@@ -540,8 +811,8 @@ function Ekstrakurikuler() {
                   <input
                     type="number"
                     name="peserta"
-                    value={formData.peserta}
-                    onChange={handleInputChange}
+                    value={formEkstra.peserta}
+                    onChange={handleInputEkstraChange}
                     className="form-control"
                     placeholder="Jumlah peserta"
                   />
@@ -553,8 +824,8 @@ function Ekstrakurikuler() {
                   <input
                     type="text"
                     name="jadwal"
-                    value={formData.jadwal}
-                    onChange={handleInputChange}
+                    value={formEkstra.jadwal}
+                    onChange={handleInputEkstraChange}
                     className="form-control"
                     placeholder="Contoh: Senin & Rabu"
                   />
@@ -564,8 +835,8 @@ function Ekstrakurikuler() {
                   <input
                     type="text"
                     name="pembimbing"
-                    value={formData.pembimbing}
-                    onChange={handleInputChange}
+                    value={formEkstra.pembimbing}
+                    onChange={handleInputEkstraChange}
                     className="form-control"
                     placeholder="Nama pembimbing"
                   />
@@ -575,21 +846,21 @@ function Ekstrakurikuler() {
                 <label>Status</label>
                 <select
                   name="status"
-                  value={formData.status}
-                  onChange={handleInputChange}
+                  value={formEkstra.status}
+                  onChange={handleInputEkstraChange}
                   className="form-control"
                 >
-                  {statusOptions.map(opt => (
+                  {['Aktif', 'Nonaktif', 'Selesai'].map(opt => (
                     <option key={opt} value={opt}>{opt}</option>
                   ))}
                 </select>
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn-batal" onClick={resetModal}>
+              <button className="btn-batal" onClick={resetModalEkstra}>
                 Batal
               </button>
-              <button className="btn-simpan" onClick={editMode ? handleUpdateKegiatan : handleTambahKegiatan}>
+              <button className="btn-simpan" onClick={editMode ? handleUpdateEkstra : handleTambahEkstra}>
                 <Save size={16} /> {editMode ? 'Update' : 'Simpan'}
               </button>
             </div>

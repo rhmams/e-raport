@@ -1,117 +1,98 @@
-import React from 'react';
-import { Search } from "lucide-react"; // Hapus X dari import
-import "./CatatanPrestasiModal.css";
+import React, { useState } from 'react';
+import { Search, X } from 'lucide-react';
+import './CatatanPrestasiModal.css';
 
-function CatatanPrestasiModal({ isOpen, onClose }) {
+const CatatanPrestasiModal = ({ isOpen, onClose }) => {
+  const [siswa, setSiswa] = useState('');
+  const [semester, setSemester] = useState('Semester 1');
+  const [tahunAjaran, setTahunAjaran] = useState('2025/2026');
+  const [catatan, setCatatan] = useState('');
+  const [rekomendasi, setRekomendasi] = useState('');
+
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-container">
-        {/* Header */}
-        <div className="modal-header">
-          <h2>Catatan Prestasi Akhir</h2>
-          <button className="close-button" onClick={onClose}>
-            X {/* Ganti dari <X size={20} /> menjadi huruf X */}
+    <div className="prestasi-modal-overlay" onClick={onClose}>
+      <div className="prestasi-modal-container" onClick={e => e.stopPropagation()}>
+        <div className="prestasi-modal-header">
+          <h2>📝 Catatan Prestasi Akhir</h2>
+          <button className="prestasi-modal-close" onClick={onClose}>
+            <X size={20} />
           </button>
         </div>
-
-        <div className="modal-subtitle">
-          Cicilan prestasi yang akan ditampilkan di halaman akhir report
+        <div className="prestasi-modal-subtitle">
+          Pencapaian yang akan ditampilkan di halaman akhir raport
         </div>
-
-        {/* Content */}
-        <div className="modal-content">
-          {/* Pilih Siswa Section */}
-          <div className="form-section">
-            <label className="section-label">Pilih Siswa</label>
-            <div className="student-search">
-              <input 
-                type="text" 
-                placeholder="Cari nama siswa..." 
-                className="search-input"
+        <div className="prestasi-modal-body">
+          <div className="prestasi-form-group">
+            <label>Pilih Siswa</label>
+            <div className="prestasi-search-wrapper">
+              <input
+                type="text"
+                placeholder="Cari nama siswa..."
+                value={siswa}
+                onChange={(e) => setSiswa(e.target.value)}
+                className="prestasi-input"
               />
-              <button className="search-button">
-                <Search size={18} />
-              </button>
+              <button className="prestasi-search-btn"><Search size={18} /></button>
             </div>
           </div>
 
-          {/* Semester & Tahun Ajaran */}
-          <div className="form-row">
-            <div className="form-group">
+          <div className="prestasi-row">
+            <div className="prestasi-form-group">
               <label>Semester</label>
-              <select className="form-select">
+              <select className="prestasi-select" value={semester} onChange={(e) => setSemester(e.target.value)}>
                 <option>Semester 1</option>
                 <option>Semester 2</option>
               </select>
             </div>
-            <div className="form-group">
+            <div className="prestasi-form-group">
               <label>Tahun Ajaran</label>
-              <select className="form-select">
+              <select className="prestasi-select" value={tahunAjaran} onChange={(e) => setTahunAjaran(e.target.value)}>
                 <option>2025/2026</option>
                 <option>2024/2025</option>
-                <option>2023/2024</option>
               </select>
             </div>
           </div>
 
-          {/* Catatan Prestasi */}
-          <div className="form-section">
-            <label className="section-label">
-              Catatan Prestasi & Pencapaian
-            </label>
-            <p className="section-desc">
-              Tulis catatan prestasi dan pencapaian siswa selama semester ini, termasuk prestasi akademik dan non-akademik.
-            </p>
-            <textarea 
-              className="form-textarea"
+          <div className="prestasi-form-group">
+            <label>Catatan Prestasi & Pencapaian</label>
+            <textarea
+              className="prestasi-textarea"
               rows="4"
-              placeholder="Contoh: Meraih juara 1 lomba MTQ tingkat kabupaten, peningkatan nilai Matematika dari 75 menjadi 85..."
-            ></textarea>
-            <p className="note-text">
-              Catatan ini akan ditampilkan di halaman akhir raport sebagai penguat.
-            </p>
+              placeholder="Contoh: Meraih juara 1 lomba MTQ tingkat kabupaten..."
+              value={catatan}
+              onChange={(e) => setCatatan(e.target.value)}
+            />
+            <small className="prestasi-hint">Catatan ini akan ditampilkan di halaman akhir raport sebagai penguat.</small>
           </div>
 
-          {/* Rekomendasi */}
-          <div className="form-section">
-            <label className="section-label">
-              Rekomendasi untuk Semester Berikutnya (Opsional)
-            </label>
-            <textarea 
-              className="form-textarea"
+          <div className="prestasi-form-group">
+            <label>Rekomendasi untuk Semester Berikutnya (Opsional)</label>
+            <textarea
+              className="prestasi-textarea"
               rows="3"
-              placeholder="Masukkan saran atau rekomendasi untuk perkembangan siswa di semester mendatang..."
-            ></textarea>
+              placeholder="Saran untuk perkembangan siswa..."
+              value={rekomendasi}
+              onChange={(e) => setRekomendasi(e.target.value)}
+            />
           </div>
 
-          {/* Actions */}
-          <div className="modal-actions">
-            <button className="btn-secondary" onClick={onClose}>
-              Batal
-            </button>
-            <button className="btn-primary">
-              Simpan Catatan
-            </button>
-          </div>
-
-          {/* Preview Siswa */}
-          <div className="preview-section">
-            <div className="preview-header">
-              <span className="preview-title">Preview</span>
-            </div>
-            <div className="preview-item">
-              <div className="preview-info">
-                <span className="preview-name">Ahmad Zaki</span>
-                <span className="preview-nilai">94.2</span>
-              </div>
+          <div className="prestasi-preview">
+            <div className="prestasi-preview-title">Preview Siswa</div>
+            <div className="prestasi-preview-item">
+              <span>Ahmad Zaki</span>
+              <span className="prestasi-preview-nilai">94.2</span>
             </div>
           </div>
+        </div>
+        <div className="prestasi-modal-footer">
+          <button className="prestasi-btn-secondary" onClick={onClose}>Batal</button>
+          <button className="prestasi-btn-primary" onClick={() => { alert('Catatan disimpan (simulasi)'); onClose(); }}>Simpan Catatan</button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default CatatanPrestasiModal;

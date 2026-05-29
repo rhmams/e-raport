@@ -1,4 +1,3 @@
-// src/pages/DetailKelas.jsx
 import { useState } from "react";
 import {
   LayoutDashboard,
@@ -161,6 +160,10 @@ function DetailKelas() {
     navigate('/raport');
   };
 
+  const goToTujuanPembelajaran = () => {
+    navigate(`/tujuan-pembelajaran/${kelasId}`);
+  };
+
   const handleLogout = () => {
     navigate('/login');
   };
@@ -240,9 +243,14 @@ function DetailKelas() {
                   <h3>Kelola Data Siswa</h3>
                   <p>Lihat data kelola data siswa kelas {kelas.name}</p>
                 </div>
-                <button className="btn-kelola" onClick={() => navigate(`/kehadiran/${kelasId}`)}>
-                  Isi Kehadiran
-                </button>
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <button className="btn-kelola" onClick={() => navigate(`/kehadiran/${kelasId}`)}>
+                    Isi Kehadiran
+                  </button>
+                  <button className="btn-tujuan" onClick={goToTujuanPembelajaran}>
+                    Tujuan Pembelajaran
+                  </button>
+                </div>
               </div>
             </div>
 

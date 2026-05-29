@@ -8,27 +8,39 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [jenjang, setJenjang] = useState('SMP');
 
   const handleLogin = (e) => {
     e.preventDefault();
     setError('');
-    
+
+    // Login untuk Guru
     if (username === 'racha' && password === 'rachanun') {
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('username', username);
+      localStorage.setItem('role', 'guru');
+      localStorage.setItem('jenjang', jenjang);
       navigate('/beranda');
-    } else {
-      setError('Username atau password salah!');
+      return;
     }
+    
+    // Login untuk Admin → diarahkan ke dashboard admin
+    if (username === 'admin' && password === 'admin123') {
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('username', username);
+      localStorage.setItem('role', 'admin');
+      localStorage.setItem('jenjang', jenjang);
+      navigate('/admin/dashboard');  // ✅ arahkan ke halaman admin
+      return;
+    }
+
+    setError('Username atau password salah!');
   };
 
   return (
     <div className="login-container">
       <div className="login-wrapper">
-        {/* Left side - Background Image */}
         <div className="login-left"></div>
-
-        {/* Right side - Login Form */}
         <div className="login-right">
           <div className="login-card">
             <div className="login-header">
@@ -76,7 +88,8 @@ const Login = () => {
 
               <div className="form-row">
                 <div className="select-group">
-                  <select className="form-select" defaultValue="2024/2025">
+                  <label htmlFor="tahun" className="select-label">TAHUN PELAJARAN</label>
+                  <select id="tahun" className="form-select" defaultValue="2024/2025">
                     <option>2021/2022</option>
                     <option>2022/2023</option>
                     <option>2023/2024</option>
@@ -85,24 +98,32 @@ const Login = () => {
                   </select>
                 </div>
                 <div className="select-group">
-                  <select className="form-select" defaultValue="Genap">
+                  <label htmlFor="semester" className="select-label">SEMESTER</label>
+                  <select id="semester" className="form-select" defaultValue="Genap">
                     <option>Ganjil</option>
                     <option>Genap</option>
                   </select>
                 </div>
               </div>
 
+              <div className="form-group jenjang-group">
+                <label htmlFor="jenjang">JENJANG PENDIDIKAN</label>
+                <select
+                  id="jenjang"
+                  className="form-input jenjang-select"
+                  value={jenjang}
+                  onChange={(e) => setJenjang(e.target.value)}
+                  required
+                >
+                  <option value="SMP">SMP (Sekolah Menengah Pertama)</option>
+                  <option value="SMA">SMA (Sekolah Menengah Atas)</option>
+                </select>
+              </div>
+
               <button type="submit" className="login-button">LOGIN</button>
 
               <div className="forgot-password">
                 <Link to="/forgot-password">Lupa Password?</Link>
-              </div>
-
-              <div className="create-account-section">
-                <p>Belum punya akun?</p>
-                <Link to="/create-account" className="create-account-button">
-                  Create Account
-                </Link>
               </div>
             </form>
 

@@ -942,3 +942,203 @@ select.form-control {
     margin: 16px;
   }
 }
+
+/* Info Panel */
+.info-panel {
+  background: #e8f4fd;
+  border-left: 4px solid #2196f3;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.info-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.info-panel-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1976d2;
+  margin: 0;
+}
+
+.info-panel-body p {
+  font-size: 13px;
+  margin: 6px 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Badge untuk bentuk kegiatan */
+.badge-bentuk {
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Dimensi chips */
+.dimensi-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.chip-dimensi {
+  background: #f5f5f5;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  color: #666;
+}
+
+.chip-dimensi.more {
+  background: #e0e0e0;
+  color: #333;
+}
+
+/* Badge status untuk kokurikuler */
+.badge-status.selesai {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-status.rencana {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+/* Badge predikat nilai */
+.badge-predikat {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge-predikat.sangat-baik {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-predikat.baik {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.badge-predikat.cukup {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.badge-predikat.perlu-bimbingan {
+  background: #ffebee;
+  color: #c62828;
+}
+
+/* Deskripsi cell */
+.deskripsi-cell {
+  max-width: 300px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #555;
+}
+
+/* Table header actions */
+.table-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #fafafa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.table-header-actions h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.filter-select {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  background: white;
+}
+
+/* Form hint */
+.form-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #999;
+}
+
+/* Checkbox group */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Modal large */
+.modal-large {
+  max-width: 700px;
+  width: 90%;
+}
+
+/* Input nilai button */
+.btn-input-nilai {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.btn-input-nilai:hover {
+  background: #43a047;
+}
+
+.badge-predikat {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.badge-predikat.mb { background: #ffe6e6; color: #c0392b; }
+.badge-predikat.sb { background: #fff3e0; color: #e67e22; }
+.badge-predikat.bsh { background: #e6f7f0; color: #16a085; }
+.badge-predikat.sab { background: #e6f0f7; color: #2980b9; }

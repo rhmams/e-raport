@@ -362,3 +362,26 @@
   }
 }
 
+.predikat-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.predikat-badge.mb {
+  background: #ffe6e6;
+  color: #c0392b;
+}
+.predikat-badge.sb {
+  background: #fff3e0;
+  color: #e67e22;
+}
+.predikat-badge.bsh {
+  background: #e6f7f0;
+  color: #16a085;
+}
+.predikat-badge.sab {
+  background: #e6f0f7;
+  color: #2980b9;
+}

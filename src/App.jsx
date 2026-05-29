@@ -11,15 +11,16 @@ import DetailRaport from './pages/guru/DetailRaport';
 import Kehadiran from './pages/guru/Kehadiran';
 import DetailMuridWakel from './pages/guru/DetailMuridWakel';
 import Nilai from './pages/guru/Nilai';
-import InputNilai from './pages/guru/InputNilai'; // Import InputNilai
+import InputNilai from './pages/guru/InputNilai';
 import DetailKokurikuler from './pages/guru/DetailKokurikuler';
 import Login from './components/Login';
 import CreateAcc from './components/CreateAcc';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './pages/admin/Dashboard';
+import ProfilGuru from './pages/guru/ProfilGuru';
+import TujuanPembelajaran from './pages/guru/TujuanPembelajaran'; // ✅ import
 
 function App() {
-  // Daftar halaman yang perlu dilindungi
   const protectedRoutes = [
     { path: "/beranda", element: <Beranda /> },
     { path: "/kelas", element: <Kelas /> },
@@ -33,21 +34,20 @@ function App() {
     { path: "/raport/:id", element: <DetailRaport /> },
     { path: "/wali-kelas/murid/:id/detail", element: <DetailMuridWakel /> },
     { path: "/nilai", element: <Nilai /> },
-    { path: "/nilai/input/:kelasId/:jenis", element: <InputNilai /> }, // Route untuk InputNilai
+    { path: "/nilai/input/:kelasId/:jenis", element: <InputNilai /> },
     { path: "/kokurikuler/:id", element: <DetailKokurikuler /> },
     { path: "/admin", element: <Dashboard /> },
-    { path: "/admin/dashboard", element: <Dashboard /> }
+    { path: "/admin/dashboard", element: <Dashboard /> },
+    { path: "/profil", element: <ProfilGuru /> },
+    { path: "/tujuan-pembelajaran/:kelasId", element: <TujuanPembelajaran /> }, // ✅ route ditambahkan
   ];
 
   return (
     <Router>
       <Routes>
-        {/* Halaman publik */}
         <Route path="/login" element={<Login />} />
         <Route path="/create-account" element={<CreateAcc />} />
         <Route path="/" element={<Navigate to="/login" replace />} />
-        
-        {/* Halaman protected - loop array */}
         {protectedRoutes.map((route, index) => (
           <Route
             key={index}
