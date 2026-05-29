@@ -18,7 +18,7 @@ import CreateAcc from './components/CreateAcc';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './pages/admin/Dashboard';
 import ProfilGuru from './pages/guru/ProfilGuru';
-import TujuanPembelajaran from './pages/guru/TujuanPembelajaran'; // ✅ import
+import TujuanPembelajaran from './pages/guru/TujuanPembelajaran';
 
 function App() {
   const protectedRoutes = [
@@ -39,7 +39,7 @@ function App() {
     { path: "/admin", element: <Dashboard /> },
     { path: "/admin/dashboard", element: <Dashboard /> },
     { path: "/profil", element: <ProfilGuru /> },
-    { path: "/tujuan-pembelajaran/:kelasId", element: <TujuanPembelajaran /> }, // ✅ route ditambahkan
+    { path: "/tujuan-pembelajaran/:kelasId", element: <TujuanPembelajaran /> }, 
   ];
 
   return (
