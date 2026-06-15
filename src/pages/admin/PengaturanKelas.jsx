@@ -1,18 +1,16 @@
 // src/pages/admin/PengaturanKelas.jsx
 import React, { useState, useEffect } from 'react';
 import './PengaturanKelas.css';
-import { FaSearch, FaFileExcel, FaFileImport, FaFileDownload, FaTimes, FaFilter, FaChevronLeft, FaChevronRight, FaEye, FaEdit, FaTrashAlt } from 'react-icons/fa';
-import { FiFileText } from 'react-icons/fi';
+import { FaFileExcel, FaFileImport, FaFileDownload, FaTimes, FaFilter, FaChevronLeft, FaChevronRight, FaEye, FaEdit, FaTrashAlt } from 'react-icons/fa';
+// Hapus import FiFileText, gunakan FaFileExcel untuk semua
 
 // Data dummy: gabungan SMA dan SMP
 const initialData = [
-  // SMA
   { id: 1, nama: 'X 1', jumlah: 28, wali: 'Fatimah Azzahra, S.Pd', ruangan: 'R.101', tingkat: 'X', jenjang: 'SMA', kurikulum: 'Kurikulum Merdeka' },
   { id: 2, nama: 'X 2', jumlah: 30, wali: 'Ahmad Zaki, S.Pd.I', ruangan: 'R.102', tingkat: 'X', jenjang: 'SMA', kurikulum: 'Kurikulum Merdeka' },
   { id: 3, nama: 'XI 1', jumlah: 27, wali: 'Siti Nurhaliza, S.Pd', ruangan: 'R.201', tingkat: 'XI', jenjang: 'SMA', kurikulum: 'Kurikulum Merdeka' },
   { id: 4, nama: 'XI 2', jumlah: 29, wali: 'Muhammad Rizki, S.Pd', ruangan: 'R.202', tingkat: 'XI', jenjang: 'SMA', kurikulum: 'Kurikulum Merdeka' },
   { id: 5, nama: 'XII 1', jumlah: 26, wali: 'Nur Azizah, S.Pd.I', ruangan: 'R.301', tingkat: 'XII', jenjang: 'SMA', kurikulum: 'Kurikulum Merdeka' },
-  // SMP
   { id: 6, nama: 'VII 1', jumlah: 32, wali: 'Dewi Kartika, S.Pd', ruangan: 'R.001', tingkat: 'VII', jenjang: 'SMP', kurikulum: 'Kurikulum Merdeka' },
   { id: 7, nama: 'VII 2', jumlah: 30, wali: 'Budi Santoso, S.Pd', ruangan: 'R.002', tingkat: 'VII', jenjang: 'SMP', kurikulum: 'Kurikulum Merdeka' },
   { id: 8, nama: 'VIII 1', jumlah: 31, wali: 'Siti Aminah, S.Pd', ruangan: 'R.003', tingkat: 'VIII', jenjang: 'SMP', kurikulum: 'Kurikulum Merdeka' },
@@ -53,7 +51,6 @@ const PengaturanKelas = ({ onDetailKelas, onNavigate }) => {
     }
   }, [form.jenjang, form.tingkat, form.jenisNama, form.nama]);
 
-  // Auto-hide notification
   useEffect(() => {
     if (notification.show) {
       const timer = setTimeout(() => {
@@ -63,22 +60,18 @@ const PengaturanKelas = ({ onDetailKelas, onNavigate }) => {
     }
   }, [notification.show]);
 
-  // Data filter berdasarkan search, jenjang, dan tingkat
   const filtered = data.filter(k => {
     const matchSearch = k.nama.toLowerCase().includes(search.toLowerCase()) ||
       k.wali.toLowerCase().includes(search.toLowerCase()) ||
       k.ruangan.toLowerCase().includes(search.toLowerCase());
-    
     const matchJenjang = filterJenjang === '' || k.jenjang === filterJenjang;
     const matchTingkat = filterTingkat === '' || k.tingkat === filterTingkat;
-    
     return matchSearch && matchJenjang && matchTingkat;
   });
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
-  // Pagination helpers
   const getPageNumbers = () => {
     const pageNumbers = [];
     const maxVisible = 5;
@@ -113,7 +106,6 @@ const PengaturanKelas = ({ onDetailKelas, onNavigate }) => {
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
-    // Reset tingkat ketika jenjang berubah
     if (name === 'jenjang') {
       setForm(prev => ({ ...prev, tingkat: '', jenisNama: '', nama: '' }));
     }
@@ -224,7 +216,6 @@ const PengaturanKelas = ({ onDetailKelas, onNavigate }) => {
     setForm(emptyForm);
   };
 
-  // Daftar tingkat berdasarkan jenjang yang dipilih di modal
   const getTingkatOptions = () => {
     if (form.jenjang === 'SMA') return ['X', 'XI', 'XII'];
     if (form.jenjang === 'SMP') return ['VII', 'VIII', 'IX'];
@@ -251,7 +242,7 @@ const PengaturanKelas = ({ onDetailKelas, onNavigate }) => {
         </button>
       </div>
 
-      {/* Filter Jenjang */}
+      {/* Filter Jenjang (dengan ikon filter) */}
       <div className="filter-tingkat-section">
         <div className="filter-label">
           <FaFilter className="filter-icon" />
@@ -270,11 +261,11 @@ const PengaturanKelas = ({ onDetailKelas, onNavigate }) => {
         </div>
       </div>
 
-      {/* Filter Tingkat (berubah dinamis berdasarkan filterJenjang) */}
+      {/* Filter Tingkat Kelas (TANPA ikon filter - sudah dihapus) */}
       {filterJenjang !== '' && (
         <div className="filter-tingkat-section">
           <div className="filter-label">
-            <FaFilter className="filter-icon" />
+            {/* Ikon FaFilter dihapus dari sini */}
             <span>Filter Tingkat Kelas:</span>
           </div>
           <div className="filter-buttons">
@@ -313,8 +304,9 @@ const PengaturanKelas = ({ onDetailKelas, onNavigate }) => {
 
       <div className="pengkelas-toolbar">
         <div className="toolbar-left">
+          {/* Ikon tombol Template sekarang pakai FaFileExcel (sama dengan yang lain) */}
           <button className="btn-tool btn-template" onClick={() => alert('Download template kelas')}>
-            <FiFileText size={15} /> Template
+            <FaFileExcel size={15} /> Template
           </button>
           <button className="btn-tool btn-import" onClick={() => alert('Import data kelas dari Excel')}>
             <FaFileImport size={14} /> Import Excel
@@ -325,7 +317,6 @@ const PengaturanKelas = ({ onDetailKelas, onNavigate }) => {
         </div>
         <div className="toolbar-right">
           <div className="search-box">
-            <FaSearch className="search-icon" />
             <input type="text" placeholder="Cari kelas, wali kelas, atau ruangan..." value={search} onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }} />
           </div>
         </div>
@@ -389,7 +380,7 @@ const PengaturanKelas = ({ onDetailKelas, onNavigate }) => {
         </div>
       )}
 
-      {/* Modal Tambah/Edit */}
+      {/* Modal Tambah/Edit (tidak berubah) */}
       {showModal && (
         <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && resetModal()}>
           <div className="modal-box">

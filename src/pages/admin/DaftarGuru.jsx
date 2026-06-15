@@ -9,6 +9,9 @@ const DaftarGuru = ({ onNavigate }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   
+  // State untuk filter jenjang
+  const [jenjangFilter, setJenjangFilter] = useState('semua'); // 'semua', 'SMP', 'SMA'
+
   // State untuk modal tambah guru
   const [showTambahModal, setShowTambahModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -17,6 +20,13 @@ const DaftarGuru = ({ onNavigate }) => {
     initials: '',
     nip: '',
     name: '',
+    gelarDepan: '',
+    gelarBelakang: '',
+    jenjang: 'SMP',
+    jenisKelamin: 'Laki-laki',
+    tempatLahir: '',
+    tanggalLahir: '',
+    alamat: '',
     subject: '',
     email: '',
     phone: '',
@@ -25,37 +35,46 @@ const DaftarGuru = ({ onNavigate }) => {
   const [editForm, setEditForm] = useState({
     nip: '',
     name: '',
+    gelarDepan: '',
+    gelarBelakang: '',
+    jenjang: '',
+    jenisKelamin: '',
+    tempatLahir: '',
+    tanggalLahir: '',
+    alamat: '',
     subject: '',
     email: '',
     phone: '',
     status: ''
   });
 
-  // Data guru
+  // Data guru dengan field baru
   const [teachers, setTeachers] = useState([
-    { no: 1, initials: "AZ", nip: "197801012005011001", name: "Ahmad Zaki, S.Pd.I", subject: "Al-Quran Hadits", email: "ahmad.zaki@madrasah.sch.id", phone: "081234567890", status: "PNS" },
-    { no: 2, initials: "FA", nip: "198205152006042002", name: "Fatimah Azzahra, S.Pd.", subject: "Pendidikan Agama Islam", email: "fatimah.azzahra@madrasah.sch.id", phone: "081234567891", status: "PNS" },
-    { no: 3, initials: "SN", nip: "199003102015031003", name: "Siti Nurhaliza, S.Pd.", subject: "Bahasa Indonesia", email: "siti.nurhaliza@madrasah.sch.id", phone: "081234567892", status: "GTY" },
-    { no: 4, initials: "MR", nip: "198706202012011004", name: "Muhammad Rizki, S.Pd.", subject: "Matematika", email: "muhammad.rizki@madrasah.sch.id", phone: "081234567893", status: "PNS" },
-    { no: 5, initials: "NA", nip: "199204152016042005", name: "Nur Azizah, S.Pd.I", subject: "Fiqih", email: "nur.azizah@madrasah.sch.id", phone: "081234567894", status: "GTY" },
-    { no: 6, initials: "HB", nip: "198508252010011006", name: "Hasan Basri, S.Pd.", subject: "Fisika", email: "hasan.basri@madrasah.sch.id", phone: "081234567895", status: "PNS" },
-    { no: 7, initials: "AP", nip: "199105102015042007", name: "Aisyah Putri, S.Pd.", subject: "Bahasa Inggris", email: "aisyah.putri@madrasah.sch.id", phone: "081234567896", status: "GTY" },
-    { no: 8, initials: "AR", nip: "198409182009011008", name: "Abdul Rahman, S.Pd.I", subject: "Akidah Akhlak", email: "abdul.rahman@madrasah.sch.id", phone: "081234567897", status: "PNS" },
-    { no: 9, initials: "KA", nip: "199306222016042009", name: "Khadijah Amani, S.Pd", subject: "Kimia", email: "khadijah.amani@madrasah.sch.id", phone: "081234567898", status: "GTT" },
-    { no: 10, initials: "UF", nip: "198712102011011010", name: "Umar Faruq, S.Pd.I", subject: "Sejarah Kebudayaan Islam", email: "umar.faruq@madrasah.sch.id", phone: "081234567899", status: "PNS" },
-    { no: 11, initials: "ZS", nip: "199408152017042011", name: "Zahra Safira, S.Pd", subject: "Biologi", email: "zahra.safira@madrasah.sch.id", phone: "081234567900", status: "GTY" },
-    { no: 12, initials: "AM", nip: "198610252012011012", name: "Ali Mahfud, S.Pd", subject: "Geografi", email: "ali.mahfud@madrasah.sch.id", phone: "081234567901", status: "PNS" },
-    { no: 13, initials: "MS", nip: "199509102018042013", name: "Maryam Salsabila, S.Pd", subject: "Ekonomi", email: "maryam.salsabila@madrasah.sch.id", phone: "081234567902", status: "GTT" },
-    { no: 14, initials: "IK", nip: "198811202013011014", name: "Ibrahim Khalil, S.Pd.I", subject: "Bahasa Arab", email: "ibrahim.khalil@madrasah.sch.id", phone: "081234567903", status: "PNS" },
-    { no: 15, initials: "RZ", nip: "199607252019042015", name: "Raihan Zahra, S.Pd", subject: "Sosiologi", email: "raihan.zahra@madrasah.sch.id", phone: "081234567904", status: "GTY" }
+    { no: 1, initials: "AZ", nip: "197801012005011001", name: "Ahmad Zaki", gelarDepan: "S.Pd.I", gelarBelakang: "", jenjang: "SMP", jenisKelamin: "Laki-laki", tempatLahir: "Jakarta", tanggalLahir: "1978-01-01", alamat: "Jl. Merdeka No. 10, Jakarta", subject: "Al-Quran Hadits", email: "ahmad.zaki@madrasah.sch.id", phone: "081234567890", status: "PNS" },
+    { no: 2, initials: "FA", nip: "198205152006042002", name: "Fatimah Azzahra", gelarDepan: "S.Pd.", gelarBelakang: "", jenjang: "SMA", jenisKelamin: "Perempuan", tempatLahir: "Bandung", tanggalLahir: "1982-05-15", alamat: "Jl. Pendidikan No. 5, Bandung", subject: "Pendidikan Agama Islam", email: "fatimah.azzahra@madrasah.sch.id", phone: "081234567891", status: "PNS" },
+    { no: 3, initials: "SN", nip: "199003102015031003", name: "Siti Nurhaliza", gelarDepan: "S.Pd.", gelarBelakang: "", jenjang: "SMP", jenisKelamin: "Perempuan", tempatLahir: "Surabaya", tanggalLahir: "1990-03-10", alamat: "Jl. Raya No. 20, Surabaya", subject: "Bahasa Indonesia", email: "siti.nurhaliza@madrasah.sch.id", phone: "081234567892", status: "GTY" },
+    { no: 4, initials: "MR", nip: "198706202012011004", name: "Muhammad Rizki", gelarDepan: "S.Pd.", gelarBelakang: "", jenjang: "SMA", jenisKelamin: "Laki-laki", tempatLahir: "Medan", tanggalLahir: "1987-06-20", alamat: "Jl. Mawar No. 8, Medan", subject: "Matematika", email: "muhammad.rizki@madrasah.sch.id", phone: "081234567893", status: "PNS" },
+    { no: 5, initials: "NA", nip: "199204152016042005", name: "Nur Azizah", gelarDepan: "S.Pd.I", gelarBelakang: "", jenjang: "SMP", jenisKelamin: "Perempuan", tempatLahir: "Semarang", tanggalLahir: "1992-04-15", alamat: "Jl. Melati No. 12, Semarang", subject: "Fiqih", email: "nur.azizah@madrasah.sch.id", phone: "081234567894", status: "GTY" },
+    { no: 6, initials: "HB", nip: "198508252010011006", name: "Hasan Basri", gelarDepan: "S.Pd.", gelarBelakang: "", jenjang: "SMA", jenisKelamin: "Laki-laki", tempatLahir: "Makassar", tanggalLahir: "1985-08-25", alamat: "Jl. Anggrek No. 3, Makassar", subject: "Fisika", email: "hasan.basri@madrasah.sch.id", phone: "081234567895", status: "PNS" },
+    { no: 7, initials: "AP", nip: "199105102015042007", name: "Aisyah Putri", gelarDepan: "S.Pd.", gelarBelakang: "", jenjang: "SMP", jenisKelamin: "Perempuan", tempatLahir: "Palembang", tanggalLahir: "1991-05-10", alamat: "Jl. Kenanga No. 7, Palembang", subject: "Bahasa Inggris", email: "aisyah.putri@madrasah.sch.id", phone: "081234567896", status: "GTY" },
+    { no: 8, initials: "AR", nip: "198409182009011008", name: "Abdul Rahman", gelarDepan: "S.Pd.I", gelarBelakang: "", jenjang: "SMA", jenisKelamin: "Laki-laki", tempatLahir: "Yogyakarta", tanggalLahir: "1984-09-18", alamat: "Jl. Malioboro No. 15, Yogyakarta", subject: "Akidah Akhlak", email: "abdul.rahman@madrasah.sch.id", phone: "081234567897", status: "PNS" },
+    { no: 9, initials: "KA", nip: "199306222016042009", name: "Khadijah Amani", gelarDepan: "S.Pd", gelarBelakang: "", jenjang: "SMP", jenisKelamin: "Perempuan", tempatLahir: "Malang", tanggalLahir: "1993-06-22", alamat: "Jl. Cempaka No. 9, Malang", subject: "Kimia", email: "khadijah.amani@madrasah.sch.id", phone: "081234567898", status: "GTT" },
+    { no: 10, initials: "UF", nip: "198712102011011010", name: "Umar Faruq", gelarDepan: "S.Pd.I", gelarBelakang: "", jenjang: "SMA", jenisKelamin: "Laki-laki", tempatLahir: "Aceh", tanggalLahir: "1987-12-10", alamat: "Jl. Pahlawan No. 22, Aceh", subject: "Sejarah Kebudayaan Islam", email: "umar.faruq@madrasah.sch.id", phone: "081234567899", status: "PNS" },
+    { no: 11, initials: "ZS", nip: "199408152017042011", name: "Zahra Safira", gelarDepan: "S.Pd", gelarBelakang: "", jenjang: "SMP", jenisKelamin: "Perempuan", tempatLahir: "Bali", tanggalLahir: "1994-08-15", alamat: "Jl. Dewata No. 4, Bali", subject: "Biologi", email: "zahra.safira@madrasah.sch.id", phone: "081234567900", status: "GTY" },
+    { no: 12, initials: "AM", nip: "198610252012011012", name: "Ali Mahfud", gelarDepan: "S.Pd", gelarBelakang: "", jenjang: "SMA", jenisKelamin: "Laki-laki", tempatLahir: "Lampung", tanggalLahir: "1986-10-25", alamat: "Jl. Teratai No. 17, Lampung", subject: "Geografi", email: "ali.mahfud@madrasah.sch.id", phone: "081234567901", status: "PNS" },
+    { no: 13, initials: "MS", nip: "199509102018042013", name: "Maryam Salsabila", gelarDepan: "S.Pd", gelarBelakang: "", jenjang: "SMP", jenisKelamin: "Perempuan", tempatLahir: "Pontianak", tanggalLahir: "1995-09-10", alamat: "Jl. Kapuas No. 6, Pontianak", subject: "Ekonomi", email: "maryam.salsabila@madrasah.sch.id", phone: "081234567902", status: "GTT" },
+    { no: 14, initials: "IK", nip: "198811202013011014", name: "Ibrahim Khalil", gelarDepan: "S.Pd.I", gelarBelakang: "", jenjang: "SMA", jenisKelamin: "Laki-laki", tempatLahir: "Padang", tanggalLahir: "1988-11-20", alamat: "Jl. Bukit No. 11, Padang", subject: "Bahasa Arab", email: "ibrahim.khalil@madrasah.sch.id", phone: "081234567903", status: "PNS" },
+    { no: 15, initials: "RZ", nip: "199607252019042015", name: "Raihan Zahra", gelarDepan: "S.Pd", gelarBelakang: "", jenjang: "SMP", jenisKelamin: "Perempuan", tempatLahir: "Manado", tanggalLahir: "1996-07-25", alamat: "Jl. Laut No. 2, Manado", subject: "Sosiologi", email: "raihan.zahra@madrasah.sch.id", phone: "081234567904", status: "GTY" }
   ]);
 
-  // Filter teachers
-  const filteredTeachers = teachers.filter(teacher =>
-    teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    teacher.nip.includes(searchTerm) ||
-    teacher.subject.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filter berdasarkan pencarian dan jenjang
+  const filteredTeachers = teachers.filter(teacher => {
+    const matchSearch = teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        teacher.nip.includes(searchTerm) ||
+                        teacher.subject.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchJenjang = jenjangFilter === 'semua' || teacher.jenjang === jenjangFilter;
+    return matchSearch && matchJenjang;
+  });
 
   // Pagination
   const totalPages = Math.ceil(filteredTeachers.length / itemsPerPage);
@@ -108,6 +127,13 @@ const DaftarGuru = ({ onNavigate }) => {
     setEditForm({
       nip: guru.nip,
       name: guru.name,
+      gelarDepan: guru.gelarDepan,
+      gelarBelakang: guru.gelarBelakang,
+      jenjang: guru.jenjang,
+      jenisKelamin: guru.jenisKelamin,
+      tempatLahir: guru.tempatLahir,
+      tanggalLahir: guru.tanggalLahir,
+      alamat: guru.alamat,
       subject: guru.subject,
       email: guru.email,
       phone: guru.phone,
@@ -120,7 +146,12 @@ const DaftarGuru = ({ onNavigate }) => {
   const handleSaveEdit = () => {
     const updatedTeachers = teachers.map(teacher => 
       teacher.nip === selectedGuru.nip 
-        ? { ...teacher, ...editForm, initials: editForm.name.substring(0, 2).toUpperCase() }
+        ? { 
+            ...teacher, 
+            ...editForm, 
+            initials: editForm.name.substring(0, 2).toUpperCase(),
+            // Gabungkan nama dengan gelar untuk tampilan jika diperlukan, tapi kita simpan terpisah
+          }
         : teacher
     );
     setTeachers(updatedTeachers);
@@ -144,7 +175,11 @@ const DaftarGuru = ({ onNavigate }) => {
     };
     setTeachers([...teachers, newGuru]);
     setShowTambahModal(false);
-    setTambahForm({ initials: '', nip: '', name: '', subject: '', email: '', phone: '', status: 'PNS' });
+    setTambahForm({ 
+      initials: '', nip: '', name: '', gelarDepan: '', gelarBelakang: '', 
+      jenjang: 'SMP', jenisKelamin: 'Laki-laki', tempatLahir: '', tanggalLahir: '', 
+      alamat: '', subject: '', email: '', phone: '', status: 'PNS' 
+    });
     alert('Guru berhasil ditambahkan!');
   };
 
@@ -158,6 +193,14 @@ const DaftarGuru = ({ onNavigate }) => {
   };
 
   const getRowNumber = (index) => (currentPage - 1) * itemsPerPage + index + 1;
+
+  // Helper untuk format nama lengkap dengan gelar
+  const getFullName = (guru) => {
+    let fullName = guru.name;
+    if (guru.gelarDepan) fullName = `${guru.gelarDepan} ${fullName}`;
+    if (guru.gelarBelakang) fullName = `${fullName}, ${guru.gelarBelakang}`;
+    return fullName;
+  };
 
   return (
     <div className="daftar-guru-container">
@@ -182,6 +225,14 @@ const DaftarGuru = ({ onNavigate }) => {
                 setCurrentPage(1);
               }}
             />
+          </div>
+          <div className="filter-jenjang">
+            <label>Jenjang: </label>
+            <select value={jenjangFilter} onChange={(e) => { setJenjangFilter(e.target.value); setCurrentPage(1); }}>
+              <option value="semua">Semua</option>
+              <option value="SMP">SMP</option>
+              <option value="SMA">SMA</option>
+            </select>
           </div>
           <div className="action-buttons">
             <button className="btn-tambah" onClick={() => setShowTambahModal(true)}>
@@ -208,6 +259,10 @@ const DaftarGuru = ({ onNavigate }) => {
                 <th>Foto</th>
                 <th>NIP</th>
                 <th>Nama Guru</th>
+                <th>Jenjang</th>
+                <th>Jenis Kelamin</th>
+                <th>Tempat, Tgl Lahir</th>
+                <th>Alamat</th>
                 <th>Mata Pelajaran</th>
                 <th>Email</th>
                 <th>Telepon</th>
@@ -221,7 +276,11 @@ const DaftarGuru = ({ onNavigate }) => {
                   <td>{getRowNumber(index)}</td>
                   <td><div className="avatar-circle">{teacher.initials}</div></td>
                   <td>{teacher.nip}</td>
-                  <td>{teacher.name}</td>
+                  <td>{getFullName(teacher)}</td>
+                  <td>{teacher.jenjang}</td>
+                  <td>{teacher.jenisKelamin}</td>
+                  <td>{teacher.tempatLahir}, {teacher.tanggalLahir}</td>
+                  <td>{teacher.alamat}</td>
                   <td>{teacher.subject}</td>
                   <td>{teacher.email}</td>
                   <td>{teacher.phone}</td>
@@ -277,7 +336,7 @@ const DaftarGuru = ({ onNavigate }) => {
       {/* Modal Tambah Guru */}
       {showTambahModal && (
         <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && setShowTambahModal(false)}>
-          <div className="modal-box">
+          <div className="modal-box modal-large">
             <div className="modal-header">
               <div>
                 <h3>Tambah Guru Baru</h3>
@@ -288,13 +347,55 @@ const DaftarGuru = ({ onNavigate }) => {
               </button>
             </div>
             <div className="modal-body">
-              <div className="modal-form-group">
-                <label>NIP <span className="required">*</span></label>
-                <input type="text" className="form-control" placeholder="Masukkan NIP" value={tambahForm.nip} onChange={(e) => setTambahForm({ ...tambahForm, nip: e.target.value })} />
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>NIP <span className="required">*</span></label>
+                  <input type="text" className="form-control" placeholder="Masukkan NIP" value={tambahForm.nip} onChange={(e) => setTambahForm({ ...tambahForm, nip: e.target.value })} />
+                </div>
+                <div className="modal-form-group">
+                  <label>Nama Lengkap <span className="required">*</span></label>
+                  <input type="text" className="form-control" placeholder="Masukkan nama lengkap" value={tambahForm.name} onChange={(e) => setTambahForm({ ...tambahForm, name: e.target.value })} />
+                </div>
+              </div>
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Gelar Depan</label>
+                  <input type="text" className="form-control" placeholder="Contoh: S.Pd., M.Pd" value={tambahForm.gelarDepan} onChange={(e) => setTambahForm({ ...tambahForm, gelarDepan: e.target.value })} />
+                </div>
+                <div className="modal-form-group">
+                  <label>Gelar Belakang</label>
+                  <input type="text" className="form-control" placeholder="Contoh: M.Sc., Ph.D" value={tambahForm.gelarBelakang} onChange={(e) => setTambahForm({ ...tambahForm, gelarBelakang: e.target.value })} />
+                </div>
+              </div>
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Jenjang Mengajar <span className="required">*</span></label>
+                  <select className="form-control" value={tambahForm.jenjang} onChange={(e) => setTambahForm({ ...tambahForm, jenjang: e.target.value })}>
+                    <option value="SMP">SMP</option>
+                    <option value="SMA">SMA</option>
+                  </select>
+                </div>
+                <div className="modal-form-group">
+                  <label>Jenis Kelamin <span className="required">*</span></label>
+                  <select className="form-control" value={tambahForm.jenisKelamin} onChange={(e) => setTambahForm({ ...tambahForm, jenisKelamin: e.target.value })}>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
+                </div>
+              </div>
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Tempat Lahir <span className="required">*</span></label>
+                  <input type="text" className="form-control" placeholder="Tempat lahir" value={tambahForm.tempatLahir} onChange={(e) => setTambahForm({ ...tambahForm, tempatLahir: e.target.value })} />
+                </div>
+                <div className="modal-form-group">
+                  <label>Tanggal Lahir <span className="required">*</span></label>
+                  <input type="date" className="form-control" value={tambahForm.tanggalLahir} onChange={(e) => setTambahForm({ ...tambahForm, tanggalLahir: e.target.value })} />
+                </div>
               </div>
               <div className="modal-form-group">
-                <label>Nama Lengkap <span className="required">*</span></label>
-                <input type="text" className="form-control" placeholder="Masukkan nama lengkap" value={tambahForm.name} onChange={(e) => setTambahForm({ ...tambahForm, name: e.target.value })} />
+                <label>Alamat</label>
+                <textarea className="form-control" rows="2" placeholder="Alamat lengkap" value={tambahForm.alamat} onChange={(e) => setTambahForm({ ...tambahForm, alamat: e.target.value })}></textarea>
               </div>
               <div className="modal-form-row">
                 <div className="modal-form-group">
@@ -310,13 +411,15 @@ const DaftarGuru = ({ onNavigate }) => {
                   </select>
                 </div>
               </div>
-              <div className="modal-form-group">
-                <label>Email</label>
-                <input type="email" className="form-control" placeholder="email@example.com" value={tambahForm.email} onChange={(e) => setTambahForm({ ...tambahForm, email: e.target.value })} />
-              </div>
-              <div className="modal-form-group">
-                <label>Telepon</label>
-                <input type="tel" className="form-control" placeholder="Nomor telepon" value={tambahForm.phone} onChange={(e) => setTambahForm({ ...tambahForm, phone: e.target.value })} />
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Email</label>
+                  <input type="email" className="form-control" placeholder="email@example.com" value={tambahForm.email} onChange={(e) => setTambahForm({ ...tambahForm, email: e.target.value })} />
+                </div>
+                <div className="modal-form-group">
+                  <label>Telepon</label>
+                  <input type="tel" className="form-control" placeholder="Nomor telepon" value={tambahForm.phone} onChange={(e) => setTambahForm({ ...tambahForm, phone: e.target.value })} />
+                </div>
               </div>
             </div>
             <div className="modal-footer">
@@ -330,7 +433,7 @@ const DaftarGuru = ({ onNavigate }) => {
       {/* Modal Edit Guru */}
       {showEditModal && selectedGuru && (
         <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && setShowEditModal(false)}>
-          <div className="modal-box">
+          <div className="modal-box modal-large">
             <div className="modal-header">
               <div>
                 <h3>Edit Guru</h3>
@@ -339,13 +442,55 @@ const DaftarGuru = ({ onNavigate }) => {
               <button className="modal-close" onClick={() => setShowEditModal(false)}><FaTimes /></button>
             </div>
             <div className="modal-body">
-              <div className="modal-form-group">
-                <label>NIP <span className="required">*</span></label>
-                <input type="text" className="form-control" value={editForm.nip} disabled />
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>NIP <span className="required">*</span></label>
+                  <input type="text" className="form-control" value={editForm.nip} disabled />
+                </div>
+                <div className="modal-form-group">
+                  <label>Nama Lengkap <span className="required">*</span></label>
+                  <input type="text" className="form-control" value={editForm.name} onChange={(e) => setEditForm({ ...editForm, name: e.target.value })} />
+                </div>
+              </div>
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Gelar Depan</label>
+                  <input type="text" className="form-control" value={editForm.gelarDepan} onChange={(e) => setEditForm({ ...editForm, gelarDepan: e.target.value })} />
+                </div>
+                <div className="modal-form-group">
+                  <label>Gelar Belakang</label>
+                  <input type="text" className="form-control" value={editForm.gelarBelakang} onChange={(e) => setEditForm({ ...editForm, gelarBelakang: e.target.value })} />
+                </div>
+              </div>
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Jenjang Mengajar <span className="required">*</span></label>
+                  <select className="form-control" value={editForm.jenjang} onChange={(e) => setEditForm({ ...editForm, jenjang: e.target.value })}>
+                    <option value="SMP">SMP</option>
+                    <option value="SMA">SMA</option>
+                  </select>
+                </div>
+                <div className="modal-form-group">
+                  <label>Jenis Kelamin <span className="required">*</span></label>
+                  <select className="form-control" value={editForm.jenisKelamin} onChange={(e) => setEditForm({ ...editForm, jenisKelamin: e.target.value })}>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
+                </div>
+              </div>
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Tempat Lahir <span className="required">*</span></label>
+                  <input type="text" className="form-control" value={editForm.tempatLahir} onChange={(e) => setEditForm({ ...editForm, tempatLahir: e.target.value })} />
+                </div>
+                <div className="modal-form-group">
+                  <label>Tanggal Lahir <span className="required">*</span></label>
+                  <input type="date" className="form-control" value={editForm.tanggalLahir} onChange={(e) => setEditForm({ ...editForm, tanggalLahir: e.target.value })} />
+                </div>
               </div>
               <div className="modal-form-group">
-                <label>Nama Lengkap <span className="required">*</span></label>
-                <input type="text" className="form-control" value={editForm.name} onChange={(e) => setEditForm({ ...editForm, name: e.target.value })} />
+                <label>Alamat</label>
+                <textarea className="form-control" rows="2" value={editForm.alamat} onChange={(e) => setEditForm({ ...editForm, alamat: e.target.value })}></textarea>
               </div>
               <div className="modal-form-row">
                 <div className="modal-form-group">
@@ -361,13 +506,15 @@ const DaftarGuru = ({ onNavigate }) => {
                   </select>
                 </div>
               </div>
-              <div className="modal-form-group">
-                <label>Email</label>
-                <input type="email" className="form-control" value={editForm.email} onChange={(e) => setEditForm({ ...editForm, email: e.target.value })} />
-              </div>
-              <div className="modal-form-group">
-                <label>Telepon</label>
-                <input type="tel" className="form-control" value={editForm.phone} onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })} />
+              <div className="modal-form-row">
+                <div className="modal-form-group">
+                  <label>Email</label>
+                  <input type="email" className="form-control" value={editForm.email} onChange={(e) => setEditForm({ ...editForm, email: e.target.value })} />
+                </div>
+                <div className="modal-form-group">
+                  <label>Telepon</label>
+                  <input type="tel" className="form-control" value={editForm.phone} onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })} />
+                </div>
               </div>
             </div>
             <div className="modal-footer">

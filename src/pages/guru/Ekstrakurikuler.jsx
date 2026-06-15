@@ -26,7 +26,13 @@ import {
   FileCheck,
   Target,
   TrendingUp,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Brain,
+  Wrench,
+  Sparkles,
+  Heart,
+  Scale,
+  ChevronDown
 } from "lucide-react";
 
 import "./Ekstrakurikuler.css";
@@ -36,10 +42,11 @@ function Ekstrakurikuler() {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeTab, setActiveTab] = useState('kokurikuler'); // default ke kokurikuler
+  const [activeTab, setActiveTab] = useState('kokurikuler');
   const [showModal, setShowModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentEditId, setCurrentEditId] = useState(null);
+  const [rencanaDropdownOpen, setRencanaDropdownOpen] = useState(true);
 
   // ==================== DATA EKSTRAKURIKULER ====================
   const [dataEkstra, setDataEkstra] = useState([
@@ -349,6 +356,35 @@ function Ekstrakurikuler() {
               <li className={location.pathname === '/' || location.pathname === '/beranda' ? 'active' : ''} onClick={() => navigate('/beranda')}>
                 <LayoutDashboard size={18}/> Beranda
               </li>
+
+              {/* DROPDOWN RENCANA PENILAIAN */}
+              <div className="dropdown-wrapper">
+                <div className="dropdown-header" onClick={() => setRencanaDropdownOpen(prev => !prev)}>
+                  <FileText size={18} />
+                  <span className="dropdown-label">Rencana Penilaian</span>
+                  <ChevronDown size={16} className={`dropdown-arrow ${rencanaDropdownOpen ? 'open' : ''}`} />
+                </div>
+                {rencanaDropdownOpen && (
+                  <ul className="dropdown-list">
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-nilai-pengetahuan')}>
+                      <Brain size={14} /> <span>Rencana Nilai Pengetahuan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-penilaian-keterampilan')}>
+                      <Wrench size={14} /> <span>Rencana Penilaian Keterampilan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-spiritual')}>
+                      <Sparkles size={14} /> <span>Rencana KD/Butir Spiritual</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-sosial')}>
+                      <Heart size={14} /> <span>Rencana KD/Butir Sosial</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-bobot-ujian')}>
+                      <Scale size={14} /> <span>Rencana Bobot PH PTS & PAS</span>
+                    </li>
+                  </ul>
+                )}
+              </div>
+
               <li className={location.pathname.startsWith('/kelas') ? 'active' : ''} onClick={() => navigate('/kelas')}>
                 <BookOpen size={18}/> Kelas
               </li>
@@ -362,7 +398,7 @@ function Ekstrakurikuler() {
                 <GraduationCap size={18}/> Nilai
               </li>
               <li className={location.pathname === '/raport' ? 'active' : ''} onClick={() => navigate('/raport')}>
-                <FileText size={18}/> Raport 
+                <FileText size={18}/> Raport
               </li>
             </ul>
           </div>
@@ -641,126 +677,57 @@ function Ekstrakurikuler() {
             <div className="modal-body">
               <div className="modal-form-group">
                 <label>Nama Project <span className="required">*</span></label>
-                <input
-                  type="text"
-                  name="namaKegiatan"
-                  value={formData.namaKegiatan}
-                  onChange={handleInputChange}
-                  className="form-control"
-                  placeholder="Contoh: Projek Gaya Hidup Berkelanjutan"
-                />
+                <input type="text" name="namaKegiatan" value={formData.namaKegiatan} onChange={handleInputChange} className="form-control" placeholder="Contoh: Projek Gaya Hidup Berkelanjutan" />
               </div>
-
               <div className="modal-form-row">
                 <div className="modal-form-group">
                   <label>Bentuk Kegiatan <span className="required">*</span></label>
-                  <select
-                    name="bentuk"
-                    value={formData.bentuk}
-                    onChange={handleInputChange}
-                    className="form-control"
-                  >
-                    {bentukOptions.map(opt => (
-                      <option key={opt} value={opt}>{opt}</option>
-                    ))}
+                  <select name="bentuk" value={formData.bentuk} onChange={handleInputChange} className="form-control">
+                    {bentukOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                   </select>
                 </div>
                 <div className="modal-form-group">
                   <label>Tema</label>
-                  <select
-                    name="tema"
-                    value={formData.tema}
-                    onChange={handleInputChange}
-                    className="form-control"
-                  >
+                  <select name="tema" value={formData.tema} onChange={handleInputChange} className="form-control">
                     <option value="">Pilih Tema</option>
-                    {temaP5Options.map(opt => (
-                      <option key={opt} value={opt}>{opt}</option>
-                    ))}
+                    {temaP5Options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                   </select>
                 </div>
               </div>
-
               <div className="modal-form-row">
                 <div className="modal-form-group">
                   <label>Kelas Target</label>
-                  <input
-                    type="text"
-                    name="kelas"
-                    value={formData.kelas}
-                    onChange={handleInputChange}
-                    className="form-control"
-                    placeholder="Contoh: 7A, 7B, 7C atau Semua Kelas"
-                  />
+                  <input type="text" name="kelas" value={formData.kelas} onChange={handleInputChange} className="form-control" placeholder="Contoh: 7A, 7B, 7C atau Semua Kelas" />
                 </div>
                 <div className="modal-form-group">
                   <label>Semester <span className="required">*</span></label>
-                  <input
-                    type="text"
-                    name="semester"
-                    value={formData.semester}
-                    onChange={handleInputChange}
-                    className="form-control"
-                    placeholder="Contoh: Ganjil 2025/2026"
-                  />
+                  <input type="text" name="semester" value={formData.semester} onChange={handleInputChange} className="form-control" placeholder="Contoh: Ganjil 2025/2026" />
                 </div>
               </div>
-
               <div className="modal-form-row">
                 <div className="modal-form-group">
                   <label>Tanggal Mulai</label>
-                  <input
-                    type="date"
-                    name="tanggalMulai"
-                    value={formData.tanggalMulai}
-                    onChange={handleInputChange}
-                    className="form-control"
-                  />
+                  <input type="date" name="tanggalMulai" value={formData.tanggalMulai} onChange={handleInputChange} className="form-control" />
                 </div>
                 <div className="modal-form-group">
                   <label>Tanggal Selesai</label>
-                  <input
-                    type="date"
-                    name="tanggalSelesai"
-                    value={formData.tanggalSelesai}
-                    onChange={handleInputChange}
-                    className="form-control"
-                  />
+                  <input type="date" name="tanggalSelesai" value={formData.tanggalSelesai} onChange={handleInputChange} className="form-control" />
                 </div>
                 <div className="modal-form-group">
                   <label>Status</label>
-                  <select
-                    name="status"
-                    value={formData.status}
-                    onChange={handleInputChange}
-                    className="form-control"
-                  >
-                    {statusKegiatanOptions.map(opt => (
-                      <option key={opt} value={opt}>{opt}</option>
-                    ))}
+                  <select name="status" value={formData.status} onChange={handleInputChange} className="form-control">
+                    {statusKegiatanOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                   </select>
                 </div>
               </div>
-
               <div className="modal-form-group">
                 <label>Deskripsi Umum Kegiatan</label>
-                <textarea
-                  name="deskripsiUmum"
-                  value={formData.deskripsiUmum}
-                  onChange={handleInputChange}
-                  className="form-control"
-                  rows="3"
-                  placeholder="Jelaskan secara singkat tentang kegiatan ini..."
-                />
+                <textarea name="deskripsiUmum" value={formData.deskripsiUmum} onChange={handleInputChange} className="form-control" rows="3" placeholder="Jelaskan secara singkat tentang kegiatan ini..." />
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn-batal" onClick={resetModalKokurikuler}>
-                Batal
-              </button>
-              <button className="btn-simpan" onClick={editMode ? handleUpdateKegiatanKokurikuler : handleTambahKegiatanKokurikuler}>
-                <Save size={16} /> {editMode ? 'Update' : 'Simpan'}
-              </button>
+              <button className="btn-batal" onClick={resetModalKokurikuler}>Batal</button>
+              <button className="btn-simpan" onClick={editMode ? handleUpdateKegiatanKokurikuler : handleTambahKegiatanKokurikuler}><Save size={16} /> {editMode ? 'Update' : 'Simpan'}</button>
             </div>
           </div>
         </div>
@@ -771,98 +738,47 @@ function Ekstrakurikuler() {
         <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && resetModalEkstra()}>
           <div className="modal-box">
             <div className="modal-header">
-              <div>
-                <h3>{editMode ? 'Edit Ekstrakurikuler' : 'Tambah Ekstrakurikuler'}</h3>
-                <p>{editMode ? 'Edit data ekstrakurikuler yang dipilih' : 'Lengkapi form untuk menambahkan ekstrakurikuler baru'}</p>
-              </div>
-              <button className="modal-close" onClick={resetModalEkstra}>
-                <X size={18} />
-              </button>
+              <div><h3>{editMode ? 'Edit Ekstrakurikuler' : 'Tambah Ekstrakurikuler'}</h3><p>{editMode ? 'Edit data ekstrakurikuler yang dipilih' : 'Lengkapi form untuk menambahkan ekstrakurikuler baru'}</p></div>
+              <button className="modal-close" onClick={resetModalEkstra}><X size={18} /></button>
             </div>
             <div className="modal-body">
               <div className="modal-form-group">
                 <label>Nama Kegiatan <span className="required">*</span></label>
-                <input
-                  type="text"
-                  name="nama"
-                  value={formEkstra.nama}
-                  onChange={handleInputEkstraChange}
-                  className="form-control"
-                  placeholder="Masukkan nama ekstrakurikuler"
-                />
+                <input type="text" name="nama" value={formEkstra.nama} onChange={handleInputEkstraChange} className="form-control" placeholder="Masukkan nama ekstrakurikuler" />
               </div>
               <div className="modal-form-row">
                 <div className="modal-form-group">
                   <label>Jenis Kegiatan <span className="required">*</span></label>
-                  <select
-                    name="jenis"
-                    value={formEkstra.jenis}
-                    onChange={handleInputEkstraChange}
-                    className="form-control"
-                  >
+                  <select name="jenis" value={formEkstra.jenis} onChange={handleInputEkstraChange} className="form-control">
                     <option value="">Pilih Jenis</option>
-                    {['Keagamaan', 'Akademik', 'Seni', 'Sosial', 'Fisik', 'Olahraga'].map(opt => (
-                      <option key={opt} value={opt}>{opt}</option>
-                    ))}
+                    {['Keagamaan', 'Akademik', 'Seni', 'Sosial', 'Fisik', 'Olahraga'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
                   </select>
                 </div>
                 <div className="modal-form-group">
                   <label>Jumlah Peserta <span className="required">*</span></label>
-                  <input
-                    type="number"
-                    name="peserta"
-                    value={formEkstra.peserta}
-                    onChange={handleInputEkstraChange}
-                    className="form-control"
-                    placeholder="Jumlah peserta"
-                  />
+                  <input type="number" name="peserta" value={formEkstra.peserta} onChange={handleInputEkstraChange} className="form-control" placeholder="Jumlah peserta" />
                 </div>
               </div>
               <div className="modal-form-row">
                 <div className="modal-form-group">
                   <label>Jadwal <span className="required">*</span></label>
-                  <input
-                    type="text"
-                    name="jadwal"
-                    value={formEkstra.jadwal}
-                    onChange={handleInputEkstraChange}
-                    className="form-control"
-                    placeholder="Contoh: Senin & Rabu"
-                  />
+                  <input type="text" name="jadwal" value={formEkstra.jadwal} onChange={handleInputEkstraChange} className="form-control" placeholder="Contoh: Senin & Rabu" />
                 </div>
                 <div className="modal-form-group">
                   <label>Pembimbing <span className="required">*</span></label>
-                  <input
-                    type="text"
-                    name="pembimbing"
-                    value={formEkstra.pembimbing}
-                    onChange={handleInputEkstraChange}
-                    className="form-control"
-                    placeholder="Nama pembimbing"
-                  />
+                  <input type="text" name="pembimbing" value={formEkstra.pembimbing} onChange={handleInputEkstraChange} className="form-control" placeholder="Nama pembimbing" />
                 </div>
               </div>
               <div className="modal-form-group">
                 <label>Status</label>
-                <select
-                  name="status"
-                  value={formEkstra.status}
-                  onChange={handleInputEkstraChange}
-                  className="form-control"
-                >
-                  {['Aktif', 'Nonaktif', 'Selesai'].map(opt => (
-                    <option key={opt} value={opt}>{opt}</option>
-                  ))}
+                <select name="status" value={formEkstra.status} onChange={handleInputEkstraChange} className="form-control">
+                  {['Aktif', 'Nonaktif', 'Selesai'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
                 </select>
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn-batal" onClick={resetModalEkstra}>
-                Batal
-              </button>
-              <button className="btn-simpan" onClick={editMode ? handleUpdateEkstra : handleTambahEkstra}>
-                <Save size={16} /> {editMode ? 'Update' : 'Simpan'}
-              </button>
+              <button className="btn-batal" onClick={resetModalEkstra}>Batal</button>
+              <button className="btn-simpan" onClick={editMode ? handleUpdateEkstra : handleTambahEkstra}><Save size={16} /> {editMode ? 'Update' : 'Simpan'}</button>
             </div>
           </div>
         </div>

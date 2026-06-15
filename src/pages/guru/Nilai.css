@@ -1,4 +1,4 @@
-/* ================= NILAI ================= */
+/* Nilai.css - Untuk halaman Nilai (Pengetahuan & Keterampilan) */
 .nilai-main {
   background: #f8fafc;
 }
@@ -26,41 +26,7 @@
   color: #64748b;
 }
 
-/* Tabs */
-.nilai-tabs {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 12px;
-}
-
-.tab-btn {
-  padding: 10px 24px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #64748b;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.tab-btn:hover {
-  background: #f1f5f9;
-  border-color: #cbd5e0;
-  color: #1e293b;
-}
-
-.tab-btn.active {
-  background: #16a085;
-  border-color: #16a085;
-  color: white;
-}
-
-/* Stats Container */
+/* Stats */
 .stats-container {
   display: flex;
   justify-content: space-between;
@@ -121,7 +87,7 @@
   color: #64748b;
 }
 
-/* Kelas Nilai Grid */
+/* Card Grid */
 .kelas-nilai-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -216,43 +182,33 @@
   color: #64748b;
 }
 
-.progress-section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.progress-label {
+/* PROGRESS TEKS (tanpa progress bar) - STYLE BARU */
+.progress-teks {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 8px 0;
+  padding: 10px 0;
+  font-size: 14px;
+  border-top: 1px solid #edf2f7;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.progress-teks span:first-child {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.progress-teks .progress-value {
+  font-weight: 700;
+  color: #16a085;
+  background: #e6f7f0;
+  padding: 4px 12px;
+  border-radius: 30px;
   font-size: 13px;
 }
 
-.progress-label span:first-child {
-  color: #64748b;
-}
-
-.progress-value {
-  font-weight: 600;
-  color: #16a085;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 8px;
-  background: #edf2f7;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #16a085, #20b486);
-  border-radius: 10px;
-  transition: width 0.3s ease;
-}
-
+/* Tombol Input Nilai */
 .btn-input-nilai {
   display: flex;
   align-items: center;
@@ -267,7 +223,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .btn-input-nilai:hover {
@@ -276,12 +232,93 @@
   box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
 }
 
-.btn-input-nilai svg {
-  width: 18px;
-  height: 18px;
+/* ========== SIDEBAR MENU ========== */
+.sidebar .menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Responsive */
+.menu li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: all 0.2s;
+  cursor: pointer;
+  list-style: none;
+}
+
+.menu li:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.menu li.active {
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+  font-weight: 500;
+}
+
+/* ===== NILAI HEADER BARU ===== */
+.nilai-header-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.nilai-header-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #16a085, #20b486);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
+}
+
+/* Tab switcher kecil di header */
+.nilai-tab-switcher {
+  display: inline-flex;
+  gap: 0;
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.tab-switcher-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-switcher-btn:hover {
+  color: #1e293b;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.tab-switcher-btn.active {
+  background: white;
+  color: #16a085;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
   .kelas-nilai-grid {
     grid-template-columns: 1fr;
@@ -292,44 +329,49 @@
   .nilai-main .container {
     padding: 0 16px;
   }
-  
+
   .nilai-header h1 {
     font-size: 24px;
   }
-  
-  .nilai-tabs {
-    flex-direction: column;
-  }
-  
-  .tab-btn {
-    width: 100%;
-    text-align: center;
-  }
-  
+
   .stats-container {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .stats-left {
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .stats-right {
     width: 100%;
   }
-  
+
   .kelas-nilai-card {
     padding: 20px;
   }
-  
+
   .kelas-header {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .kelas-title {
     text-align: center;
+  }
+
+  .nilai-header-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nilai-tab-switcher {
+    width: 100%;
+  }
+
+  .tab-switcher-btn {
+    flex: 1;
+    justify-content: center;
   }
 }

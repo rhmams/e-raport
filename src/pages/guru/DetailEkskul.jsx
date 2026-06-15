@@ -1,4 +1,5 @@
 // src/pages/DetailEkskul.jsx
+import { useState } from 'react';
 import {
   LayoutDashboard,
   BookOpen,
@@ -15,7 +16,13 @@ import {
   Clock,
   Award,
   Info,
-  GraduationCap
+  GraduationCap,
+  Brain,
+  Wrench,
+  Sparkles,
+  Heart,
+  Scale,
+  ChevronDown
 } from "lucide-react";
 
 import "./DetailEkskul.css";
@@ -24,6 +31,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 function DetailEkskul() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [rencanaDropdownOpen, setRencanaDropdownOpen] = useState(true);
 
   // Data dummy detail ekstrakurikuler
   const dataEkskul = {
@@ -87,6 +95,35 @@ function DetailEkskul() {
           <div>
             <ul className="menu">
               <li onClick={() => navigate('/beranda')}><LayoutDashboard size={18}/> Beranda</li>
+
+              {/* DROPDOWN RENCANA PENILAIAN */}
+              <div className="dropdown-wrapper">
+                <div className="dropdown-header" onClick={() => setRencanaDropdownOpen(prev => !prev)}>
+                  <FileText size={18} />
+                  <span className="dropdown-label">Rencana Penilaian</span>
+                  <ChevronDown size={16} className={`dropdown-arrow ${rencanaDropdownOpen ? 'open' : ''}`} />
+                </div>
+                {rencanaDropdownOpen && (
+                  <ul className="dropdown-list">
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-nilai-pengetahuan')}>
+                      <Brain size={14} /> <span>Rencana Nilai Pengetahuan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-penilaian-keterampilan')}>
+                      <Wrench size={14} /> <span>Rencana Penilaian Keterampilan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-spiritual')}>
+                      <Sparkles size={14} /> <span>Rencana KD/Butir Spiritual</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-sosial')}>
+                      <Heart size={14} /> <span>Rencana KD/Butir Sosial</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-bobot-ujian')}>
+                      <Scale size={14} /> <span>Rencana Bobot PH PTS & PAS</span>
+                    </li>
+                  </ul>
+                )}
+              </div>
+
               <li onClick={() => navigate('/kelas')}><BookOpen size={18}/> Kelas</li>
               <li onClick={() => navigate('/wali-kelas')}><Users size={18}/> Wali Kelas</li>
               <li className="active" onClick={() => navigate('/ekstrakurikuler')}><ClipboardList size={18}/> Ekstrakurikuler</li>
@@ -229,7 +266,6 @@ function DetailEkskul() {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-content">
-            {/* KOLOM 1: LOGO */}
             <div className="footer-section footer-logo">
               <img 
                 src="/logo-madinah.png" 
@@ -238,16 +274,12 @@ function DetailEkskul() {
               />
               <h3 className="footer-brand">Madinah El - Quds</h3>
             </div>
-
-            {/* KOLOM 2: Hubungi Kami */}
             <div className="footer-section">
               <h4>Hubungi Kami</h4>
               <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
               <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
               <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
             </div>
-
-            {/* KOLOM 3: Jam Layanan */}
             <div className="footer-section">
               <h4>Jam Layanan</h4>
               <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>

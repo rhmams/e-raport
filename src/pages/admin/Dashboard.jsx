@@ -19,6 +19,16 @@ import DetailKokurikuler from './DetailKokurikuler';
 import Ekstrakurikuler from './Ekstrakurikuler';
 import DetailEkstrakurikuler from './DetailEkstrakurikuler';
 import ProfilAdmin from './ProfilAdmin';
+import DataTahunPelajaran from './DataTahunPelajaran';
+import DataMataPelajaran from './DataMataPelajaran';
+import MappingMapel from './MappingMapel';
+import IntervalPredikat from './IntervalPredikat';
+import ButirSikap from './ButirSikap';
+import DataKompetensiDasar from './DataKompetensiDasar';
+import Mutasi from './Mutasi';
+import KKMMapel from './KKMMapel';
+import InputTanggalRaport from './InputTanggalRaport';
+import LegerNilaiSiswa from './LegerNilaiSiswa'; // <-- IMPORT LEGER NILAI SISWA
 
 import { 
   FaUserGraduate, 
@@ -41,7 +51,8 @@ import {
   FaYoutube,
   FaWhatsapp,
   FaUserCircle,
-  FaPlus
+  FaPlus,
+  FaDatabase
 } from 'react-icons/fa';
 import { 
   LayoutDashboard,
@@ -55,7 +66,7 @@ import {
   Clock as ClockIcon
 } from 'lucide-react';
 
-// Modal komponen sederhana (inline)
+// ========== MODAL SEDERHANA ==========
 const AddModal = ({ isOpen, onClose, title, fields, onSubmit }) => {
   if (!isOpen) return null;
   const [formData, setFormData] = useState({});
@@ -86,6 +97,7 @@ const AddModal = ({ isOpen, onClose, title, fields, onSubmit }) => {
   );
 };
 
+// ========== DASHBOARD UTAMA ==========
 const Dashboard = () => {
   const [openMenu, setOpenMenu] = useState(null);
   const [activePage, setActivePage] = useState('dashboard');
@@ -97,11 +109,9 @@ const Dashboard = () => {
   const [selectedEkstrakurikuler, setSelectedEkstrakurikuler] = useState(null);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
-  // State untuk modal
   const [showJadwalModal, setShowJadwalModal] = useState(false);
   const [showPengumumanModal, setShowPengumumanModal] = useState(false);
 
-  // Data dinamis dengan state
   const [pengumuman, setPengumuman] = useState([
     { judul: "Libur Hari Raya Idul Fitri", isi: "Sekolah libur mulai tanggal 28 Maret – 5 April 2026 untuk perayaan Idul Fitri 1447 H.", tanggal: "20 Feb 2026" },
     { judul: "Pengumpulan Nilai Semester Genap", isi: "Batas akhir pengumpulan nilai semester genap adalah tanggal 25 Februari 2026.", tanggal: "13 Feb 2026" },
@@ -117,7 +127,6 @@ const Dashboard = () => {
     { hari: "Jum'at Bersih", waktu: "07:30 – 08:30", tempat: "Seluruh Area Sekolah" }
   ]);
 
-  // Handler tambah jadwal
   const addJadwal = (data) => {
     if (data.hari && data.waktu && data.tempat) {
       setJadwalMinggu([...jadwalMinggu, { hari: data.hari, waktu: data.waktu, tempat: data.tempat }]);
@@ -126,7 +135,6 @@ const Dashboard = () => {
     }
   };
 
-  // Handler tambah pengumuman
   const addPengumuman = (data) => {
     if (data.judul && data.isi && data.tanggal) {
       setPengumuman([...pengumuman, { judul: data.judul, isi: data.isi, tanggal: data.tanggal }]);
@@ -136,7 +144,6 @@ const Dashboard = () => {
   };
 
   const renderContent = () => {
-    // ... (semua renderContent sebelumnya hingga dashboard default)
     if (activePage === 'profil_madrasah') return <ProfilMadrasah />;
     if (activePage === 'pengaturan_umum') return <PengaturanUmum />;
     if (activePage === 'pengaturan_kelas') {
@@ -144,6 +151,7 @@ const Dashboard = () => {
         ? <DetailKelas kelas={selectedKelas} onBack={() => setSelectedKelas(null)} />
         : <PengaturanKelas onDetailKelas={(kelas) => setSelectedKelas(kelas)} />;
     }
+    if (activePage === 'mutasi') return <Mutasi />;
     if (activePage === 'daftar_guru') {
       return <DaftarGuru onNavigate={(page, data) => {
         if (page === 'detail_guru') {
@@ -230,6 +238,19 @@ const Dashboard = () => {
       />;
     }
     if (activePage === 'profil_admin') return <ProfilAdmin />;
+    
+    // Menu Data Pembelajaran
+    if (activePage === 'data_tahun_pelajaran') return <DataTahunPelajaran />;
+    if (activePage === 'data_mata_pelajaran') return <DataMataPelajaran />;
+    if (activePage === 'mapping_mapel') return <MappingMapel />;
+    if (activePage === 'kkm_mapel') return <KKMMapel />;
+    
+    // Menu Sistem Rapor
+    if (activePage === 'interval_predikat') return <IntervalPredikat />;
+    if (activePage === 'butir_sikap') return <ButirSikap />;
+    if (activePage === 'data_kompetensi_dasar') return <DataKompetensiDasar />;
+    if (activePage === 'tanggal_raport') return <InputTanggalRaport />;
+    if (activePage === 'leger_nilai_siswa') return <LegerNilaiSiswa />; // <-- TAMBAHAN LEGER
     
     // Dashboard default
     return (
@@ -335,9 +356,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Info Grid baru: Jadwal Minggu Ini (kiri) dan Pengumuman Terbaru (kanan) */}
         <div className="info-grid">
-          {/* Kolom Kiri: Jadwal Minggu Ini */}
           <div className="jadwal-section">
             <div className="section-header">
               <h3>Jadwal Minggu Ini</h3>
@@ -358,7 +377,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Kolom Kanan: Pengumuman Terbaru */}
           <div className="pengumuman-section">
             <div className="section-header">
               <h3>Pengumuman Terbaru</h3>
@@ -378,8 +396,6 @@ const Dashboard = () => {
       </>
     );
   };
-
-  // ... (fungsi toggleMenu, handleMenuClick, getBreadcrumb sama seperti sebelumnya)
 
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
@@ -442,6 +458,7 @@ const Dashboard = () => {
     if (activePage === 'profil_madrasah') return 'Profil Madrasah';
     if (activePage === 'pengaturan_umum') return 'Pengaturan Umum';
     if (activePage === 'pengaturan_kelas') return selectedKelas ? `Kelas > ${selectedKelas.nama}` : 'Pengaturan Kelas';
+    if (activePage === 'mutasi') return 'Pengaturan > Mutasi';
     if (activePage === 'daftar_guru') return 'Daftar Guru';
     if (activePage === 'detail_guru' && selectedGuru) return `Detail Guru > ${selectedGuru.name}`;
     if (activePage === 'jadwal_mengajar') return 'Jadwal Mengajar';
@@ -456,6 +473,15 @@ const Dashboard = () => {
     if (activePage === 'ekstrakurikuler') return 'Ekstrakurikuler';
     if (activePage === 'detail_ekstrakurikuler' && selectedEkstrakurikuler) return `Detail Ekstrakurikuler > ${selectedEkstrakurikuler.nama}`;
     if (activePage === 'profil_admin') return 'Profil Admin';
+    if (activePage === 'data_tahun_pelajaran') return 'Data Pembelajaran > Tahun Pelajaran';
+    if (activePage === 'data_mata_pelajaran') return 'Data Pembelajaran > Mata Pelajaran';
+    if (activePage === 'mapping_mapel') return 'Data Pembelajaran > Mapping Mata Pelajaran';
+    if (activePage === 'kkm_mapel') return 'Data Pembelajaran > KKM Mapel';
+    if (activePage === 'interval_predikat') return 'Sistem Rapor > Interval Predikat';
+    if (activePage === 'butir_sikap') return 'Sistem Rapor > Butir-Butir Sikap';
+    if (activePage === 'data_kompetensi_dasar') return 'Sistem Rapor > Data Kompetensi Dasar';
+    if (activePage === 'tanggal_raport') return 'Sistem Rapor > Tanggal Raport';
+    if (activePage === 'leger_nilai_siswa') return 'Sistem Rapor > Leger Nilai Siswa'; // <-- TAMBAHAN LEGER
     return activePage.replace(/_/g, ' ').toUpperCase();
   };
 
@@ -520,6 +546,29 @@ const Dashboard = () => {
                   <School size={18} /><span>Profil Madrasah</span>
                 </div>
               </li>
+              
+              {/* Menu Data Pembelajaran */}
+              <li className={openMenu === 'data_master' ? 'active' : ''}>
+                <div className="menu-item" onClick={() => toggleMenu('data_master')}>
+                  <FaDatabase size={18} /><span>Data Pembelajaran</span>
+                  {openMenu === 'data_master' ? <FaChevronUp size={12} style={{marginLeft: 'auto'}} /> : <FaChevronDown size={12} style={{marginLeft: 'auto'}} />}
+                </div>
+                <ul className={`submenu ${openMenu === 'data_master' ? 'show' : ''}`}>
+                  <li onClick={() => handleMenuClick('data_master', 'data_tahun_pelajaran')}>
+                    <span className="submenu-dot">•</span><span>Tahun Pelajaran</span>
+                  </li>
+                  <li onClick={() => handleMenuClick('data_master', 'data_mata_pelajaran')}>
+                    <span className="submenu-dot">•</span><span>Mata Pelajaran</span>
+                  </li>
+                  <li onClick={() => handleMenuClick('data_master', 'mapping_mapel')}>
+                    <span className="submenu-dot">•</span><span>Mapping Mata Pelajaran</span>
+                  </li>
+                  <li onClick={() => handleMenuClick('data_master', 'kkm_mapel')}>
+                    <span className="submenu-dot">•</span><span>KKM Mapel</span>
+                  </li>
+                </ul>
+              </li>
+
               <li className={openMenu === 'pengaturan' ? 'active' : ''}>
                 <div className="menu-item" onClick={() => toggleMenu('pengaturan')}>
                   <Settings size={18} /><span>Pengaturan</span>
@@ -528,8 +577,12 @@ const Dashboard = () => {
                 <ul className={`submenu ${openMenu === 'pengaturan' ? 'show' : ''}`}>
                   <li onClick={() => handleMenuClick('pengaturan', 'pengaturan_umum')}><span className="submenu-dot">•</span><span>Umum</span></li>
                   <li onClick={() => handleMenuClick('pengaturan', 'pengaturan_kelas')}><span className="submenu-dot">•</span><span>Kelas</span></li>
+                  <li onClick={() => handleMenuClick('pengaturan', 'mutasi')}>
+                    <span className="submenu-dot">•</span><span>Mutasi</span>
+                  </li>
                 </ul>
               </li>
+
               <li className={openMenu === 'guru' ? 'active' : ''}>
                 <div className="menu-item" onClick={() => toggleMenu('guru')}>
                   <Users size={18} /><span>Guru</span>
@@ -558,6 +611,21 @@ const Dashboard = () => {
                 <ul className={`submenu ${openMenu === 'rapor' ? 'show' : ''}`}>
                   <li onClick={() => handleMenuClick('rapor', 'input_nilai')}><span className="submenu-dot">•</span><span>Input Nilai</span></li>
                   <li onClick={() => handleMenuClick('rapor', 'cetak_raport')}><span className="submenu-dot">•</span><span>Cetak Raport</span></li>
+                  <li onClick={() => handleMenuClick('rapor', 'tanggal_raport')}>
+                    <span className="submenu-dot">•</span><span>Input Tanggal Raport</span>
+                  </li>
+                  <li onClick={() => handleMenuClick('rapor', 'leger_nilai_siswa')}> {/* <-- TAMBAHAN LEGER */}
+                    <span className="submenu-dot">•</span><span>Leger Nilai Siswa</span>
+                  </li>
+                  <li onClick={() => handleMenuClick('rapor', 'interval_predikat')}>
+                    <span className="submenu-dot">•</span><span>Interval Predikat</span>
+                  </li>
+                  <li onClick={() => handleMenuClick('rapor', 'butir_sikap')}>
+                    <span className="submenu-dot">•</span><span>Butir-Butir Sikap</span>
+                  </li>
+                  <li onClick={() => handleMenuClick('rapor', 'data_kompetensi_dasar')}>
+                    <span className="submenu-dot">•</span><span>Data Kompetensi Dasar</span>
+                  </li>
                 </ul>
               </li>
               <li className={openMenu === 'kegiatan' ? 'active' : ''}>
@@ -620,7 +688,6 @@ const Dashboard = () => {
         </div>
       </footer>
 
-      {/* Modal tambah jadwal */}
       <AddModal
         isOpen={showJadwalModal}
         onClose={() => setShowJadwalModal(false)}
@@ -633,7 +700,6 @@ const Dashboard = () => {
         onSubmit={addJadwal}
       />
 
-      {/* Modal tambah pengumuman */}
       <AddModal
         isOpen={showPengumumanModal}
         onClose={() => setShowPengumumanModal(false)}

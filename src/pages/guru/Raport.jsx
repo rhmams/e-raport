@@ -18,7 +18,13 @@ import {
   Printer,
   Award,
   Calendar,
-  GraduationCap  // Ditambahkan untuk icon di sidebar nanti
+  GraduationCap,
+  Brain,
+  Wrench,
+  Sparkles,
+  Heart,
+  Scale,
+  ChevronDown
 } from "lucide-react";
 
 import "./Raport.css";
@@ -28,63 +34,14 @@ function Raport() {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
+  const [rencanaDropdownOpen, setRencanaDropdownOpen] = useState(true);
 
   const dataRaport = [
-    {
-      id: 1,
-      inisial: "AZ",
-      nama: "Ahmad Zaki",
-      nis: "2024001",
-      kelas: "X",
-      semester: "Ganjil - 2025/2026",
-      status: "Selesai",
-      tanggalTerbit: "20 Des 2025",
-      warna: "#e6f7f0"
-    },
-    {
-      id: 2,
-      inisial: "FA",
-      nama: "Fatimah Azzahra",
-      nis: "2024002",
-      kelas: "X",
-      semester: "Ganjil - 2025/2026",
-      status: "Selesai",
-      tanggalTerbit: "20 Des 2025",
-      warna: "#e6f0f7"
-    },
-    {
-      id: 3,
-      inisial: "MR",
-      nama: "Muhammad Rizki",
-      nis: "2024003",
-      kelas: "X",
-      semester: "Ganjil - 2025/2026",
-      status: "Draft",
-      tanggalTerbit: "-",
-      warna: "#fef3c7"
-    },
-    {
-      id: 4,
-      inisial: "AS",
-      nama: "Aisha Salsabila",
-      nis: "2024004",
-      kelas: "X",
-      semester: "Ganjil - 2025/2026",
-      status: "Selesai",
-      tanggalTerbit: "20 Des 2025",
-      warna: "#fee2e2"
-    },
-    {
-      id: 5,
-      inisial: "UF",
-      nama: "Umar Faruq",
-      nis: "2024005",
-      kelas: "XI",
-      semester: "Ganjil - 2025/2026",
-      status: "Selesai",
-      tanggalTerbit: "20 Des 2025",
-      warna: "#e6f7f0"
-    }
+    { id: 1, inisial: "AZ", nama: "Ahmad Zaki", nis: "2024001", kelas: "X", semester: "Ganjil - 2025/2026", status: "Selesai", tanggalTerbit: "20 Des 2025", warna: "#e6f7f0" },
+    { id: 2, inisial: "FA", nama: "Fatimah Azzahra", nis: "2024002", kelas: "X", semester: "Ganjil - 2025/2026", status: "Selesai", tanggalTerbit: "20 Des 2025", warna: "#e6f0f7" },
+    { id: 3, inisial: "MR", nama: "Muhammad Rizki", nis: "2024003", kelas: "X", semester: "Ganjil - 2025/2026", status: "Draft", tanggalTerbit: "-", warna: "#fef3c7" },
+    { id: 4, inisial: "AS", nama: "Aisha Salsabila", nis: "2024004", kelas: "X", semester: "Ganjil - 2025/2026", status: "Selesai", tanggalTerbit: "20 Des 2025", warna: "#fee2e2" },
+    { id: 5, inisial: "UF", nama: "Umar Faruq", nis: "2024005", kelas: "XI", semester: "Ganjil - 2025/2026", status: "Selesai", tanggalTerbit: "20 Des 2025", warna: "#e6f7f0" }
   ];
 
   const filteredData = dataRaport.filter(raport =>
@@ -138,40 +95,51 @@ function Raport() {
         <aside className="sidebar">
           <div>
             <ul className="menu">
-              <li 
-                className={location.pathname === '/' || location.pathname === '/beranda' ? 'active' : ''} 
-                onClick={() => navigate('/beranda')}
-              >
+              <li className={location.pathname === '/' || location.pathname === '/beranda' ? 'active' : ''} onClick={() => navigate('/beranda')}>
                 <LayoutDashboard size={18}/> Beranda
               </li>
-              <li 
-                className={location.pathname.startsWith('/kelas') && !location.pathname.includes('/kelas/') ? 'active' : ''} 
-                onClick={() => navigate('/kelas')}
-              >
+
+              {/* DROPDOWN RENCANA PENILAIAN */}
+              <div className="dropdown-wrapper">
+                <div className="dropdown-header" onClick={() => setRencanaDropdownOpen(prev => !prev)}>
+                  <FileText size={18} />
+                  <span className="dropdown-label">Rencana Penilaian</span>
+                  <ChevronDown size={16} className={`dropdown-arrow ${rencanaDropdownOpen ? 'open' : ''}`} />
+                </div>
+                {rencanaDropdownOpen && (
+                  <ul className="dropdown-list">
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-nilai-pengetahuan')}>
+                      <Brain size={14} /> <span>Rencana Nilai Pengetahuan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-penilaian-keterampilan')}>
+                      <Wrench size={14} /> <span>Rencana Penilaian Keterampilan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-spiritual')}>
+                      <Sparkles size={14} /> <span>Rencana KD/Butir Spiritual</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-sosial')}>
+                      <Heart size={14} /> <span>Rencana KD/Butir Sosial</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-bobot-ujian')}>
+                      <Scale size={14} /> <span>Rencana Bobot PH PTS & PAS</span>
+                    </li>
+                  </ul>
+                )}
+              </div>
+
+              <li className={location.pathname.startsWith('/kelas') ? 'active' : ''} onClick={() => navigate('/kelas')}>
                 <BookOpen size={18}/> Kelas
               </li>
-              <li 
-                className={location.pathname === '/wali-kelas' ? 'active' : ''} 
-                onClick={() => navigate('/wali-kelas')}
-              >
+              <li className={location.pathname === '/wali-kelas' ? 'active' : ''} onClick={() => navigate('/wali-kelas')}>
                 <Users size={18}/> Wali Kelas
               </li>
-              <li 
-                className={location.pathname === '/ekstrakurikuler' ? 'active' : ''} 
-                onClick={() => navigate('/ekstrakurikuler')}
-              >
+              <li className={location.pathname === '/ekstrakurikuler' ? 'active' : ''} onClick={() => navigate('/ekstrakurikuler')}>
                 <ClipboardList size={18}/> Ekstrakurikuler
               </li>
-              <li 
-                className={location.pathname === '/nilai' ? 'active' : ''} 
-                onClick={() => navigate('/nilai')}
-              >
+              <li className={location.pathname === '/nilai' ? 'active' : ''} onClick={() => navigate('/nilai')}>
                 <GraduationCap size={18}/> Nilai
               </li>
-              <li 
-                className={location.pathname === '/raport' ? 'active' : ''} 
-                onClick={() => navigate('/raport')}
-              >
+              <li className={location.pathname === '/raport' ? 'active' : ''} onClick={() => navigate('/raport')}>
                 <FileText size={18}/> Raport 
               </li>
             </ul>
@@ -278,22 +246,12 @@ function Raport() {
                       </div>
                     </td>
                     <td>{raport.nis}</td>
-                    <td>
-                      <span className="badge-kelas">{raport.kelas}</span>
-                    </td>
+                    <td><span className="badge-kelas">{raport.kelas}</span></td>
                     <td>{raport.semester}</td>
-                    <td>
-                      <span className={`badge-status ${raport.status === 'Selesai' ? 'selesai' : 'draft'}`}>
-                        {raport.status}
-                      </span>
-                    </td>
+                    <td><span className={`badge-status ${raport.status === 'Selesai' ? 'selesai' : 'draft'}`}>{raport.status}</span></td>
                     <td>{raport.tanggalTerbit}</td>
                     <td>
-                      <button 
-                        className="btn-lihat-detail" 
-                        onClick={() => handleLihatDetail(raport.id)}
-                        title="Lihat Detail Raport"
-                      >
+                      <button className="btn-lihat-detail" onClick={() => handleLihatDetail(raport.id)} title="Lihat Detail Raport">
                         <Eye size={16} />
                         <span>Lihat Detail</span>
                       </button>
@@ -314,42 +272,31 @@ function Raport() {
       </div>
 
       {/* ================= FOOTER ================= */}
-<footer className="footer">
-  <div className="footer-container">
-    <div className="footer-content">
-
-      {/* KOLOM 1: LOGO */}
-      <div className="footer-section footer-logo">
-        <img 
-          src="/logo-madinah.png" 
-          alt="Logo Madinah" 
-          className="footer-logo-img"
-        />
-        <h3 className="footer-brand">Madinah El - Quds</h3>
-      </div>
-
-      {/* KOLOM 2: Hubungi Kami */}
-      <div className="footer-section">
-        <h4>Hubungi Kami</h4>
-        <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
-        <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
-        <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
-      </div>
-
-      {/* KOLOM 3: Jam Layanan */}
-      <div className="footer-section">
-        <h4>Jam Layanan</h4>
-        <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
-        <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
-        <p><ClockIcon size={18}/> Minggu: Tutup</p>
-      </div>
-
-    </div>
-    <div className="footer-bottom">
-      <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
-    </div>
-  </div>
-</footer>
+      <footer className="footer">
+        <div className="footer-container">
+          <div className="footer-content">
+            <div className="footer-section footer-logo">
+              <img src="/logo-madinah.png" alt="Logo Madinah" className="footer-logo-img" />
+              <h3 className="footer-brand">Madinah El - Quds</h3>
+            </div>
+            <div className="footer-section">
+              <h4>Hubungi Kami</h4>
+              <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
+              <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
+              <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
+            </div>
+            <div className="footer-section">
+              <h4>Jam Layanan</h4>
+              <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
+              <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
+              <p><ClockIcon size={18}/> Minggu: Tutup</p>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
+          </div>
+        </div>
+      </footer>
 
     </div>
   );

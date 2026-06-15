@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import './CetakRaport.css';
 import * as XLSX from 'xlsx';
 import {
-  FaSearch, FaPrint, FaFileImport, FaFileExport, FaEye, FaDownload,
-  FaChevronLeft, FaChevronRight, FaUserCircle, FaCheckCircle, FaClock, FaTimesCircle
+  FaSearch, FaPrint, FaFileImport, FaFileExport, FaEye,
+  FaChevronLeft, FaChevronRight, FaCheckCircle, FaClock
 } from 'react-icons/fa';
 import { FiFileText } from 'react-icons/fi';
 
 const CetakRaport = ({ onNavigate }) => {
+  const [jenisRapor, setJenisRapor] = useState('semester');
   const [selectedKelas, setSelectedKelas] = useState('X IPA 1');
   const [selectedSemester, setSelectedSemester] = useState('Ganjil');
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,310 +21,164 @@ const CetakRaport = ({ onNavigate }) => {
   const semesterOptions = ['Ganjil', 'Genap'];
   const statusOptions = ['all', 'Siap Cetak', 'Draft', 'Sudah Dicetak'];
 
-  // Data rapor siswa
+  // Data contoh (dengan jenisRapor)
   const [raporData, setRaporData] = useState([
-    { id: 1, foto: 'AF', nis: '2024001', nisn: '0056789012', nama: 'Ahmad Fauzi Ramadhan', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak' },
-    { id: 2, foto: 'SA', nis: '2024002', nisn: '0056789013', nama: 'Siti Aisyah Nuraini', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak' },
-    { id: 3, foto: 'MR', nis: '2024003', nisn: '0056789014', nama: 'Muhammad Rizki Pratama', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Draft' },
-    { id: 4, foto: 'FA', nis: '2024004', nisn: '0056789015', nama: 'Fatimah Azzahra', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak' },
-    { id: 5, foto: 'AR', nis: '2024005', nisn: '0056789016', nama: 'Abdul Rahman Hakim', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak' },
-    { id: 6, foto: 'KA', nis: '2024006', nisn: '0056789017', nama: 'Khadijah Amani Putri', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak' },
-    { id: 7, foto: 'UF', nis: '2024007', nisn: '0056789018', nama: 'Umar Faruq Ibrahim', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak' },
-    { id: 8, foto: 'ZS', nis: '2024008', nisn: '0056789019', nama: 'Zahra Safira Ayu', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak' },
-    { id: 9, foto: 'AM', nis: '2024009', nisn: '0056789020', nama: 'Ali Mahfud Hidayat', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Draft' },
-    { id: 10, foto: 'MS', nis: '2024010', nisn: '0056789021', nama: 'Maryam Salsabila', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak' },
+    { id: 1, foto: 'AF', nis: '2024001', nisn: '0056789012', nama: 'Ahmad Fauzi', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak', jenisRapor: 'semester' },
+    { id: 2, foto: 'SA', nis: '2024002', nisn: '0056789013', nama: 'Siti Aisyah', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak', jenisRapor: 'semester' },
+    { id: 3, foto: 'MR', nis: '2024003', nisn: '0056789014', nama: 'Muhammad Rizki', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Draft', jenisRapor: 'semester' },
+    { id: 11, foto: 'AR', nis: '2024011', nisn: '0056789022', nama: 'Arjuna Wijaya', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Siap Cetak', jenisRapor: 'tengah_semester' },
+    { id: 12, foto: 'DN', nis: '2024012', nisn: '0056789023', nama: 'Dewi Nirmala', kelas: 'X IPA 1', semester: 'Ganjil', status: 'Draft', jenisRapor: 'tengah_semester' },
   ]);
 
   // Filter data
   const filteredData = raporData.filter(item => {
-    const matchesSearch = item.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          item.nis.includes(searchTerm) ||
-                          item.nisn.includes(searchTerm);
-    const matchesKelas = item.kelas === selectedKelas;
-    const matchesSemester = item.semester === selectedSemester;
-    const matchesStatus = selectedStatus === 'all' || item.status === selectedStatus;
-    return matchesSearch && matchesKelas && matchesSemester && matchesStatus;
+    return item.jenisRapor === jenisRapor &&
+           item.kelas === selectedKelas &&
+           item.semester === selectedSemester &&
+           (item.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.nis.includes(searchTerm) ||
+            item.nisn.includes(searchTerm)) &&
+           (selectedStatus === 'all' || item.status === selectedStatus);
   });
 
-  // Statistik
   const totalSiswa = filteredData.length;
-  const siapCetak = filteredData.filter(item => item.status === 'Siap Cetak').length;
-  const draft = filteredData.filter(item => item.status === 'Draft').length;
-  const sudahDicetak = filteredData.filter(item => item.status === 'Sudah Dicetak').length;
+  const siapCetak = filteredData.filter(i => i.status === 'Siap Cetak').length;
+  const draft = filteredData.filter(i => i.status === 'Draft').length;
+  const sudahDicetak = filteredData.filter(i => i.status === 'Sudah Dicetak').length;
 
   // Pagination
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = filteredData.slice(startIndex, endIndex);
+  const currentItems = filteredData.slice(startIndex, startIndex + itemsPerPage);
 
   const handlePageChange = (page) => {
     if (page === 'prev') setCurrentPage(prev => Math.max(1, prev - 1));
     else if (page === 'next') setCurrentPage(prev => Math.min(totalPages, prev + 1));
-    else if (typeof page === 'number') setCurrentPage(page);
+    else setCurrentPage(page);
   };
 
   const getPageNumbers = () => {
-    const pageNumbers = [];
-    const maxVisible = 5;
-    if (totalPages <= maxVisible) {
-      for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
-    } else {
-      if (currentPage <= 3) {
-        for (let i = 1; i <= 4; i++) pageNumbers.push(i);
-        pageNumbers.push('...');
-        pageNumbers.push(totalPages);
-      } else if (currentPage >= totalPages - 2) {
-        pageNumbers.push(1);
-        pageNumbers.push('...');
-        for (let i = totalPages - 3; i <= totalPages; i++) pageNumbers.push(i);
-      } else {
-        pageNumbers.push(1);
-        pageNumbers.push('...');
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) pageNumbers.push(i);
-        pageNumbers.push('...');
-        pageNumbers.push(totalPages);
-      }
+    let pages = [];
+    if (totalPages <= 5) for (let i = 1; i <= totalPages; i++) pages.push(i);
+    else {
+      if (currentPage <= 3) pages = [1,2,3,4, '...', totalPages];
+      else if (currentPage >= totalPages - 2) pages = [1, '...', totalPages-3, totalPages-2, totalPages-1, totalPages];
+      else pages = [1, '...', currentPage-1, currentPage, currentPage+1, '...', totalPages];
     }
-    return pageNumbers;
+    return pages;
   };
 
-  // Navigasi ke halaman Detail Raport
-  const handleDetail = (siswa) => {
-    if (onNavigate) {
-      onNavigate('detail_raport', siswa);
-    }
-  };
-
-  const handleCetakRaport = (siswa) => {
-    alert(`Cetak raport untuk ${siswa.nama} (${siswa.kelas} - Semester ${siswa.semester})`);
-  };
-
-  const handleCetakMassal = () => {
-    alert('Cetak raport massal untuk semua siswa yang siap cetak');
-  };
+  const handleDetail = (siswa) => onNavigate && onNavigate('detail_raport', siswa);
+  const handleCetakRaport = (siswa) => alert(`Cetak ${jenisRapor === 'semester' ? 'Rapor Semester' : 'Rapor Tengah Semester'} untuk ${siswa.nama}`);
+  const handleCetakMassal = () => alert(`Cetak massal ${jenisRapor === 'semester' ? 'Rapor Semester' : 'Rapor Tengah Semester'}`);
 
   const handleTemplate = () => {
-    const template = [
-      { 'NIS': '2024001', 'Nama Siswa': 'Contoh Nama', 'Kelas': 'X IPA 1', 'Semester': 'Ganjil', 'Status': 'Siap Cetak' }
-    ];
-    const ws = XLSX.utils.json_to_sheet(template);
+    const ws = XLSX.utils.json_to_sheet([{ NIS: '2024001', Nama: 'Contoh', Kelas: 'X IPA 1', Semester: 'Ganjil', JenisRapor: jenisRapor }]);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Template Cetak Raport');
-    XLSX.writeFile(wb, 'template_cetak_raport.xlsx');
-    alert('Template berhasil diunduh!');
-  };
-
-  const handleImportExcel = (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const data = new Uint8Array(e.target.result);
-      const workbook = XLSX.read(data, { type: 'array' });
-      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet);
-      
-      jsonData.forEach((row) => {
-        if (row['NIS']) {
-          setRaporData(prev => prev.map(siswa => 
-            siswa.nis === String(row['NIS']) 
-              ? { ...siswa, status: row['Status'] || siswa.status }
-              : siswa
-          ));
-        }
-      });
-      alert('Data berhasil diimport!');
-    };
-    reader.readAsArrayBuffer(file);
-    event.target.value = '';
+    XLSX.utils.book_append_sheet(wb, ws, 'Template');
+    XLSX.writeFile(wb, `template_${jenisRapor}.xlsx`);
   };
 
   const handleExportExcel = () => {
-    const exportData = filteredData.map((item, index) => ({
-      'No': index + 1,
-      'NIS': item.nis,
-      'NISN': item.nisn,
-      'Nama Siswa': item.nama,
-      'Kelas': item.kelas,
-      'Semester': item.semester,
-      'Status': item.status
-    }));
+    const exportData = filteredData.map((item, idx) => ({ No: idx+1, NIS: item.nis, NISN: item.nisn, Nama: item.nama, Kelas: item.kelas, Semester: item.semester, Status: item.status }));
     const ws = XLSX.utils.json_to_sheet(exportData);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Cetak Raport');
-    XLSX.writeFile(wb, `cetak_raport_${selectedKelas}_${selectedSemester}.xlsx`);
-    alert('Data berhasil diexport ke Excel!');
+    XLSX.utils.book_append_sheet(wb, ws, 'CetakRaport');
+    XLSX.writeFile(wb, `cetak_${jenisRapor}_${selectedKelas}.xlsx`);
   };
 
   const getStatusBadge = (status) => {
-    switch(status) {
-      case 'Siap Cetak':
-        return <span className="status-badge status-siap"><FaCheckCircle /> Siap Cetak</span>;
-      case 'Draft':
-        return <span className="status-badge status-draft"><FaClock /> Draft</span>;
-      case 'Sudah Dicetak':
-        return <span className="status-badge status-cetak"><FaCheckCircle /> Sudah Dicetak</span>;
-      default:
-        return <span className="status-badge">{status}</span>;
-    }
+    if (status === 'Siap Cetak') return <span className="badge siap"><FaCheckCircle /> Siap Cetak</span>;
+    if (status === 'Draft') return <span className="badge draft"><FaClock /> Draft</span>;
+    if (status === 'Sudah Dicetak') return <span className="badge cetak"><FaCheckCircle /> Sudah Dicetak</span>;
+    return <span className="badge">{status}</span>;
   };
 
   return (
     <div className="cetak-raport-container">
       <div className="cetak-raport-content">
-        {/* Header */}
         <div className="page-header">
           <h1>Cetak Rapor</h1>
           <p>Cetak dokumen rapor siswa</p>
         </div>
 
-        {/* Filter Baris 1: Kelas dan Semester */}
+        {/* Pilihan Jenis Rapor - DIPERBAIKI */}
+        <div className="jenis-rapor-section">
+          <span className="jenis-rapor-title">Jenis Rapor :</span>
+          <div className="radio-group">
+            <label className="radio-option">
+              <input type="radio" value="semester" checked={jenisRapor === 'semester'} onChange={() => setJenisRapor('semester')} />
+              <span>Rapor Semester</span>
+            </label>
+            <label className="radio-option">
+              <input type="radio" value="tengah_semester" checked={jenisRapor === 'tengah_semester'} onChange={() => setJenisRapor('tengah_semester')} />
+              <span>Rapor Tengah Semester</span>
+            </label>
+          </div>
+        </div>
+
+        {/* Filter Kelas & Semester */}
         <div className="filter-row">
           <div className="filter-group">
             <label>Kelas</label>
-            <select 
-              value={selectedKelas} 
-              onChange={(e) => {
-                setSelectedKelas(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="filter-select"
-            >
-              {kelasOptions.map(kelas => (
-                <option key={kelas} value={kelas}>{kelas}</option>
-              ))}
+            <select value={selectedKelas} onChange={(e) => setSelectedKelas(e.target.value)}>
+              {kelasOptions.map(k => <option key={k}>{k}</option>)}
             </select>
           </div>
           <div className="filter-group">
             <label>Semester</label>
-            <select 
-              value={selectedSemester} 
-              onChange={(e) => {
-                setSelectedSemester(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="filter-select"
-            >
-              {semesterOptions.map(semester => (
-                <option key={semester} value={semester}>{semester}</option>
-              ))}
+            <select value={selectedSemester} onChange={(e) => setSelectedSemester(e.target.value)}>
+              {semesterOptions.map(s => <option key={s}>{s}</option>)}
             </select>
           </div>
         </div>
 
-        {/* Statistik Cards */}
+        {/* Statistik */}
         <div className="stats-cards">
-          <div className="stat-card total">
-            <div className="stat-value">{totalSiswa}</div>
-            <div className="stat-label">Total Siswa</div>
-          </div>
-          <div className="stat-card siap">
-            <div className="stat-value">{siapCetak}</div>
-            <div className="stat-label">Siap Cetak</div>
-          </div>
-          <div className="stat-card draft">
-            <div className="stat-value">{draft}</div>
-            <div className="stat-label">Draft</div>
-          </div>
-          <div className="stat-card cetak">
-            <div className="stat-value">{sudahDicetak}</div>
-            <div className="stat-label">Sudah Dicetak</div>
-          </div>
+          <div className="stat-card"><div className="value">{totalSiswa}</div><div className="label">Total Siswa</div></div>
+          <div className="stat-card"><div className="value">{siapCetak}</div><div className="label">Siap Cetak</div></div>
+          <div className="stat-card"><div className="value">{draft}</div><div className="label">Draft</div></div>
+          <div className="stat-card"><div className="value">{sudahDicetak}</div><div className="label">Sudah Dicetak</div></div>
         </div>
 
-        {/* Baris 2: Cari Siswa, Status, Template, Import, Export */}
+        {/* Search & Aksi */}
         <div className="action-row">
-          <div className="search-group">
-            <div className="search-wrapper">
-              <FaSearch className="search-icon" />
-              <input 
-                type="text" 
-                placeholder="Cari nama, NIS, atau NISN..." 
-                className="search-input"
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setCurrentPage(1);
-                }}
-              />
-            </div>
+          <div className="search-wrapper">
+            <FaSearch className="search-icon" />
+            <input type="text" placeholder="Cari nama, NIS, atau NISN..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </div>
-          <div className="filter-group status-filter">
+          <div className="filter-group">
             <label>Status</label>
-            <select 
-              value={selectedStatus} 
-              onChange={(e) => {
-                setSelectedStatus(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="filter-select"
-            >
-              {statusOptions.map(option => (
-                <option key={option} value={option}>
-                  {option === 'all' ? 'Semua Status' : option}
-                </option>
-              ))}
+            <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
+              {statusOptions.map(s => <option key={s} value={s}>{s === 'all' ? 'Semua Status' : s}</option>)}
             </select>
           </div>
           <div className="action-buttons">
-            <button className="btn-template" onClick={handleTemplate}>
-              <FiFileText /> Template
-            </button>
-            <button className="btn-import" onClick={() => document.getElementById('importExcel').click()}>
-              <FaFileImport /> Import Excel
-            </button>
-            <button className="btn-export" onClick={handleExportExcel}>
-              <FaFileExport /> Export Excel
-            </button>
-            <input type="file" id="importExcel" onChange={handleImportExcel} accept=".xlsx, .xls" style={{ display: 'none' }} />
+            <button onClick={handleTemplate}><FiFileText /> Template</button>
+            <button onClick={() => document.getElementById('importExcel').click()}><FaFileImport /> Import Excel</button>
+            <button onClick={handleExportExcel}><FaFileExport /> Export Excel</button>
+            <input id="importExcel" type="file" style={{ display: 'none' }} />
           </div>
         </div>
 
-        {/* Table */}
+        {/* Tabel */}
         <div className="table-responsive">
           <table className="raport-table">
             <thead>
-              <tr>
-                <th>No</th>
-                <th>Foto</th>
-                <th>NIS</th>
-                <th>NISN</th>
-                <th>Nama Siswa</th>
-                <th>Kelas</th>
-                <th>Semester</th>
-                <th>Status</th>
-                <th>Aksi</th>
-              </tr>
+              <tr><th>No</th><th>Foto</th><th>NIS</th><th>NISN</th><th>Nama Siswa</th><th>Kelas</th><th>Semester</th><th>Status</th><th>Aksi</th></tr>
             </thead>
             <tbody>
-              {currentItems.map((item, index) => (
+              {currentItems.map((item, idx) => (
                 <tr key={item.id}>
-                  <td>{startIndex + index + 1}</td>
-                  <td>
-                    <div className="avatar-circle">{item.foto}</div>
-                  </td>
-                  <td>{item.nis}</td>
-                  <td>{item.nisn}</td>
-                  <td className="student-name">{item.nama}</td>
-                  <td>{item.kelas}</td>
-                  <td>{item.semester}</td>
+                  <td>{startIndex + idx + 1}</td>
+                  <td><div className="avatar">{item.foto}</div></td>
+                  <td>{item.nis}</td><td>{item.nisn}</td>
+                  <td className="nama">{item.nama}</td>
+                  <td>{item.kelas}</td><td>{item.semester}</td>
                   <td>{getStatusBadge(item.status)}</td>
-                  <td className="action-cell">
-                    <button 
-                      className="action-btn detail-btn" 
-                      onClick={() => handleDetail(item)}
-                      title="Detail Rapor"
-                    >
-                      <FaEye /> Detail
-                    </button>
-                    <button 
-                      className="action-btn print-btn" 
-                      onClick={() => handleCetakRaport(item)}
-                      title="Cetak Raport"
-                    >
-                      <FaPrint /> Cetak
-                    </button>
+                  <td className="actions">
+                    <button className="btn-detail" onClick={() => handleDetail(item)}><FaEye /> Detail</button>
+                    <button className="btn-cetak" onClick={() => handleCetakRaport(item)}><FaPrint /> Cetak</button>
                   </td>
                 </tr>
               ))}
@@ -333,38 +188,17 @@ const CetakRaport = ({ onNavigate }) => {
 
         {/* Pagination */}
         {filteredData.length > 0 && (
-          <div className="pagination-container">
-            <div className="pagination-info">
-              Menampilkan {startIndex + 1}–{Math.min(endIndex, filteredData.length)} dari {filteredData.length} data
-            </div>
-            <div className="pagination">
-              <button className="pagination-arrow" onClick={() => handlePageChange('prev')} disabled={currentPage === 1}>
-                <FaChevronLeft /> Prev
-              </button>
-              <div className="pagination-numbers">
-                {getPageNumbers().map((page, idx) => (
-                  <button
-                    key={idx}
-                    className={`pagination-number ${currentPage === page ? 'active' : ''} ${page === '...' ? 'dots' : ''}`}
-                    onClick={() => typeof page === 'number' && handlePageChange(page)}
-                    disabled={page === '...'}
-                  >
-                    {page}
-                  </button>
-                ))}
-              </div>
-              <button className="pagination-arrow" onClick={() => handlePageChange('next')} disabled={currentPage === totalPages}>
-                Next <FaChevronRight />
-              </button>
-            </div>
+          <div className="pagination">
+            <button onClick={() => handlePageChange('prev')} disabled={currentPage === 1}><FaChevronLeft /> Prev</button>
+            {getPageNumbers().map((p, i) => (
+              <button key={i} className={p === currentPage ? 'active' : ''} onClick={() => typeof p === 'number' && handlePageChange(p)} disabled={p === '...'}>{p}</button>
+            ))}
+            <button onClick={() => handlePageChange('next')} disabled={currentPage === totalPages}>Next <FaChevronRight /></button>
           </div>
         )}
 
-        {/* Cetak Massal Button */}
-        <div className="print-massal-section">
-          <button className="btn-print-massal" onClick={handleCetakMassal}>
-            <FaPrint /> Cetak Massal (Siap Cetak)
-          </button>
+        <div className="print-massal">
+          <button onClick={handleCetakMassal}><FaPrint /> Cetak Massal (Siap Cetak)</button>
         </div>
       </div>
     </div>

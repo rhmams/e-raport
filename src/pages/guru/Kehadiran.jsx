@@ -16,7 +16,13 @@ import {
   Plus,
   Download,
   Upload,
-  GraduationCap
+  GraduationCap,
+  Brain,
+  Wrench,
+  Sparkles,
+  Heart,
+  Scale,
+  ChevronDown
 } from "lucide-react";
 import { useNavigate, useParams } from 'react-router-dom';
 import "./Kehadiran.css";
@@ -26,6 +32,7 @@ function Kehadiran() {
   const navigate = useNavigate();
   const { kelasId } = useParams();
   const [showModal, setShowModal] = useState(false);
+  const [rencanaDropdownOpen, setRencanaDropdownOpen] = useState(true);
 
   // Data kelas berdasarkan ID
   const kelasData = {
@@ -80,63 +87,26 @@ function Kehadiran() {
     ruangan: 'R-102'
   };
 
-  // Navigasi ke halaman Beranda
-  const goToBeranda = () => {
-    navigate('/beranda');
-  };
-
-  // Navigasi ke halaman Kelas
-  const goToKelas = () => {
-    navigate('/kelas');
-  };
-
-  // Navigasi ke halaman Detail Kelas
-  const goToDetailKelas = () => {
-    navigate(`/kelas/${kelasId}`);
-  };
+  // Navigasi
+  const goToBeranda = () => navigate('/beranda');
+  const goToKelas = () => navigate('/kelas');
+  const goToDetailKelas = () => navigate(`/kelas/${kelasId}`);
+  const goToWaliKelas = () => navigate('/wali-kelas');
+  const goToEkstrakurikuler = () => navigate('/ekstrakurikuler');
+  const goToNilai = () => navigate('/nilai');
+  const goToRaport = () => navigate('/raport');
+  const handleLogout = () => navigate('/login');
 
   // Handler untuk modal
-  const handleTambahKehadiran = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
+  const handleTambahKehadiran = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
   const handleSubmitKehadiran = (data) => {
     console.log("Data kehadiran:", data);
     alert("Data kehadiran berhasil disimpan!");
   };
 
-  // Navigasi ke halaman lain
-  const goToWaliKelas = () => {
-    navigate('/wali-kelas');
-  };
-
-  const goToEkstrakurikuler = () => {
-    navigate('/ekstrakurikuler');
-  };
-
-  const goToNilai = () => {
-    navigate('/nilai');
-  };
-
-  const goToRaport = () => {
-    navigate('/raport');
-  };
-
-  const handleLogout = () => {
-    navigate('/login');
-  };
-
-  const handleImportExcel = () => {
-    alert('Fitur import Excel akan segera tersedia');
-  };
-
-  const handleExportExcel = () => {
-    alert('Fitur export Excel akan segera tersedia');
-  };
+  const handleImportExcel = () => alert('Fitur import Excel akan segera tersedia');
+  const handleExportExcel = () => alert('Fitur export Excel akan segera tersedia');
 
   return (
     <div className="page">
@@ -179,6 +149,35 @@ function Kehadiran() {
           <div>
             <ul className="menu">
               <li onClick={goToBeranda}><LayoutDashboard size={18}/> Beranda</li>
+
+              {/* DROPDOWN RENCANA PENILAIAN */}
+              <div className="dropdown-wrapper">
+                <div className="dropdown-header" onClick={() => setRencanaDropdownOpen(prev => !prev)}>
+                  <FileText size={18} />
+                  <span className="dropdown-label">Rencana Penilaian</span>
+                  <ChevronDown size={16} className={`dropdown-arrow ${rencanaDropdownOpen ? 'open' : ''}`} />
+                </div>
+                {rencanaDropdownOpen && (
+                  <ul className="dropdown-list">
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-nilai-pengetahuan')}>
+                      <Brain size={14} /> <span>Rencana Nilai Pengetahuan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-penilaian-keterampilan')}>
+                      <Wrench size={14} /> <span>Rencana Penilaian Keterampilan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-spiritual')}>
+                      <Sparkles size={14} /> <span>Rencana KD/Butir Spiritual</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-sosial')}>
+                      <Heart size={14} /> <span>Rencana KD/Butir Sosial</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-bobot-ujian')}>
+                      <Scale size={14} /> <span>Rencana Bobot PH PTS & PAS</span>
+                    </li>
+                  </ul>
+                )}
+              </div>
+
               <li className="active" onClick={goToKelas}><BookOpen size={18}/> Kelas</li>
               <li onClick={goToWaliKelas}><Users size={18}/> Wali Kelas</li>
               <li onClick={goToEkstrakurikuler}><ClipboardList size={18}/> Ekstrakurikuler</li>

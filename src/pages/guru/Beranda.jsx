@@ -18,10 +18,13 @@ import {
   Bookmark,
   UserCheck,
   Repeat,
-  GraduationCap
+  GraduationCap,
+  ChevronDown,
+  Brain,
+  Wrench
 } from "lucide-react";
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "./Beranda.css";
 import CatatanPrestasiModal from "./CatatanPrestasiModal";
 import SampulModal from "./SampulModal";
@@ -35,6 +38,18 @@ function Beranda() {
   const [isSampulModalOpen, setIsSampulModalOpen] = useState(false);
   const [isWaliKelasModalOpen, setIsWaliKelasModalOpen] = useState(false);
   const [isMutasiModalOpen, setIsMutasiModalOpen] = useState(false);
+  
+  // Inisialisasi status dropdown terbuka jika halaman saat ini adalah rencana penilaian
+  const [rencanaDropdownOpen, setRencanaDropdownOpen] = useState(
+    location.pathname.startsWith('/rencana-penilaian')
+  );
+
+  // Memastikan keadaan dropdown sinkron ketika rute berubah
+  useEffect(() => {
+    if (location.pathname.startsWith('/rencana-penilaian')) {
+      setRencanaDropdownOpen(true);
+    }
+  }, [location.pathname]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -44,6 +59,14 @@ function Beranda() {
   const closeWaliKelasModal = () => setIsWaliKelasModalOpen(false);
   const openMutasiModal = () => setIsMutasiModalOpen(true);
   const closeMutasiModal = () => setIsMutasiModalOpen(false);
+
+  // Fungsi navigasi ke halaman Rencana Penilaian dengan tab tertentu
+  const goToRencanaPengetahuan = () => {
+    navigate('/rencana-penilaian', { state: { tab: 'pengetahuan' } });
+  };
+  const goToRencanaKeterampilan = () => {
+    navigate('/rencana-penilaian', { state: { tab: 'keterampilan' } });
+  };
 
   return (
     <div className="page">
@@ -82,18 +105,59 @@ function Beranda() {
         <aside className="sidebar">
           <div>
             <ul className="menu">
+              {/* Beranda */}
               <li 
                 className={location.pathname === '/' || location.pathname === '/beranda' ? 'active' : ''} 
                 onClick={() => navigate('/beranda')}
               >
                 <LayoutDashboard size={18}/> Beranda
               </li>
+
+              {/* DROPDOWN RENCANA PENILAIAN */}
+              <li className={`menu-rencana-container ${location.pathname.startsWith('/rencana-penilaian') ? 'active-parent' : ''}`}>
+                <div
+                  className="menu-rencana-header"
+                  onClick={() => {
+                    navigate('/rencana-penilaian');
+                    setRencanaDropdownOpen(prev => location.pathname.startsWith('/rencana-penilaian') ? !prev : true);
+                  }}
+                >
+                  <FileText size={18} />
+                  <span className="menu-text">Rencana Penilaian</span>
+                  <ChevronDown
+                    size={16}
+                    className={`chevron-icon ${rencanaDropdownOpen ? 'open' : ''}`}
+                  />
+                </div>
+
+                {rencanaDropdownOpen && (
+                  <ul className="submenu-rencana">
+                    <li
+                      className={location.state?.tab === 'pengetahuan' ? 'active' : ''}
+                      onClick={goToRencanaPengetahuan}
+                    >
+                      <Brain size={14} />
+                      <span>Rencana Nilai Pengetahuan</span>
+                    </li>
+                    <li
+                      className={location.state?.tab === 'keterampilan' ? 'active' : ''}
+                      onClick={goToRencanaKeterampilan}
+                    >
+                      <Wrench size={14} />
+                      <span>Rencana Penilaian Keterampilan</span>
+                    </li>
+                  </ul>
+                )}
+              </li>
+
+              {/* Kelas */}
               <li 
                 className={location.pathname.startsWith('/kelas') && !location.pathname.includes('/kelas/') ? 'active' : ''} 
                 onClick={() => navigate('/kelas')}
               >
                 <BookOpen size={18}/> Kelas
               </li>
+
               <li 
                 className={location.pathname === '/wali-kelas' ? 'active' : ''} 
                 onClick={() => navigate('/wali-kelas')}
@@ -199,7 +263,7 @@ function Beranda() {
                     </div>
                     <div className="activity-content">
                       <div className="activity-title">Laporan Dihasilkan</div>
-                      <div className="activity-desc">Rupoet Semester 1 sudah siap</div>
+                      <div className="activity-desc">Rapot Semester 1 sudah siap</div>
                       <div className="activity-time">1 hari yang lalu</div>
                     </div>
                   </div>
@@ -241,6 +305,10 @@ function Beranda() {
                     <Repeat size={20} />
                     Mutasi
                   </div>
+                  <div className="quick-action-btn" onClick={() => navigate('/kompetensi-dasar')}>
+                    <BookOpen size={20} />
+                    Data Tujuan Pembelajaran
+                  </div>
                 </div>
               </div>
             </div>
@@ -248,7 +316,7 @@ function Beranda() {
 
           {/* ================= ROW TIGA KOLOM: Pengumuman + Jadwal Hari Ini + Tugas Mendesak ================= */}
           <div className="row-tiga-kolom">
-            {/* KOLOM 1: Pengumuman (dulu Siswa Terbaik) */}
+            {/* KOLOM 1: Pengumuman */}
             <div className="kolom-pengumuman">
               <div className="card">
                 <div className="card-header">
@@ -344,7 +412,7 @@ function Beranda() {
                       <Users size={20} />
                     </div>
                     <div className="task-content">
-                      <h4>Rupoet koordinasi wali kelas</h4>
+                      <h4>Rapat koordinasi wali kelas</h4>
                       <div className="task-deadline">
                         <Clock size={14} /> 1 minggu lagi
                       </div>

@@ -17,7 +17,13 @@ import {
   GraduationCap,
   Trash2,
   Plus,
-  X
+  X,
+  Brain,
+  Wrench,
+  Sparkles,
+  Heart,
+  Scale,
+  ChevronDown
 } from "lucide-react";
 
 import "./DetailKokurikuler.css";
@@ -29,6 +35,7 @@ function DetailKokurikuler() {
   const [showModal, setShowModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentEditId, setCurrentEditId] = useState(null);
+  const [rencanaDropdownOpen, setRencanaDropdownOpen] = useState(true);
 
   // Data nilai kokurikuler (skor hanya 1-4)
   const [dataNilai, setDataNilai] = useState([
@@ -183,6 +190,35 @@ function DetailKokurikuler() {
               <li onClick={() => navigate('/beranda')}>
                 <LayoutDashboard size={18}/> Beranda
               </li>
+
+              {/* DROPDOWN RENCANA PENILAIAN */}
+              <div className="dropdown-wrapper">
+                <div className="dropdown-header" onClick={() => setRencanaDropdownOpen(prev => !prev)}>
+                  <FileText size={18} />
+                  <span className="dropdown-label">Rencana Penilaian</span>
+                  <ChevronDown size={16} className={`dropdown-arrow ${rencanaDropdownOpen ? 'open' : ''}`} />
+                </div>
+                {rencanaDropdownOpen && (
+                  <ul className="dropdown-list">
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-nilai-pengetahuan')}>
+                      <Brain size={14} /> <span>Rencana Nilai Pengetahuan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-penilaian-keterampilan')}>
+                      <Wrench size={14} /> <span>Rencana Penilaian Keterampilan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-spiritual')}>
+                      <Sparkles size={14} /> <span>Rencana KD/Butir Spiritual</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-sosial')}>
+                      <Heart size={14} /> <span>Rencana KD/Butir Sosial</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-bobot-ujian')}>
+                      <Scale size={14} /> <span>Rencana Bobot PH PTS & PAS</span>
+                    </li>
+                  </ul>
+                )}
+              </div>
+
               <li onClick={() => navigate('/kelas')}>
                 <BookOpen size={18}/> Kelas
               </li>
@@ -289,18 +325,10 @@ function DetailKokurikuler() {
                       <td>{item.catatan}</td>
                       <td>
                         <div style={{ display: 'flex', gap: '8px' }}>
-                          <button 
-                            className="btn-edit-small" 
-                            onClick={() => handleEdit(item)}
-                            title="Edit"
-                          >
+                          <button className="btn-edit-small" onClick={() => handleEdit(item)} title="Edit">
                             <Edit size={16} />
                           </button>
-                          <button 
-                            className="btn-delete-small" 
-                            onClick={() => handleHapus(item.id, item.namaSiswa)}
-                            title="Hapus"
-                          >
+                          <button className="btn-delete-small" onClick={() => handleHapus(item.id, item.namaSiswa)} title="Hapus">
                             <Trash2 size={16} />
                           </button>
                         </div>
@@ -344,56 +372,23 @@ function DetailKokurikuler() {
             <div className="modal-body">
               <div className="modal-form-group">
                 <label>Nama Siswa <span className="required">*</span></label>
-                <input
-                  type="text"
-                  name="namaSiswa"
-                  value={formData.namaSiswa}
-                  onChange={handleInputChange}
-                  className="form-control"
-                  placeholder="Masukkan nama siswa"
-                />
+                <input type="text" name="namaSiswa" value={formData.namaSiswa} onChange={handleInputChange} className="form-control" placeholder="Masukkan nama siswa" />
               </div>
               <div className="modal-form-group">
                 <label>Kelas <span className="required">*</span></label>
-                <input
-                  type="text"
-                  name="kelas"
-                  value={formData.kelas}
-                  onChange={handleInputChange}
-                  className="form-control"
-                  placeholder="Contoh: 7A"
-                />
+                <input type="text" name="kelas" value={formData.kelas} onChange={handleInputChange} className="form-control" placeholder="Contoh: 7A" />
               </div>
               <div className="modal-form-group">
                 <label>Tema <span className="required">*</span></label>
-                <input
-                  type="text"
-                  name="tema"
-                  value={formData.tema}
-                  onChange={handleInputChange}
-                  className="form-control"
-                  placeholder="Contoh: Gaya Hidup Berkelanjutan"
-                />
+                <input type="text" name="tema" value={formData.tema} onChange={handleInputChange} className="form-control" placeholder="Contoh: Gaya Hidup Berkelanjutan" />
               </div>
               <div className="modal-form-group">
                 <label>Sub elemen yang dinilai <span className="required">*</span></label>
-                <input
-                  type="text"
-                  name="subElemen"
-                  value={formData.subElemen}
-                  onChange={handleInputChange}
-                  className="form-control"
-                  placeholder="Contoh: Mengidentifikasi masalah lingkungan"
-                />
+                <input type="text" name="subElemen" value={formData.subElemen} onChange={handleInputChange} className="form-control" placeholder="Contoh: Mengidentifikasi masalah lingkungan" />
               </div>
               <div className="modal-form-group">
                 <label>Skor awal (1-4) <span className="required">*</span></label>
-                <select
-                  name="skor"
-                  value={formData.skor}
-                  onChange={handleInputChange}
-                  className="form-control"
-                >
+                <select name="skor" value={formData.skor} onChange={handleInputChange} className="form-control">
                   <option value="1">1 - Mulai Berkembang (MB)</option>
                   <option value="2">2 - Sedang Berkembang (SB)</option>
                   <option value="3">3 - Berkembang Sesuai Harapan (BSH)</option>
@@ -402,20 +397,11 @@ function DetailKokurikuler() {
               </div>
               <div className="modal-form-group">
                 <label>Catatan perilaku/deskripsi</label>
-                <textarea
-                  name="catatan"
-                  value={formData.catatan}
-                  onChange={handleInputChange}
-                  className="form-control"
-                  rows="3"
-                  placeholder="Catatan tambahan tentang perilaku atau deskripsi capaian siswa..."
-                />
+                <textarea name="catatan" value={formData.catatan} onChange={handleInputChange} className="form-control" rows="3" placeholder="Catatan tambahan..." />
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn-batal" onClick={resetModal}>
-                Batal
-              </button>
+              <button className="btn-batal" onClick={resetModal}>Batal</button>
               <button className="btn-simpan" onClick={editMode ? handleUpdate : handleTambah}>
                 <Save size={16} /> {editMode ? 'Update' : 'Simpan'}
               </button>
@@ -429,11 +415,7 @@ function DetailKokurikuler() {
         <div className="footer-container">
           <div className="footer-content">
             <div className="footer-section footer-logo">
-              <img 
-                src="/logo-madinah.png" 
-                alt="Logo Madinah" 
-                className="footer-logo-img"
-              />
+              <img src="/logo-madinah.png" alt="Logo Madinah" className="footer-logo-img" />
               <h3 className="footer-brand">Madinah El - Quds</h3>
             </div>
             <div className="footer-section">

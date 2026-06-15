@@ -15,7 +15,13 @@ import {
   Clock as ClockIcon,
   Calendar,
   Award,
-  GraduationCap
+  GraduationCap,
+  Brain,
+  Wrench,
+  Sparkles,
+  Heart,
+  Scale,
+  ChevronDown
 } from "lucide-react";
 import "./DetailMuridWakel.css";
 
@@ -23,8 +29,9 @@ function DetailMuridWakel() {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
+  const [rencanaDropdownOpen, setRencanaDropdownOpen] = useState(true);
 
-  // Data murid wali kelas (contoh) - bisa diganti dengan data dari API berdasarkan id
+  // Data murid wali kelas (contoh)
   const muridData = {
     id: 1,
     nama: "Ahmad Fauzi",
@@ -37,31 +44,17 @@ function DetailMuridWakel() {
     namaIbu: "Siti Aminah",
     noTelp: "0812-3456-7890",
     email: "ahmad.fauzi@edu.id",
-    
-    // Data kehadiran
     hadir: 152,
     sakit: 5,
     izin: 3,
     alpha: 0,
-    
-    // Data nilai per semester
-    semester1: {
-      rataRata: 85.2,
-      peringkat: 5
-    },
-    semester2: {
-      rataRata: 87.5,
-      peringkat: 3
-    },
-    
-    // Prestasi
+    semester1: { rataRata: 85.2, peringkat: 5 },
+    semester2: { rataRata: 87.5, peringkat: 3 },
     prestasi: [
       "Juara 1 Olimpiade Matematika Tingkat Provinsi 2023",
       "Best Student Award Semester Ganjil 2023/2024",
       "Juara 2 Lomba Tahfiz Al-Quran"
     ],
-    
-    // Nilai per mata pelajaran
     nilaiMapel: [
       { no: 1, mapel: "Al-Quran Hadith", nilai: 90, predikat: "A" },
       { no: 2, mapel: "Matematika", nilai: 85, predikat: "A+" },
@@ -74,14 +67,10 @@ function DetailMuridWakel() {
     ]
   };
 
-  // Hitung rata-rata nilai
   const rataRataNilai = (muridData.nilaiMapel.reduce((acc, curr) => acc + curr.nilai, 0) / muridData.nilaiMapel.length).toFixed(1);
-  
-  // Hitung persentase kehadiran
   const totalKehadiran = muridData.hadir + muridData.sakit + muridData.izin + muridData.alpha;
   const persentaseKehadiran = ((muridData.hadir / totalKehadiran) * 100).toFixed(0);
 
-  // Navigasi
   const goToBeranda = () => navigate('/');
   const goToKelas = () => navigate('/kelas');
   const goToWaliKelas = () => navigate('/wali-kelas');
@@ -128,40 +117,51 @@ function DetailMuridWakel() {
         <aside className="sidebar">
           <div>
             <ul className="menu">
-              <li 
-                className={location.pathname === '/' || location.pathname === '/beranda' ? 'active' : ''} 
-                onClick={goToBeranda}
-              >
+              <li className={location.pathname === '/' || location.pathname === '/beranda' ? 'active' : ''} onClick={goToBeranda}>
                 <LayoutDashboard size={18}/> Beranda
               </li>
-              <li 
-                className={location.pathname.startsWith('/kelas') && !location.pathname.includes('/kelas/') ? 'active' : ''} 
-                onClick={goToKelas}
-              >
+
+              {/* DROPDOWN RENCANA PENILAIAN */}
+              <div className="dropdown-wrapper">
+                <div className="dropdown-header" onClick={() => setRencanaDropdownOpen(prev => !prev)}>
+                  <FileText size={18} />
+                  <span className="dropdown-label">Rencana Penilaian</span>
+                  <ChevronDown size={16} className={`dropdown-arrow ${rencanaDropdownOpen ? 'open' : ''}`} />
+                </div>
+                {rencanaDropdownOpen && (
+                  <ul className="dropdown-list">
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-nilai-pengetahuan')}>
+                      <Brain size={14} /> <span>Rencana Nilai Pengetahuan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-penilaian-keterampilan')}>
+                      <Wrench size={14} /> <span>Rencana Penilaian Keterampilan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-spiritual')}>
+                      <Sparkles size={14} /> <span>Rencana KD/Butir Spiritual</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-sosial')}>
+                      <Heart size={14} /> <span>Rencana KD/Butir Sosial</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-bobot-ujian')}>
+                      <Scale size={14} /> <span>Rencana Bobot PH PTS & PAS</span>
+                    </li>
+                  </ul>
+                )}
+              </div>
+
+              <li className={location.pathname.startsWith('/kelas') && !location.pathname.includes('/kelas/') ? 'active' : ''} onClick={goToKelas}>
                 <BookOpen size={18}/> Kelas
               </li>
-              <li 
-                className={location.pathname === '/wali-kelas' ? 'active' : ''} 
-                onClick={goToWaliKelas}
-              >
+              <li className={location.pathname === '/wali-kelas' ? 'active' : ''} onClick={goToWaliKelas}>
                 <Users size={18}/> Wali Kelas
               </li>
-              <li 
-                className={location.pathname === '/ekstrakurikuler' ? 'active' : ''} 
-                onClick={goToEkstrakurikuler}
-              >
+              <li className={location.pathname === '/ekstrakurikuler' ? 'active' : ''} onClick={goToEkstrakurikuler}>
                 <ClipboardList size={18}/> Ekstrakurikuler
               </li>
-              <li 
-                className={location.pathname === '/nilai' ? 'active' : ''} 
-                onClick={goToNilai}
-              >
+              <li className={location.pathname === '/nilai' ? 'active' : ''} onClick={goToNilai}>
                 <GraduationCap size={18}/> Nilai
               </li>
-              <li 
-                className={location.pathname === '/raport' ? 'active' : ''} 
-                onClick={goToRaport}
-              >
+              <li className={location.pathname === '/raport' ? 'active' : ''} onClick={goToRaport}>
                 <FileText size={18}/> Raport 
               </li>
             </ul>
@@ -210,34 +210,13 @@ function DetailMuridWakel() {
                 <div className="info-card">
                   <h3>A. Biodata Pribadi</h3>
                   <div className="info-list">
-                    <div className="info-row">
-                      <span className="info-label">Jenis Kelamin:</span>
-                      <span className="info-value">{muridData.jenisKelamin}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Tempat, Tanggal Lahir:</span>
-                      <span className="info-value">{muridData.tempatTglLahir}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Alamat:</span>
-                      <span className="info-value">{muridData.alamat}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Nama Ayah:</span>
-                      <span className="info-value">{muridData.namaAyah}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Nama Ibu:</span>
-                      <span className="info-value">{muridData.namaIbu}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">No. Telepon:</span>
-                      <span className="info-value">{muridData.noTelp}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Email:</span>
-                      <span className="info-value">{muridData.email}</span>
-                    </div>
+                    <div className="info-row"><span className="info-label">Jenis Kelamin:</span><span className="info-value">{muridData.jenisKelamin}</span></div>
+                    <div className="info-row"><span className="info-label">Tempat, Tanggal Lahir:</span><span className="info-value">{muridData.tempatTglLahir}</span></div>
+                    <div className="info-row"><span className="info-label">Alamat:</span><span className="info-value">{muridData.alamat}</span></div>
+                    <div className="info-row"><span className="info-label">Nama Ayah:</span><span className="info-value">{muridData.namaAyah}</span></div>
+                    <div className="info-row"><span className="info-label">Nama Ibu:</span><span className="info-value">{muridData.namaIbu}</span></div>
+                    <div className="info-row"><span className="info-label">No. Telepon:</span><span className="info-value">{muridData.noTelp}</span></div>
+                    <div className="info-row"><span className="info-label">Email:</span><span className="info-value">{muridData.email}</span></div>
                   </div>
                 </div>
 
@@ -246,10 +225,7 @@ function DetailMuridWakel() {
                   <h3>Prestasi dan Penghargaan</h3>
                   <ul className="prestasi-list">
                     {muridData.prestasi.map((item, index) => (
-                      <li key={index}>
-                        <Award size={16} color="#16a085" />
-                        {item}
-                      </li>
+                      <li key={index}><Award size={16} color="#16a085" /> {item}</li>
                     ))}
                   </ul>
                 </div>
@@ -262,32 +238,14 @@ function DetailMuridWakel() {
                 <div className="kehadiran-card">
                   <h3>B. Detail Kehadiran</h3>
                   <div className="kehadiran-grid">
-                    <div className="kehadiran-item">
-                      <span className="kehadiran-label">Hadir</span>
-                      <span className="kehadiran-value hadir">{muridData.hadir}</span>
-                    </div>
-                    <div className="kehadiran-item">
-                      <span className="kehadiran-label">Sakit</span>
-                      <span className="kehadiran-value sakit">{muridData.sakit}</span>
-                    </div>
-                    <div className="kehadiran-item">
-                      <span className="kehadiran-label">Izin</span>
-                      <span className="kehadiran-value izin">{muridData.izin}</span>
-                    </div>
-                    <div className="kehadiran-item">
-                      <span className="kehadiran-label">Alpha</span>
-                      <span className="kehadiran-value alpha">{muridData.alpha}</span>
-                    </div>
+                    <div className="kehadiran-item"><span className="kehadiran-label">Hadir</span><span className="kehadiran-value hadir">{muridData.hadir}</span></div>
+                    <div className="kehadiran-item"><span className="kehadiran-label">Sakit</span><span className="kehadiran-value sakit">{muridData.sakit}</span></div>
+                    <div className="kehadiran-item"><span className="kehadiran-label">Izin</span><span className="kehadiran-value izin">{muridData.izin}</span></div>
+                    <div className="kehadiran-item"><span className="kehadiran-label">Alpha</span><span className="kehadiran-value alpha">{muridData.alpha}</span></div>
                   </div>
                   <div className="kehadiran-footer">
-                    <div className="persentase">
-                      <span>Persentase Kehadiran:</span>
-                      <strong>{persentaseKehadiran}%</strong>
-                    </div>
-                    <div className="total">
-                      <span>Total Perolehan:</span>
-                      <strong>100%</strong>
-                    </div>
+                    <div className="persentase"><span>Persentase Kehadiran:</span><strong>{persentaseKehadiran}%</strong></div>
+                    <div className="total"><span>Total Perolehan:</span><strong>100%</strong></div>
                   </div>
                 </div>
 
@@ -295,32 +253,8 @@ function DetailMuridWakel() {
                 <div className="info-card">
                   <h3>C. Perkembangan Akademik</h3>
                   <div className="akademik-grid">
-                    <div className="semester-card">
-                      <h4>Semester 1</h4>
-                      <div className="semester-detail">
-                        <p>
-                          <span>Rata-rata:</span>
-                          <strong>{muridData.semester1.rataRata}</strong>
-                        </p>
-                        <p>
-                          <span>Peringkat:</span>
-                          <strong>#{muridData.semester1.peringkat}</strong>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="semester-card">
-                      <h4>Semester 2</h4>
-                      <div className="semester-detail">
-                        <p>
-                          <span>Rata-rata:</span>
-                          <strong>{muridData.semester2.rataRata}</strong>
-                        </p>
-                        <p>
-                          <span>Peringkat:</span>
-                          <strong>#{muridData.semester2.peringkat}</strong>
-                        </p>
-                      </div>
-                    </div>
+                    <div className="semester-card"><h4>Semester 1</h4><div className="semester-detail"><p><span>Rata-rata:</span><strong>{muridData.semester1.rataRata}</strong></p><p><span>Peringkat:</span><strong>#{muridData.semester1.peringkat}</strong></p></div></div>
+                    <div className="semester-card"><h4>Semester 2</h4><div className="semester-detail"><p><span>Rata-rata:</span><strong>{muridData.semester2.rataRata}</strong></p><p><span>Peringkat:</span><strong>#{muridData.semester2.peringkat}</strong></p></div></div>
                   </div>
                 </div>
               </div>
@@ -329,41 +263,22 @@ function DetailMuridWakel() {
             {/* Nilai Per Mata Pelajaran */}
             <div className="nilai-section">
               <h3>D. Nilai Per Mata Pelajaran</h3>
-              
               <div className="table-container">
                 <table className="nilai-table">
-                  <thead>
-                    <tr>
-                      <th>NO</th>
-                      <th>MATERI PELAJARAN</th>
-                      <th>NILAI</th>
-                      <th>PREDIKAT</th>
-                    </tr>
-                  </thead>
+                  <thead><tr><th>NO</th><th>MATERI PELAJARAN</th><th>NILAI</th><th>PREDIKAT</th></tr></thead>
                   <tbody>
                     {muridData.nilaiMapel.map((item) => (
                       <tr key={item.no}>
                         <td>{item.no}</td>
                         <td>{item.mapel}</td>
-                        <td>
-                          <span className="nilai-badge">{item.nilai}</span>
-                        </td>
-                        <td>
-                          <span className={`predikat-badge ${item.predikat.toLowerCase().replace('+', 'plus')}`}>
-                            {item.predikat}
-                          </span>
-                        </td>
+                        <td><span className="nilai-badge">{item.nilai}</span></td>
+                        <td><span className={`predikat-badge ${item.predikat.toLowerCase().replace('+', 'plus')}`}>{item.predikat}</span></td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-
-              {/* Rata-rata */}
-              <div className="rata-rata">
-                <span>Rata-rata Kemampuan:</span>
-                <strong>{rataRataNilai}</strong>
-              </div>
+              <div className="rata-rata"><span>Rata-rata Kemampuan:</span><strong>{rataRataNilai}</strong></div>
             </div>
 
           </div>
@@ -371,42 +286,31 @@ function DetailMuridWakel() {
       </div>
 
       {/* ================= FOOTER ================= */}
-<footer className="footer">
-  <div className="footer-container">
-    <div className="footer-content">
-
-      {/* KOLOM 1: LOGO */}
-      <div className="footer-section footer-logo">
-        <img 
-          src="/logo-madinah.png" 
-          alt="Logo Madinah" 
-          className="footer-logo-img"
-        />
-        <h3 className="footer-brand">Madinah El - Quds</h3>
-      </div>
-
-      {/* KOLOM 2: Hubungi Kami */}
-      <div className="footer-section">
-        <h4>Hubungi Kami</h4>
-        <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
-        <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
-        <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
-      </div>
-
-      {/* KOLOM 3: Jam Layanan */}
-      <div className="footer-section">
-        <h4>Jam Layanan</h4>
-        <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
-        <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
-        <p><ClockIcon size={18}/> Minggu: Tutup</p>
-      </div>
-
-    </div>
-    <div className="footer-bottom">
-      <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
-    </div>
-  </div>
-</footer>
+      <footer className="footer">
+        <div className="footer-container">
+          <div className="footer-content">
+            <div className="footer-section footer-logo">
+              <img src="/logo-madinah.png" alt="Logo Madinah" className="footer-logo-img" />
+              <h3 className="footer-brand">Madinah El - Quds</h3>
+            </div>
+            <div className="footer-section">
+              <h4>Hubungi Kami</h4>
+              <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
+              <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
+              <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
+            </div>
+            <div className="footer-section">
+              <h4>Jam Layanan</h4>
+              <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
+              <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
+              <p><ClockIcon size={18}/> Minggu: Tutup</p>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
+          </div>
+        </div>
+      </footer>
 
     </div>
   );

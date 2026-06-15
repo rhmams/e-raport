@@ -1,0 +1,445 @@
+/* RencanaPenilaian.css */
+.rencana-main {
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* ===================== SIDEBAR DROPDOWN ===================== */
+
+/* Wrapper li dropdown — override .menu li bawaan Beranda.css */
+.menu li.dropdown-wrapper,
+.menu li.dropdown-wrapper:hover,
+.menu li.dropdown-wrapper:focus,
+.menu li.dropdown-wrapper:active {
+  display: block !important;
+  padding: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  cursor: default !important;
+  margin-bottom: 4px !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: inherit !important;
+}
+
+/* Header "Rencana Penilaian" */
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #e2e8f0;
+  background: transparent;
+  user-select: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.dropdown-header:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.dropdown-label {
+  flex: 1;
+}
+
+.dropdown-arrow {
+  opacity: 0.7;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+  transform: rotate(0deg);
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Sub-menu list */
+.dropdown-list {
+  list-style: none;
+  margin: 2px 0 4px 0;
+  padding: 0 0 0 28px;
+}
+
+/* Sub-item — override .menu li bawaan Beranda.css */
+.menu .dropdown-list li.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  border-radius: 8px;
+  margin-bottom: 2px;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 400;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.menu .dropdown-list li.dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.menu .dropdown-list li.dropdown-item.active {
+  background: #16a085;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.menu .dropdown-list li.dropdown-item.active:hover {
+  background: #13856c;
+  color: #ffffff;
+}
+
+/* ===================== RENCANA HEADER ===================== */
+.rencana-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.rencana-header-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rencana-header-icon {
+  background: #e0f2fe;
+  padding: 12px;
+  border-radius: 16px;
+  color: #0f766e;
+}
+
+.rencana-header h1 {
+  font-size: 24px;
+  margin: 0 0 4px 0;
+  color: #1e293b;
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0;
+}
+
+.btn-add-rencana {
+  background: #16a085;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 40px;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-add-rencana:hover {
+  background: #13856c;
+}
+
+/* ===================== CARD & TABLE ===================== */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.table-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.show-entries {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #334155;
+}
+
+.show-entries select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: white;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #334155;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 4px 8px;
+  background: white;
+  gap: 6px;
+}
+
+.search-input-wrapper input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  width: 200px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.rencana-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rencana-table th {
+  text-align: left;
+  padding: 12px 8px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.rencana-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #edf2f7;
+  color: #334155;
+}
+
+.badge-jumlah {
+  background: #e0f2fe;
+  padding: 2px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #0c4a6e;
+}
+
+.aksi-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-edit,
+.btn-delete {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.btn-edit {
+  color: #3b82f6;
+}
+.btn-edit:hover {
+  background: #eff6ff;
+}
+
+.btn-delete {
+  color: #ef4444;
+}
+.btn-delete:hover {
+  background: #fef2f2;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+}
+
+/* ===================== PAGINATION ===================== */
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 14px;
+  color: #334155;
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pagination-buttons button {
+  padding: 6px 12px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+
+.pagination-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-buttons button:not(:disabled):hover {
+  background: #f1f5f9;
+}
+
+.current-page {
+  padding: 6px 12px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* ===================== MODAL ===================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  animation: modalFadeIn 0.2s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  transition: color 0.2s;
+}
+.modal-close:hover {
+  color: #1e293b;
+}
+
+.modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.form-group input {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: border 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #16a085;
+}
+
+.modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-batal,
+.btn-simpan {
+  padding: 8px 20px;
+  border-radius: 40px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-batal {
+  background: white;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+}
+.btn-batal:hover {
+  background: #f1f5f9;
+}
+
+.btn-simpan {
+  background: #16a085;
+  border: none;
+  color: white;
+}
+.btn-simpan:hover {
+  background: #13856c;
+}

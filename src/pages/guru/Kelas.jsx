@@ -1,4 +1,5 @@
 // src/pages/Kelas.jsx
+import { useState } from 'react';
 import {
   LayoutDashboard,
   BookOpen,
@@ -13,14 +14,22 @@ import {
   MapPinned,
   Clock as ClockIcon,
   ChevronRight,
-  FileText
+  FileText,
+  Brain,
+  Wrench,
+  Sparkles,
+  Heart,
+  Scale,
+  ChevronDown
 } from "lucide-react";
 
 import "./Kelas.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Kelas() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [rencanaDropdownOpen, setRencanaDropdownOpen] = useState(true);
 
   const handleKelasClick = (kelasId) => {
     navigate(`/kelas/${kelasId}`);
@@ -67,21 +76,71 @@ function Kelas() {
         <aside className="sidebar">
           <div>
             <ul className="menu">
+              {/* Beranda */}
               <li onClick={() => handleNavigation('/beranda')}>
                 <LayoutDashboard size={18}/> Beranda
               </li>
+
+              {/* DROPDOWN RENCANA PENILAIAN */}
+              <div className="dropdown-wrapper">
+                <div
+                  className="dropdown-header"
+                  onClick={() => setRencanaDropdownOpen(prev => !prev)}
+                >
+                  <FileText size={18} />
+                  <span className="dropdown-label">Rencana Penilaian</span>
+                  <ChevronDown
+                    size={16}
+                    className={`dropdown-arrow ${rencanaDropdownOpen ? 'open' : ''}`}
+                  />
+                </div>
+                {rencanaDropdownOpen && (
+                  <ul className="dropdown-list">
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-nilai-pengetahuan')}>
+                      <Brain size={14} />
+                      <span>Rencana Nilai Pengetahuan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-penilaian-keterampilan')}>
+                      <Wrench size={14} />
+                      <span>Rencana Penilaian Keterampilan</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-spiritual')}>
+                      <Sparkles size={14} />
+                      <span>Rencana KD/Butir Spiritual</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/observatif-karakter-sosial')}>
+                      <Heart size={14} />
+                      <span>Rencana KD/Butir Sosial</span>
+                    </li>
+                    <li className="dropdown-item" onClick={() => navigate('/rencana-bobot-ujian')}>
+                      <Scale size={14} />
+                      <span>Rencana Bobot PH PTS & PAS</span>
+                    </li>
+                  </ul>
+                )}
+              </div>
+
+              {/* Kelas (aktif) */}
               <li className="active">
                 <BookOpen size={18}/> Kelas
               </li>
+
+              {/* Wali Kelas */}
               <li onClick={() => handleNavigation('/wali-kelas')}>
                 <Users size={18}/> Wali Kelas
               </li>
+
+              {/* Ekstrakurikuler */}
               <li onClick={() => handleNavigation('/ekstrakurikuler')}>
                 <ClipboardList size={18}/> Ekstrakurikuler
               </li>
+
+              {/* Nilai */}
               <li onClick={() => handleNavigation('/nilai')}>
                 <GraduationCap size={18}/> Nilai
               </li>
+
+              {/* Raport */}
               <li onClick={() => handleNavigation('/raport')}>
                 <FileText size={18}/> Raport
               </li>
@@ -321,8 +380,6 @@ function Kelas() {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-content">
-
-            {/* KOLOM 1: LOGO */}
             <div className="footer-section footer-logo">
               <img 
                 src="/logo-madinah.png" 
@@ -331,23 +388,18 @@ function Kelas() {
               />
               <h3 className="footer-brand">Madinah El - Quds</h3>
             </div>
-
-            {/* KOLOM 2: Hubungi Kami */}
             <div className="footer-section">
               <h4>Hubungi Kami</h4>
               <p><MapPinned size={18} /> Jl. Pendidikan No. 123, Kota Santri, Indonesia</p>
               <p><Phone size={18} /><a href="tel:+622112345678">+62 21 1234-5678</a></p>
               <p><Mail size={18} /><a href="mailto:info@alhanaan.sch.id">info@alhanaan.sch.id</a></p>
             </div>
-
-            {/* KOLOM 3: Jam Layanan */}
             <div className="footer-section">
               <h4>Jam Layanan</h4>
               <p><ClockIcon size={18}/> Senin - Jumat: 07:00 - 16:00</p>
               <p><ClockIcon size={18}/> Sabtu: 07:00 - 14:00</p>
               <p><ClockIcon size={18}/> Minggu: Tutup</p>
             </div>
-
           </div>
           <div className="footer-bottom">
             <p>© 2026 Pondok Pesantren Madinah Al-Quds. Semua Hak Dilindungi.</p>
